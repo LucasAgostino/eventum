@@ -109,7 +109,7 @@ function Eventos() {
     <table className="min-w-full divide-y divide-gray-200 bg-blue-900 border border-gray-300">
   <thead className="bg-gray-50">
     <tr className='bg-blue-700 hover:bg-blue-600 rounded-t-lg rounded-b-lg'>
-      <th scope="col" className="px-6 py-4 whitespace-nowrap text-sm text-white bg-blue-800 border border-black text-left">Imagen</th>
+      <th scope="col" className="px-6 py-4 whitespace-nowrap text-sm text-white bg-blue-800 border border-black text-left">Imagen1</th>
       <th scope="col" className="px-6 py-4 whitespace-nowrap text-sm text-white bg-blue-800 border border-black text-left">Nombre del Evento</th>
       <th scope="col" className="px-6 py-4 whitespace-nowrap text-sm text-white bg-blue-800 border border-black text-left">Fecha del Evento</th>
       <th scope="col" className="px-6 py-4 whitespace-nowrap text-sm text-white bg-blue-800 border border-black text-left">Cantidad de Invitados</th>
