@@ -7,6 +7,8 @@ function FormularioEvento() {
   const router = useRouter();
   const [showNotification, setShowNotification] = useState(false);
   const [notificationContent, setNotificationContent] = useState('');
+  const [notificationClass, setNotificationClass] = useState('bg-green-500');
+  const [notificationIcon, setNotificationIcon] = useState(null);
   const [formData, setFormData] = useState({
       nombreEvento: '',
       cantInvitados: '',
@@ -33,26 +35,62 @@ function FormularioEvento() {
       }));
     };
 
-  const handleSubmit = async (e) => {
-      e.preventDefault(); // Hace q no se refresque cuando se envia el formulario
-      await supabase.from('evento').insert({nombreEvento:formData.nombreEvento, cantInvitados:formData.cantInvitados, fecha:formData.fecha, ubicacion:formData.ubicacion, presupuestoEstimado:formData.presupuestoEstimado});
-      setNotificationContent('El evento se ha creado correctamente');
-      setShowNotification(true);
-      setTimeout(() => {
+    const handleSubmit = async (e) => {
+      e.preventDefault(); // Evita que la página se refresque al enviar el formulario
+  
+      try {
+        // Intentar insertar el nuevo registro en la base de datos
+        const { error } = await supabase.from('evento').insert({
+          nombreEvento: formData.nombreEvento,
+          cantInvitados: formData.cantInvitados,
+          fecha: formData.fecha,
+          ubicacion: formData.ubicacion,
+          presupuestoEstimado: formData.presupuestoEstimado
+        });
+  
+        if (error) {
+          // Si hay un error, lanzarlo para ser capturado por el bloque catch
+          throw error;
+        }
+  
+        // Si la inserción es exitosa, mostrar la notificación de éxito
+        setNotificationContent('El evento se ha creado correctamente');
+        setNotificationClass('bg-green-500');
+        setNotificationIcon(
+          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+          </svg>
+        );
+        setShowNotification(true);
+        setTimeout(() => {
           setShowNotification(false);
           router.push('/eventos'); // Redireccionar después de ocultar la notificación
-      }, 2000); // Ocultar la notificación después de 3 segundos
-  };
-
+        }, 2000); // Ocultar la notificación después de 2 segundos
+  
+      } catch (error) {
+        // Manejar el error y mostrar una notificación de error
+        console.error("Error al crear el evento:", error);
+        setNotificationContent('Hubo un error al crear el evento. Por favor, inténtalo de nuevo.');
+        setNotificationClass('bg-red-500');
+        setNotificationIcon(
+          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        );
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 2000); // Ocultar la notificación después de 2 segundos
+      }
+    };
+  
   return (
     <div>{showNotification && (
-      <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-green-500 text-white px-4 py-2 rounded shadow flex items-center animate-push-up">
-      <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-      </svg>
-          {notificationContent}
+      <div className={`fixed bottom-0 right-0 mb-4 mr-4 ${notificationClass} text-white px-4 py-2 rounded shadow flex items-center animate-push-up`}>
+        {notificationIcon}
+        {notificationContent}
       </div>
-  )}
+    )}
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-blue-100 p-8 rounded-lg shadow-lg">
       <div className="mb-4">
         <label htmlFor="nombreEvento" className="block text-blue-900 font-bold mb-2">Nombre del Evento:</label>
