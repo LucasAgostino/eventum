@@ -1,9 +1,18 @@
-import React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/solid';
-import { LockOpenIcon } from '@heroicons/react/solid'; 
+import { LockOpenIcon } from '@heroicons/react/solid';
+import { usePathname } from 'next/navigation'; 
 
 function Navbar() {
+  const [isSpecificPage, setIsSpecificPage] = useState(false);
+  const pathname = usePathname();
+  useEffect(() => {
+    // Verifica si la ruta actual coincide con el patrón /eventos/[id]
+    const isEventoPage = pathname.startsWith('/eventos/') && pathname.split('/').length === 3;
+    setIsSpecificPage(isEventoPage);
+  }, [pathname]);
   return (
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       {/* Menú a la izquierda */}
@@ -25,16 +34,20 @@ function Navbar() {
               <span className="text-white hover:text-gray-300 cursor-pointer">Eventos</span>
             </Link>
           </li>
-          <li>
-            <Link href="/presupuesto">
-              <span className="text-white hover:text-gray-300 cursor-pointer">Presupuestos</span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/reportes">
-              <span className="text-white hover:text-gray-300 cursor-pointer">Reportes</span>
-            </Link>
-          </li>
+          {isSpecificPage && (
+            <>
+              <li>
+                <Link href="/eventos/presupuesto">
+                  <div className="text-white hover:text-gray-300">Presupuestos</div>
+                </Link>
+              </li>
+              <li>
+                <Link href="/eventos/reportes">
+                  <div className="text-white hover:text-gray-300">Reportes</div>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       {/* Botones de Iniciar Sesión y Premium */}
