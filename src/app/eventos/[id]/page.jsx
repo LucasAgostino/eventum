@@ -161,7 +161,7 @@ export default function EventoDetalles({ params }) {
             </div>
             <div className="flex items-center justify-between">
               <button
-                class="mt-8 text-left flex gap-2 text-gray-600 hover:scale-110 duration-200 hover:cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="mt-8 text-left flex gap-2 text-gray-600 hover:scale-110 duration-200 hover:cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Actualizar Evento
@@ -198,29 +198,29 @@ export default function EventoDetalles({ params }) {
                   <span>{event.ubicacion}</span>
                 </div>
               </div>
-              <div class="flex justify-between items-center mt-8">
-                <button class="px-4 py-2 bg-blue-700 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-blue-500 hover:shadow-lg transform hover:scale-105 transition duration-200 ease-in-out">
+              <div className="flex justify-between items-center mt-8">
+                <button className="px-4 py-2 bg-blue-700 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-blue-500 hover:shadow-lg transform hover:scale-105 transition duration-200 ease-in-out">
                   <Link href="/eventos">
                     <span>Volver a eventos</span>
                   </Link>
                 </button>
                 <button
-                  class="text-left flex gap-2 text-gray-600 hover:scale-110 duration-200 hover:cursor-pointer"
+                  className="text-left flex gap-2 text-gray-600 hover:scale-110 duration-200 hover:cursor-pointer"
                   onClick={handleEditar}
                 >
                   <svg
-                    class="w-6 stroke-green-700"
+                    className="w-6 stroke-green-700"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                   </svg>
-                  <span class="font-semibold text-sm text-green-700">
+                  <span className="font-semibold text-sm text-green-700">
                     Editar Evento
                   </span>
                 </button>
