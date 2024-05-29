@@ -225,6 +225,11 @@ export default function EventoDetalles({ params }) {
                     Editar Evento
                   </span>
                 </button>
+                <Link href={`/eventos/${params.id}/invitados`} passHref>
+                  <button className="px-4 py-2 bg-green-700 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-green-500 hover:shadow-lg transform hover:scale-105 transition duration-200 ease-in-out">
+                    Cargar Invitados
+                  </button>
+                </Link>
               </div>
             </div>
           )}
