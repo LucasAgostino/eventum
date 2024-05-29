@@ -1,30 +1,19 @@
 "use client";
 import MostrarInvitados from '@/components/Mostrarinvitados';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-const Invitados = () => {
-  const pathname = usePathname();
-  const [id, setId] = useState(null);
-
-  useEffect(() => {
-    if (pathname) {
-      const pathSegments = pathname.split('/');
-      const eventId = pathSegments[pathSegments.length - 2]; // Asumiendo que el formato es /eventos/[id]/invitados
-      setId(eventId);
-    }
-  }, [pathname]);
-
-  if (!id) {
+export default function Invitados ({params}) {
+  
+  if (!params) {
     return <div>Cargando...</div>;
   }
+  console.log(params.id)
 
   return (
     <div>
-      <h1>Invitados para el evento {id}</h1>
-      <MostrarInvitados eventoID={id} />
+      <h1>Invitados para el evento {params.id}</h1>
+      <Link href={`/eventos/${params.id}/invitados/crear_invitados`}passHref><button>Crear Invitado</button></Link>
+      <MostrarInvitados eventoID={params.id} />
     </div>
   );
 };
-
-export default Invitados;

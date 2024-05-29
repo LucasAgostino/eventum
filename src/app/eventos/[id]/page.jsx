@@ -1,7 +1,6 @@
 "use client";
 import { supabase } from "@/app/utils/supabase";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function EventoDetalles({ params }) {
