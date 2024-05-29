@@ -88,8 +88,8 @@ function Eventos() {
           <tbody className="bg-white divide-y divide-gray-200">
             {eventos.map((evento) => (
               <tr key={evento.id} className="hover:shadow-lg">
-                <td className="px-6 py-4 bg-blue-800 border border-black">
-                  <img src="/user.ico" alt="User Icon" className="w-10 h-10" />
+                <td className="px-6 py-4 bg-blue-800 border border-black ">
+                  <img src="/user.ico" alt="User Icon" className="w-10 h-10 rounded-2xl" />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap border-b border-black">
                   {evento.nombreEvento}
