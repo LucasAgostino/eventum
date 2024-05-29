@@ -3,16 +3,33 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { LockOpenIcon } from '@heroicons/react/solid';
+import { supabase } from '@/app/utils/supabase';
 import { usePathname } from 'next/navigation'; 
 
 function Navbar() {
   const [isSpecificPage, setIsSpecificPage] = useState(false);
   const pathname = usePathname();
+
+  const  handleLogOut = async (e) => {
+    const {user} = await supabase.auth.getUser()
+    console.log(user)
+    let { error } = await supabase.auth.signOut()
+    if(error){
+      console.log("ERROR AL CERRAR SESION")
+    }
+    else {
+      console.log("inicio OK")
+      const {data,error} = await supabase.auth.getUser()
+      console.log(data)
+    }
+  };
+
   useEffect(() => {
     // Verifica si la ruta actual coincide con el patrón /eventos/[id]
     const isEventoPage = pathname.startsWith('/eventos/') && pathname.split('/').length === 3;
     setIsSpecificPage(isEventoPage);
   }, [pathname]);
+  
   return (
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       {/* Menú a la izquierda */}
@@ -76,21 +93,27 @@ function Navbar() {
             </div>
           </div>
         </button>
-        {/* Botón de iniciar sesión */}
+        
+        <button onClick={handleLogOut} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold shadow transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-hray-50 hover:bg-green-600 text-white dark:bg-gray-700 dark:text-white dark:text-white dark:hover:text-gray-200 dark:shadow-none group ml-2">
+            cerra sesion
+        </button>
+
+        {/* Botón de iniciar sesión 
         <Link href="/auth/login">
           <button className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold shadow transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-hray-50 hover:bg-green-600 text-white dark:bg-gray-700 dark:text-white dark:text-white dark:hover:text-gray-200 dark:shadow-none group ml-2">
             <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-green-600 group-hover:h-full"></span>
             <LockClosedIcon className="h-5 w-5 text-white group-hover:text-indigo-400" aria-hidden="true"/>
             <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-              {/* Aquí deberías agregar el icono de cerrar sesión */}
+           
             </span>
             <span className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
             <LockOpenIcon className="h-5 w-5 text-white group-hover:text-indigo-400" aria-hidden="true"/>
-              {/* Aquí deberías agregar el icono de iniciar sesión */}
             </span>
             <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white dark:group-hover:text-gray-200">Iniciar Sesión</span>
           </button>
         </Link>
+      */}
+
       </div>
     </nav>
   );
