@@ -9,13 +9,6 @@ import { IconTrash } from '@tabler/icons-react';
 function Eventos() {
   const [eventos, setEventos] = useState([]);
   const [eventoIdToDelete, setEventoIdToDelete] = useState(null);
-  const [editing, setEditing] = useState(false);
-  const [nombreEvento, setNombreEvento] = useState('');
-  const [ubicacion, setUbicacion] = useState('');
-  const [cantInvitados, setcantInvitados] = useState(0);
-  const [fecha, setFecha] = useState('');
-  const [presupuestoEstimado, setPresupuestoEstimado] = useState(0);
-
 
 
   useEffect(() => {
@@ -30,14 +23,6 @@ function Eventos() {
     fetchEventos();
   }, []);
 
-  const handleEditar = () => {
-    setEditing(true);
-    setNombreEvento(event.nombreEvento);
-    setUbicacion(event.ubicacion);
-    setcantInvitados(event.cantInvitados);
-    setFecha(event.fecha);
-    setPresupuestoEstimado(event.presupuestoEstimado);
-  };
 
   const handleDelete = async (eventoId) => {
     const { error } = await supabase.from('evento').delete().eq('id', eventoId);
