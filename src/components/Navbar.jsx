@@ -17,8 +17,11 @@ function Navbar() {
     <nav className="bg-gray-800 p-4 flex justify-between items-center">
       {/* Menú a la izquierda */}
       <div className="flex items-center">
-        <h1> 
-          <img src= '/favicon.ico' alt= '' style={{width: '80px', height: '80px'}}/> 
+        
+        <h1>
+          <Link href="/"> 
+            <img src= '/favicon.ico' alt= '' style={{width: '80px', height: '80px'}}/> 
+          </Link>
         </h1>
       </div>
       {/* Elementos centrados */}
