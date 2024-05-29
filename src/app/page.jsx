@@ -3,9 +3,12 @@ import Link from 'next/link';
 import { supabase } from '@/app/utils/supabase';
 import React, { useEffect, useRef, useState } from 'react';
 import { IconTrash } from '@tabler/icons-react';
+import { useRouter } from "next/navigation";
+
 import Chart from 'chart.js/auto';
 
 const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
+  const router = useRouter();
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null); // Referencia al objeto Chart
   const [idEventoSeleccionado, setIdEventoSeleccionado] = useState(null);
@@ -159,17 +162,17 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
             <canvas ref={chartRef} style={{maxHeight: '200px', maxWidth:'600px'}}></canvas>
           </div>
           <svg
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             viewBox="0 0 24 24"
             fill="none"
-            class="h-6 w-6 text-zinc-900 dark:text-white"
+            className="h-6 w-6 text-zinc-900 dark:text-white"
             xmlns="http://www.w3.org/2000/svg" 
             >
             <path
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              stroke-linejoin="round"
-              stroke-linecap="round"
+              strokeLinejoin="round"
+              strokeLinecap="round"
               ></path>
           </svg>
         </div>
@@ -178,7 +181,7 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
             File: var/test/admin.php extracted..
           </p>
           <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2.5">
-            <div style={{width: "70%"}}  class="bg-blue-600 h-2.5 rounded-full"></div>
+            <div style={{width: "70%"}}  className="bg-blue-600 h-2.5 rounded-full"></div>
           </div>
           <div className="flex justify-between items-center mt-3">
             <span className="text-sm text-zinc-600 dark:text-zinc-400">70% Complete</span>
