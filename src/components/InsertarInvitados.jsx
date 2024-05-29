@@ -1,7 +1,6 @@
 "use client"
 import { useState } from 'react';
 import { supabase } from '@/app/utils/supabase';
-import Link from 'next/link';
 
 const InsertarInvitados = ({ eventoID }) => {
     const [formData, setFormData] = useState({
