@@ -7,7 +7,6 @@ export default function Invitados ({params}) {
   if (!params) {
     return <div>Cargando...</div>;
   }
-  console.log(params.id)
 
   return (
     <div>
