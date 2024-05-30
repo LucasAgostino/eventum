@@ -2,8 +2,9 @@
 import { supabase } from "@/app/utils/supabase";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import withAuth from "@/app/utils/withAuth";
 
-export default function EventoDetalles({ params }) {
+function EventoDetalles({ params }) {
   const [event, setEvent] = useState(null);
   const [editing, setEditing] = useState(false);
   const [nombreEvento, setNombreEvento] = useState("");
@@ -237,3 +238,5 @@ export default function EventoDetalles({ params }) {
     </div>
   );
 }
+
+export default withAuth(EventoDetalles);

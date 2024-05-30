@@ -1,3 +1,4 @@
+import withAuth from '@/app/utils/withAuth'
 import React from 'react'
 
 function Reportes() {
@@ -6,4 +7,4 @@ function Reportes() {
   )
 }
 
-export default Reportes
+export default withAuth(Reportes)

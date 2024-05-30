@@ -1,10 +1,14 @@
 "use client"
+import withAuth from "@/app/utils/withAuth";
 import FormularioEvento from "@/components/FormularioEvento";
-export default function Home() {
+
+function CrearEvento() {
 
   return (
     <FormularioEvento/>
   );
 }
+
+export default withAuth(CrearEvento);
 
 
