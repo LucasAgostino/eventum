@@ -1,8 +1,9 @@
 "use client";
+import withAuth from '@/app/utils/withAuth';
 import MostrarInvitados from '@/components/Mostrarinvitados';
 import Link from 'next/link';
 
-export default function Invitados ({params}) {
+function Invitados ({params}) {
   
   if (!params) {
     return <div>Cargando...</div>;
@@ -16,3 +17,5 @@ export default function Invitados ({params}) {
     </div>
   );
 };
+
+export default withAuth(Invitados)

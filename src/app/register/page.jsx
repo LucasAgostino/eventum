@@ -29,10 +29,10 @@ export default function RegisterPage() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault(); // Evita que la página se refresque al enviar el formulario
     if (formData.password === formData.confirmarPassword) {
-      let { data, error } = await supabase.auth.signUp({
+      let { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
@@ -42,31 +42,16 @@ export default function RegisterPage() {
           },
         },
       });
-
-      if(data.session){
-        router.push('/')
+      if (error) {
+        alert(error.message);
+      } else {
+        router.push('/login');
       }
-
     } else {
       //agregar notificacion de error como el form de eventos
       console.log("Contraseña diferente");
     }
 
-    /*
-      // Intentar insertar el nuevo registro en la base de datos
-      const { error } = await supabase.from('evento').insert({
-          nombreEvento: formData.nombreEvento,
-          cantInvitados: formData.cantInvitados,
-          fecha: formData.fecha,
-          ubicacion: formData.ubicacion,
-          presupuestoEstimado: formData.presupuestoEstimado
-      });
-  
-      if (error) {
-        // Si hay un error, lanzarlo para ser capturado por el bloque catch
-        throw error;
-      }
-              */
   };
 
   return (
@@ -90,7 +75,7 @@ export default function RegisterPage() {
             </span>
           </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSignUp}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="input flex flex-col relative">

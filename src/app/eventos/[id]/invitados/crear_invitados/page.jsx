@@ -1,7 +1,9 @@
+"use client"
+import withAuth from "@/app/utils/withAuth";
 import InsertarInvitados from "@/components/InsertarInvitados";
 import Link from "next/link";
 
-export default function crear_invitados({ params }) {
+function crear_invitados({ params }) {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="flex justify-start mb-4">
@@ -17,3 +19,5 @@ export default function crear_invitados({ params }) {
     </div>
   );
 }
+
+export default withAuth(crear_invitados)

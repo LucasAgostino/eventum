@@ -3,12 +3,10 @@ import Link from 'next/link';
 import { supabase } from '@/app/utils/supabase';
 import React, { useEffect, useRef, useState } from 'react';
 import { IconTrash } from '@tabler/icons-react';
-import { useRouter } from "next/navigation";
-
 import Chart from 'chart.js/auto';
+import withAuth from './utils/withAuth';
 
 const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
-  const router = useRouter();
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null); // Referencia al objeto Chart
   const [idEventoSeleccionado, setIdEventoSeleccionado] = useState(null);
@@ -243,4 +241,4 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
 };
 
 
-export default Home;
+export default withAuth(Home);

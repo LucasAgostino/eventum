@@ -6,6 +6,7 @@ import { supabase } from "@/app/utils/supabase";
 import EventoCard from "@/components/EventoCard";
 import { IconTrash } from "@tabler/icons-react";
 import PopUpEliminar from "@/components/PopUpEliminar";
+import withAuth from "../utils/withAuth";
 
 function Eventos() {
   const [eventos, setEventos] = useState([]);
@@ -135,4 +136,4 @@ function Eventos() {
   );
 }
 
-export default Eventos;
+export default withAuth(Eventos);

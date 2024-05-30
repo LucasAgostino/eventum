@@ -26,9 +26,9 @@ export default function Auth() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault(); // Evita que la página se refresque al enviar el formulario
-    let { data, error } = await supabase.auth.signInWithPassword({
+    const {error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
     });
@@ -37,10 +37,10 @@ export default function Auth() {
       console.error(error);
       return;
     }
-
-    if (data.session) {
+    else{
       router.push('/'); // Redirige a la página de inicio
     }
+
   };
 
   return (
@@ -62,7 +62,7 @@ export default function Auth() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{" "}
-            <Link href="/auth/register">
+            <Link href="register">
               <span className="font-medium text-blue-400 hover:text-blue-500 cursor-pointer">
                 Sign Up
               </span>
@@ -70,7 +70,7 @@ export default function Auth() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+        <form onSubmit={handleLogin} className="mt-8 space-y-6">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
