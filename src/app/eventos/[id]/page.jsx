@@ -1,8 +1,8 @@
 "use client";
-import { supabase } from "@/app/utils/supabase";
+import { supabase } from "@/utils/supabase";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import withAuth from "@/app/utils/withAuth";
+import withAuth from "@/utils/withAuth";
 
 function EventoDetalles({ params }) {
   const [event, setEvent] = useState(null);

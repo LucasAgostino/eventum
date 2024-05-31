@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { supabase } from "@/app/utils/supabase";
+import { supabase } from "@/utils/supabase";
 import EventoCard from "@/components/EventoCard";
 import { IconTrash } from "@tabler/icons-react";
 import PopUpEliminar from "@/components/PopUpEliminar";
-import withAuth from "../utils/withAuth";
+import withAuth from '@/utils/withAuth'
 import { useUserSession } from "../context/UserSessionContext";
 
 function Eventos() {

@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import { supabase } from '@/app/utils/supabase';
+import { supabase } from '@/utils/supabase';
 
 const InsertarInvitados = ({ eventoID }) => {
     const [formData, setFormData] = useState({

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { LockOpenIcon } from "@heroicons/react/solid";
-import { supabase } from "@/app/utils/supabase";
+import { supabase } from "@/utils/supabase";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 

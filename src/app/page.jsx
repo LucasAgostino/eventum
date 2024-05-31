@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { supabase } from "@/app/utils/supabase";
+import { supabase } from "@/utils/supabase";
 import React, { useEffect, useRef, useState } from "react";
 import { IconTrash } from "@tabler/icons-react";
 import Chart from "chart.js/auto";
-import withAuth from "./utils/withAuth";
+import withAuth from "@/utils/withAuth";
 import PopUpEliminar from "@/components/PopUpEliminar";
 import { useUserSession } from "./context/UserSessionContext";
 

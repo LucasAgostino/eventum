@@ -1,5 +1,5 @@
 "use client";
-import withAuth from '@/app/utils/withAuth';
+import withAuth from '@/utils/withAuth';
 import MostrarInvitados from '@/components/Mostrarinvitados';
 import Link from 'next/link';
 

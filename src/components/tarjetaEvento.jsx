@@ -1,5 +1,5 @@
 import React from 'react'
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/supabase/server';
 
 async function tarjetaEvento() {
     const supabase = createClient();
