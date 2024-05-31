@@ -1,7 +1,7 @@
 // InvitadosTabla.js
 "use client"
 import React, { useState, useEffect } from 'react';
-import { supabase } from '@/app/utils/supabase';
+import { supabase } from '@/utils/supabase';
 
 const Mostrarinvitados = ({ eventoID }) => {
   const [invitados, setInvitados] = useState([]);

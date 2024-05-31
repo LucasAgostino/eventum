@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useState, useEffect} from 'react';
-import { supabase } from '@/app/utils/supabase';
+import { supabase } from '@/utils/supabase';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/navigation';

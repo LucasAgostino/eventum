@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState, useEffect} from 'react';
-import { supabase } from '@/app/utils/supabase';
+import { supabase } from '@/utils/supabase';
 import { useRouter } from 'next/navigation';
-import { useUserSession } from '@/app/context/UserSessionContext';
+import { useUserSession } from '@/context/UserSessionContext';
 
 function FormularioEvento() {
   const router = useRouter();

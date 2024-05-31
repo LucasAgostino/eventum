@@ -1,4 +1,5 @@
-import withAuth from '@/app/utils/withAuth'
+"use client"
+import withAuth from '@/utils/withAuth'
 import React from 'react'
 
 function Presupuestos() {

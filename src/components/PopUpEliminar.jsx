@@ -1,8 +1,9 @@
 import React from 'react';
 import { IconTrash } from "@tabler/icons-react";
-import { supabase } from "@/app/utils/supabase";
+import { supabase } from "@/utils/supabase";
 
 function PopUpEliminar({ eventoId, onCancel, onDelete }) {
+  
   const handleDelete = async () => {
     const { error } = await supabase.from("evento").delete().eq("id", eventoId);
     if (error) {

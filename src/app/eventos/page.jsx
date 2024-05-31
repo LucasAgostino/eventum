@@ -2,8 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { supabase } from "@/app/utils/supabase";
-import withAuth from "../utils/withAuth";
+
+
+import { supabase } from "@/utils/supabase";
+import { IconTrash } from "@tabler/icons-react";
+import PopUpEliminar from "@/components/PopUpEliminar";
+import withAuth from '@/utils/withAuth'
+
 import { useUserSession } from "../context/UserSessionContext";
 import EliminarEvento from "@/components/EliminarEvento";
 
