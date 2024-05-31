@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IconTrash } from '@tabler/icons-react';
 import Chart from 'chart.js/auto';
 import withAuth from './utils/withAuth';
+import PopUpEliminar from "@/components/PopUpEliminar";
 import { useUserSession } from './context/UserSessionContext';
 
 const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
@@ -19,6 +20,7 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
   const [presupuestoEstimado, setPresupuestoEstimado] = useState(0);
   const fechaFormateada = fecha.split('/').reverse().join('-');
   const {user} = useUserSession();
+  const [eventoIdToDelete, setEventoIdToDelete] = useState(null);
 
   useEffect(() => {
     async function fetchEventos() {
@@ -98,9 +100,28 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
       }
     }
   }, [idEventoSeleccionado, eventos]);
+  const confirmarEliminacion = (eventoId) => {
+    setEventoIdToDelete(eventoId);
+  };
+
+  const cancelarEliminacion = () => {
+    setEventoIdToDelete(null);
+  };
+
+  const handleDelete = (eventoId) => {
+    setEventos(eventos.filter((evento) => evento.id !== eventoId));
+  };
+
 
   return (
-    <div className="flex flex-col " >
+    <div>
+    {eventoIdToDelete && (
+      <PopUpEliminar
+        eventoId={eventoIdToDelete}
+        onCancel={cancelarEliminacion}
+        onDelete={handleDelete}
+      />
+    )}
       <h1 className="m-4 text-5xl font-bold text-blue-700 text-center ">Dashboard</h1>
       <div className="relative inline-flex items-center justify-center p-4 rounded-full transition duration-200 font-bold text-gray-700 shadow-lg bg-blue-300 hover:bg-blue-400 hover:text-indigo-900 transform hover:scale-95 m-4">
         <Link href="/eventos/crear-evento">

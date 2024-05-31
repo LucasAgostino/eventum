@@ -47,10 +47,13 @@ function FormularioEvento() {
           cantInvitados: formData.cantInvitados,
           fecha: formData.fecha,
           ubicacion: formData.ubicacion,
-          presupuestoEstimado: formData.presupuestoEstimado
+          presupuestoEstimado: formData.presupuestoEstimado,
+          userID: user.id
           });
   
         if (error) {
+          console.log(user.id)
+          console.log("hola")
           // Si hay un error, lanzarlo para ser capturado por el bloque catch
           throw error;
         }
