@@ -7,14 +7,16 @@ import EventoCard from "@/components/EventoCard";
 import { IconTrash } from "@tabler/icons-react";
 import PopUpEliminar from "@/components/PopUpEliminar";
 import withAuth from "../utils/withAuth";
+import { useUserSession } from "../context/UserSessionContext";
 
 function Eventos() {
   const [eventos, setEventos] = useState([]);
   const [eventoIdToDelete, setEventoIdToDelete] = useState(null);
+  const {user} = useUserSession();
 
   useEffect(() => {
     async function fetchEventos() {
-      const { data: eventos, error } = await supabase.from("evento").select();
+      const { data: eventos, error } = await supabase.from("evento").select().eq('userID',user.id);;
       if (error) {
         console.error("Error fetching eventos:", error.message);
       } else {
@@ -22,7 +24,7 @@ function Eventos() {
       }
     }
     fetchEventos();
-  }, []);
+  }, [user]);
 
   const confirmarEliminacion = (eventoId) => {
     setEventoIdToDelete(eventoId);

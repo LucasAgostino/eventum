@@ -1,3 +1,4 @@
+import withAuth from '@/app/utils/withAuth'
 import React from 'react'
 
 function Presupuestos() {
@@ -6,4 +7,4 @@ function Presupuestos() {
   )
 }
 
-export default Presupuestos
+export default withAuth(Presupuestos)

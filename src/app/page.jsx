@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IconTrash } from '@tabler/icons-react';
 import Chart from 'chart.js/auto';
 import withAuth from './utils/withAuth';
+import { useUserSession } from './context/UserSessionContext';
 
 const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
   const chartRef = useRef(null);
@@ -17,11 +18,12 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
   const [fecha, setFecha] = useState('');
   const [presupuestoEstimado, setPresupuestoEstimado] = useState(0);
   const fechaFormateada = fecha.split('/').reverse().join('-');
+  const {user} = useUserSession();
 
   useEffect(() => {
     async function fetchEventos() {
       
-      const { data: eventos, error } = await supabase.from('evento').select();
+      const { data: eventos, error } = await supabase.from('evento').select().eq('userID',user.id);
       if (error) {
         console.error('Error fetching eventos:', error.message);
       } else {
@@ -29,7 +31,7 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
       }
     }
     fetchEventos();
-  }, []);
+  }, [user]);
 
 
   useEffect(() => {

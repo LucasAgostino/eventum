@@ -2,9 +2,11 @@ import React from 'react'
 import { useState, useEffect} from 'react';
 import { supabase } from '@/app/utils/supabase';
 import { useRouter } from 'next/navigation';
+import { useUserSession } from '@/app/context/UserSessionContext';
 
 function FormularioEvento() {
   const router = useRouter();
+  const { user } = useUserSession();
   const [showNotification, setShowNotification] = useState(false);
   const [notificationContent, setNotificationContent] = useState('');
   const [notificationClass, setNotificationClass] = useState('bg-green-500');
@@ -46,7 +48,7 @@ function FormularioEvento() {
           fecha: formData.fecha,
           ubicacion: formData.ubicacion,
           presupuestoEstimado: formData.presupuestoEstimado
-        });
+          });
   
         if (error) {
           // Si hay un error, lanzarlo para ser capturado por el bloque catch
