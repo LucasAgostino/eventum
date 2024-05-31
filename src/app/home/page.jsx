@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-
 export default function Landing() {
   
   return (
@@ -90,7 +89,7 @@ export default function Landing() {
                   <ul className="grid gap-6">
                     <li className="flex flex-col ">
                       <div className="flex items-center mr-4"> {/* Contenedor flex con margen a la derecha */}
-                        <img src='/Icono_Evento.png' className="mr-2 h-10" /> {/* La clase 'mr-2' añade un margen a la derecha */}
+                        <img src='/Icono_Evento.png' className="mr-2 h-10" alt="2" /> {/* La clase 'mr-2' añade un margen a la derecha */}
                         <h3 className="text-xl font-bold">Event Planning</h3>
                       </div>
                       <div className="grid gap-1">
@@ -102,7 +101,7 @@ export default function Landing() {
                     </li>
                     <li className="flex flex-col ">
                       <div className="flex items-center mr-4"> {/* Contenedor flex con margen a la derecha */}
-                        <img src='/Icono_Alerta.png' className="mr-2 h-10 " /> {/* La clase 'mr-2' añade un margen a la derecha */}
+                        <img src='/Icono_Alerta.png' className="mr-2 h-10" alt="" /> {/* La clase 'mr-2' añade un margen a la derecha */}
                         <h3 className="text-xl font-bold">Event Promotion</h3>
                       </div>
                       <div className="grid gap-1">
@@ -114,7 +113,7 @@ export default function Landing() {
                     </li>
                     <li className="flex flex-col ">
                       <div className="flex items-center mr-4"> {/* Contenedor flex con margen a la derecha */}
-                        <img src='/Icono_Documento.png' className="mr-2 h-10" /> {/* La clase 'mr-2' añade un margen a la derecha */}
+                        <img src='/Icono_Documento.png' className="mr-2 h-10" alt="3"/> {/* La clase 'mr-2' añade un margen a la derecha */}
                         <h3 className="text-xl font-bold">Event Management</h3>
                       </div>
                       <div className="grid gap-1">

@@ -52,8 +52,7 @@ function FormularioEvento() {
           });
   
         if (error) {
-          console.log(user.id)
-          console.log("hola")
+          console.log(user)
           // Si hay un error, lanzarlo para ser capturado por el bloque catch
           throw error;
         }
