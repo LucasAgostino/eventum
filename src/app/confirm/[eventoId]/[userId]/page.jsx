@@ -1,20 +1,20 @@
 // src/app/confirm/[eventId]/[userId].jsx
-import { useRouter } from 'next/router';
+"use client"
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/utils/supabase';
 
 const Confirm = () => {
-  const router = useRouter();
-  const { eventId, userId } = router.query;
+  const { eventoId, userId } = useParams();
   const [message, setMessage] = useState('Confirmando tu asistencia...');
-
   useEffect(() => {
+
     const confirmAttendance = async () => {
-      if (eventId && userId) {
+      if (eventoId && userId) {
         const { data, error } = await supabase
           .from('invitado')
           .update({ estado: "confirmado" })
-          .eq('eventoID', eventId)
+          .eq('eventoID', eventoId)
           .eq('id', userId);
 
         if (error) {
@@ -27,7 +27,7 @@ const Confirm = () => {
     };
 
     confirmAttendance();
-  }, [eventId, userId]);
+  }, [eventoId, userId]);
 
   return <p>{message}</p>;
 };

@@ -22,7 +22,7 @@ export async function POST(req, { params }) {
         from: '"Eventum" <eventum.software@gmail.com>',
         to: invitado.email,
         subject: 'Invitación al Evento',
-        html: `<p>Has sido invitado a un evento. Confirma tu asistencia en el siguiente enlace:</p><a href="${confirmationLink}">Confirmar Asistencia</a>`,
+        html: `<p> Has sido invitado a un evento. Confirma tu asistencia en el siguiente enlace:</p><a href="${confirmationLink}">Confirmar Asistencia</a>`,
       };
 
       await transporter.sendMail(mailOptions);
