@@ -29,7 +29,7 @@ function EventoDetalles({ params }) {
     };
 
     fetchEvent();
-  }, [params.id]);
+  }, [params.id,event]);
 
   const handleEditar = () => {
     setEditing(true);
@@ -65,7 +65,7 @@ function EventoDetalles({ params }) {
       console.error("Error al actualizar el evento:", error.message);
     }
     setEditing(false);
-    window.location.reload();
+    //window.location.reload();
   };
 
   return (
