@@ -19,7 +19,7 @@ const Mostrarinvitados = ({ eventoID }) => {
       setLoading(true);
       const { data, error } = await supabase
         .from('invitado')
-        .select('nombre, apellido, email')
+        .select('nombre, apellido, email, estado')
         .eq('eventoID', parseInt(eventoID, 10));
         
       if (error) {
@@ -31,7 +31,7 @@ const Mostrarinvitados = ({ eventoID }) => {
     };
 
     fetchInvitados();
-  }, [eventoID]);
+  }, [eventoID,invitados.estado]);
 
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -44,6 +44,7 @@ const Mostrarinvitados = ({ eventoID }) => {
       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Apellido</th>
       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
     </tr>
   </thead>
   <tbody className="bg-white divide-y divide-gray-200">
@@ -53,6 +54,7 @@ const Mostrarinvitados = ({ eventoID }) => {
         <td className="px-6 py-4 whitespace-nowrap">{invitado.nombre}</td>
         <td className="px-6 py-4 whitespace-nowrap">{invitado.apellido}</td>
         <td className="px-6 py-4 whitespace-nowrap">{invitado.email}</td>
+        <td className="px-6 py-4 whitespace-nowrap">{invitado.estado}</td>
       </tr>
     ))}
   </tbody>

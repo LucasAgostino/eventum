@@ -26,7 +26,7 @@ const InsertarInvitados = ({ eventoID }) => {
         const { data, error } = await supabase
             .from('invitado')
             .insert([
-                { nombre: formData.firstName, apellido: formData.lastName, email: formData.email, eventoID: formData.eventoID },
+                { nombre: formData.firstName, apellido: formData.lastName, email: formData.email, eventoID: formData.eventoID, estado: 'pendiente'},
             ]);
 
         if (error) {
