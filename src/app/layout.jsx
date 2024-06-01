@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import { UserSessionProvider } from "./context/UserSessionContext";
-import 'tailwindcss/tailwind.css'
+import "tailwindcss/tailwind.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,11 +15,11 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <body className={inter.className}>
         <UserSessionProvider>
-        <header>
-           <Navbar/>
-        </header>
-        {children}
-      </UserSessionProvider>
+          <header>
+            <Navbar />
+          </header>
+          {children}
+        </UserSessionProvider>
       </body>
     </html>
   );
