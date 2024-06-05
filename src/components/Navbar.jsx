@@ -11,6 +11,10 @@ function Navbar() {
   const router = useRouter();
   const [isSpecificPage, setIsSpecificPage] = useState(false);
   const pathname = usePathname();
+  const noNavbarRoutes = ["/login", "/register", "/home"];
+  const hideNavbarOnDynamicRoutes = pathname.startsWith("/confirm/");
+
+  const showNavbar = !noNavbarRoutes.includes(pathname) && !hideNavbarOnDynamicRoutes;
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -27,8 +31,9 @@ function Navbar() {
   }, [pathname]);
 
   return (
-
-      <nav className="bg-gray-800 p-4 flex justify-between items-center">
+  <div>
+    {showNavbar && (
+      <nav className="bg-custom-blue p-4 flex justify-between items-center font-bold">
         <div className="flex items-center">
           <h1>
             <Link href="/">
@@ -86,7 +91,8 @@ function Navbar() {
           </button>
         </div>
       </nav>
-
+    )}
+  </div>
   );
 }
 

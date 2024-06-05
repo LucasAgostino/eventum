@@ -20,13 +20,13 @@ function Invitados({ params }) {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen ml-10">
+    <div className="p-6 min-h-screen ml-10">
       <div className="mb-12">
         <h1 className="text-4xl font-extrabold mb-4 text-gray-900 m-10 mb-15">
           Lista de Invitados
         </h1>
         <span className="Justify-center text-blue-400 text-4xl m-10 mt-10 ">
-          Invitados para el Evento {params.id}
+          Invitados para el Evento
         </span>
         <p className="text-lg text-gray-700 ml-10">
           Aquí puedes gestionar todos los invitados para el evento. Crea, edita

@@ -5,12 +5,12 @@ import PopUpEliminar from "@/components/PopUpEliminar";
 import EliminarEvento from "./EliminarEvento";
 import VisualizarEvento from "./VisualizarEvento";
 
+
 const TablaEventos = ({ userId}) => {
   const [eventos, setEventos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [selectedEventoId, setSelectedEventoId] = useState(null);
+
 
   useEffect(() => {
     const fetchEventos = async () => {
@@ -47,61 +47,54 @@ const TablaEventos = ({ userId}) => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              N°
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Nombre
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Fecha
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Cantidad de invitados
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Ubicacion
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Presupuesto
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {eventos.map((evento, index) => (
-            <tr key={evento.id} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {evento.nombreEvento}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {evento.cantInvitados}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">{evento.fecha}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {evento.ubicacion}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {evento.presupuestoEstimado}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex">
-                  <EliminarEvento evento={evento} onDelete={handleDelete} />
-                  <VisualizarEvento eventoId={evento.id}> </VisualizarEvento>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+<div className="overflow-x-auto p-4">
+  <table className="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <thead className="bg-gray-50">
+      <tr>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          N°
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Nombre
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Fecha
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Cantidad de invitados
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Ubicación
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Presupuesto
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200">
+      {eventos.map((evento, index) => (
+        <tr key={evento.id} className="hover:bg-gray-50">
+          <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+          <td className="px-6 py-4 whitespace-nowrap">{evento.nombreEvento}</td>
+          <td className="px-6 py-4 whitespace-nowrap">{evento.fecha}</td>
+          <td className="px-6 py-4 whitespace-nowrap">{evento.cantInvitados}</td>
+          <td className="px-6 py-4 whitespace-nowrap">{evento.ubicacion}</td>
+          <td className="px-6 py-4 whitespace-nowrap">$ {evento.presupuestoEstimado}</td>
+          <td className="px-6 py-4 whitespace-nowrap">
+            <div className="flex space-x-2">
+              <EliminarEvento evento={evento} onDelete={handleDelete} />
+              <VisualizarEvento eventoId={evento.id} />
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
   );
 };
 

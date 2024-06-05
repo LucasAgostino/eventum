@@ -5,8 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import withAuth from "@/utils/withAuth";
 import { useUserSession } from "./context/UserSessionContext";
-import EliminarEvento from "@/components/EliminarEvento";
-import VisualizarEvento from "@/components/VisualizarEvento"
+import TablaEventos from "@/components/TablaEventos";
 
 const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
   const chartRef = useRef(null);
@@ -110,11 +109,11 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
 
   return (
     <div>
-      <h1 className="m-4 text-5xl font-bold text-blue-700 text-center ">
-        Dashboard
-      </h1>
-      <div className="relative inline-flex items-center justify-center p-4 rounded-full transition duration-200 font-bold text-gray-700 shadow-lg bg-blue-300 hover:bg-blue-400 hover:text-indigo-900 transform hover:scale-95 m-4">
-        <Link href="/eventos/crear-evento">Crear evento</Link>
+      <div className="flex items-center justify-between m-4">
+        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+        <div className="relative inline-flex items-center justify-center p-2 px-4 rounded-lg transition duration-200 font-bold text-gray-700 shadow-lg bg-blue-300 hover:bg-blue-400 hover:text-indigo-900 transform hover:scale-95">
+          <Link href="/eventos/crear-evento">Crear evento</Link>
+        </div>
       </div>
       <div className="flex flex-file justify-center">
         {/* Tarjeta de evento */}
@@ -124,7 +123,11 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
         >
           <h1 className="text-xl font-bold mb-2">Próximo evento</h1>
           <div className="flex items-center mb-">
-          <img src="Favicon.ico" className="h-20px w-20px" alt="Icono de la aplicación"></img>
+            <img
+              src="Favicon.ico"
+              className="h-20px w-20px"
+              alt="Icono de la aplicación"
+            ></img>
             <div>
               <h2 className="text-3xl font-semibold mb-12">
                 <strong>{nombreevento}Casamiento de Jazmín</strong>
@@ -226,86 +229,9 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
           </div>
         </div>
       </div>
-      <div className="flex overflow-x-auto justify-arround">
-        <div
-          className="overflow-x-auto flex-grow m-4"
-          style={{ maxWidth: "100vw", textAlign: "center" }}
-        >
-          <table className="w-full divide-y divide-gray-200 bg-blue-900 border border-gray-300">
-            <thead className="bg-gray-50">
-              <tr className="bg-blue-700 hover:bg-blue-600 rounded-t-lg rounded-b-lg ">
-                <th
-                  scope="col"
-                  className="w-1/10 px-2 py-2 whitespace-nowrap text-sm text-white bg-blue-800 border border-black"
-                >
-                  Imagen
-                </th>
-                <th
-                  scope="col"
-                  className="w-1/14 px-2 py-2 whitespace-nowrap text-sm text-white bg-blue-800 border border-black"
-                >
-                  Nombre del Evento
-                </th>
-                <th
-                  scope="col"
-                  className="w-1/14 px-2 py-2 whitespace-nowrap text-sm text-white bg-blue-800 border border-black"
-                >
-                  Fecha del Evento
-                </th>
-                <th
-                  scope="col"
-                  className="w-1/14 px-2 py-2 whitespace-nowrap text-sm text-white bg-blue-800 border border-black"
-                >
-                  Cantidad de Invitados
-                </th>
-                <th
-                  scope="col"
-                  className="w-1/14 px-2 py-2 whitespace-nowrap text-sm text-white bg-blue-800 border border-black"
-                >
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {eventos.map((evento) => (
-                <tr
-                  key={evento.id}
-                  className="hover:shadow-lg"
-                  onClick={() => setIdEventoSeleccionado(evento.id)}
-                >
-                  <td className="px-2 py-2 bg-blue-950 border border-grey text-center">
-                    <div className="flex justify-center items-center">
-                      <img
-                        src="/User.ico"
-                        alt=""
-                        className="w-14 h-14 rounded-2xl "
-                      />
-                    </div>
-                  </td>
-                  <td className="px-2 py-2 whitespace-nowrap border border-grey">
-                    {evento.nombreEvento}
-                  </td>
-                  <td className="px-2 py-2 whitespace-nowrap border border-grey">
-                    {evento.fecha}
-                  </td>
-                  <td className="px-2 py-2 whitespace-nowrap border border-grey">
-                    {evento.cantInvitados}
-                  </td>
-                  <td className="px-2 py-2 whitespace-nowrap border border-grey">
-                    {/* Contenedor flex para los iconos */}
-                    <div className="flex" style={{ justifyContent: "center" }}>
-                      {/* Botón de eliminar con ícono */}
-                      <EliminarEvento evento={evento} onDelete={handleDelete} />
-                      {/* Botón de editar con ícono */}
-                      <VisualizarEvento eventoId = {evento.id}> </VisualizarEvento>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+
+      <br />
+      <TablaEventos userId={user.id} />
     </div>
   );
 };

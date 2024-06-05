@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Tabs = ({ activeTab, onTabChange }) => {
-  const tabs = ['pendiente', 'enviado', 'confirmado', 'rechazado','todos'];
+  const tabs = ['todos','pendiente', 'enviado', 'confirmado', 'rechazado',];
 
   return (
     <div className="border-b border-gray-200">
