@@ -6,6 +6,7 @@ import withAuth from "@/utils/withAuth";
 
 function EventoDetalles({ params }) {
   const [event, setEvent] = useState(null);
+  const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
   const [nombreEvento, setNombreEvento] = useState("");
   const [ubicacion, setUbicacion] = useState("");

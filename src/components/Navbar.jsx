@@ -11,6 +11,7 @@ function Navbar() {
   const pathname = usePathname();
   const noNavbarRoutes = ["/login", "/register", "/home"];
   const hideNavbarOnDynamicRoutes = pathname.startsWith("/confirm/");
+  const [eventId, setEventId] = useState(null);
 
   const showNavbar =
     !noNavbarRoutes.includes(pathname) && !hideNavbarOnDynamicRoutes;
@@ -25,6 +26,15 @@ function Navbar() {
   };
 
   useEffect(() => {
+    // Supongamos que puedes obtener el id desde el pathname o alguna otra lógica
+    const pathParts = pathname.split("/");
+    if (pathParts.length >= 3 && pathParts[1] === "eventos") {
+      setEventId(pathParts[2]);
+    } else {
+      setEventId(null);
+    }
+
+
     const isEventoPage =
       pathname.startsWith("/eventos/") && pathname.split("/").length === 3;
     setIsSpecificPage(isEventoPage);
@@ -64,8 +74,8 @@ function Navbar() {
               {isSpecificPage && (
                 <>
                   <li>
-                    <Link href="/eventos/presupuesto">
-                      <div className="text-white hover:text-gray-300">
+                  < Link href={`/eventos/${eventId}/presupuesto`}>
+                    <div className="text-white hover:text-gray-300">
                         Presupuestos
                       </div>
                     </Link>
