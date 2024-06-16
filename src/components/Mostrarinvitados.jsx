@@ -37,7 +37,7 @@ const MostrarInvitados = ({ eventoID, filter, searchQuery }) => {
 
     const channel = supabase
       .channel('invitado-changes')
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'invitado' }, (payload) => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'invitado' }, (payload) => {
         console.log(payload);
         fetchInvitados();
       })
