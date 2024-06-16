@@ -27,7 +27,7 @@ export default function ExpenseTable({eventoID}) {
       setExpenses(expenses.filter((expense) => expense.id !== expenseId));
     };
 
-    
+  
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-xl font-semibold">Expenses</h2>
