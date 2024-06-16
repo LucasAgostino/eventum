@@ -51,7 +51,7 @@ export default function AddExpenseForm({eventoId}) {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
-            htmlFor="firstName"
+            htmlFor="descripcion"
             className="block text-gray-700 font-bold mb-2"
           >
             Descripcion del gasto:
@@ -68,7 +68,7 @@ export default function AddExpenseForm({eventoId}) {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="lastName"
+            htmlFor="importe"
             className="block text-gray-700 font-bold mb-2"
           >
             Importe:

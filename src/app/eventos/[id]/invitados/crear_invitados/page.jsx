@@ -1,6 +1,6 @@
 "use client"
 import withAuth from "@/utils/withAuth";
-import InsertarInvitados from "@/components/InsertarInvitados";
+import InsertarInvitados from "@/components/invitados/InsertarInvitados";
 import Link from "next/link";
 
 function crear_invitados({ params }) {

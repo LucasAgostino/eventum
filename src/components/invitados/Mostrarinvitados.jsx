@@ -1,15 +1,13 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/utils/supabase';
-import PopUpEliminar from '@/components/PopUpEliminar';
+import BotonEliminar from '../eliminar/BotonEliminar';
 
 const MostrarInvitados = ({ eventoID, filter, searchQuery }) => {
   const [invitados, setInvitados] = useState([]);
   const [filteredInvitados, setFilteredInvitados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [selectedInvitadoId, setSelectedInvitadoId] = useState(null);
 
   useEffect(() => {
     const fetchInvitados = async () => {
@@ -66,18 +64,9 @@ const MostrarInvitados = ({ eventoID, filter, searchQuery }) => {
     setFilteredInvitados(result);
   }, [filter, searchQuery, invitados]);
 
-  const handleDeleteClick = (invitadoId) => {
-    setSelectedInvitadoId(invitadoId);
-    setShowDeletePopup(true);
-  };
 
   const handleDelete = (invitadoId) => {
     setInvitados(invitados.filter((invitado) => invitado.id !== invitadoId));
-  };
-
-  const handleCancel = () => {
-    setShowDeletePopup(false);
-    setSelectedInvitadoId(null);
   };
 
   if (loading) return <div>Cargando...</div>;
@@ -85,13 +74,6 @@ const MostrarInvitados = ({ eventoID, filter, searchQuery }) => {
 
   return (
     <div className="overflow-x-auto">
-      {showDeletePopup && (
-        <PopUpEliminar
-          invitadoId={selectedInvitadoId}
-          onCancel={handleCancel}
-          onDelete={handleDelete}
-        />
-      )}
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
@@ -112,12 +94,11 @@ const MostrarInvitados = ({ eventoID, filter, searchQuery }) => {
               <td className="px-6 py-4 whitespace-nowrap">{invitado.email}</td>
               <td className="px-6 py-4 whitespace-nowrap">{invitado.estado}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <button 
-                  onClick={() => handleDeleteClick(invitado.id)} 
-                  className="text-red-500 hover:text-red-700 ml-2"
-                >
-                  Eliminar
-                </button>
+                <BotonEliminar
+                item={invitado}
+                tableName="invitado"
+                onDelete={handleDelete}
+                />
                 <button className="text-blue-500 hover:text-blue-700">Editar</button>
               </td>
             </tr>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { supabase } from '@/utils/supabase';
 import { useEffect, useState } from "react";
+import BotonEliminar from '../eliminar/BotonEliminar';
 
 export default function ExpenseTable({eventoID}) {
 
@@ -13,7 +14,7 @@ export default function ExpenseTable({eventoID}) {
           .select()
           .eq("eventoId", eventoID);
 
-          if (error) {
+        if (error) {
           console.error("Error fetching gastos:", error.message);
         } else {
           setExpenses(expenses);
@@ -21,6 +22,11 @@ export default function ExpenseTable({eventoID}) {
       }
       fetchExpenses();
     }, [eventoID]);
+
+    const handleDelete = (expenseId) => {
+      setExpenses(expenses.filter((expense) => expense.id !== expenseId));
+    };
+
     
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">
@@ -42,7 +48,11 @@ export default function ExpenseTable({eventoID}) {
                             <td className="px-6 py-4 text-center">{expense.categoria}</td>
                             <td className="px-6 py-4 flex space-x-2 justify-center items-center ">
                                 <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Edit</button>
-                                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                <BotonEliminar
+                                  item={expense}
+                                  tableName="gasto"
+                                  onDelete={handleDelete}
+                                />
                             </td>
                         </tr>
                     ))}

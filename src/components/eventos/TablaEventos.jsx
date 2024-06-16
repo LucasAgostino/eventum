@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
-import PopUpEliminar from "@/components/PopUpEliminar";
-import EliminarEvento from "./EliminarEvento";
 import VisualizarEvento from "./VisualizarEvento";
-
+import BotonEliminar from "../eliminar/BotonEliminar";
 
 const TablaEventos = ({ userId}) => {
   const [eventos, setEventos] = useState([]);
@@ -85,7 +83,11 @@ const TablaEventos = ({ userId}) => {
           <td className="px-6 py-4 whitespace-nowrap">$ {evento.presupuestoEstimado}</td>
           <td className="px-6 py-4 whitespace-nowrap">
             <div className="flex space-x-2">
-              <EliminarEvento evento={evento} onDelete={handleDelete} />
+              <BotonEliminar
+              item={evento}
+              tableName="evento"
+              onDelete={handleDelete}
+              />  
               <VisualizarEvento eventoId={evento.id} />
             </div>
           </td>

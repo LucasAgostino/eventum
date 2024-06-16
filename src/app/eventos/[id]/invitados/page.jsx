@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import withAuth from "@/utils/withAuth";
-import MostrarInvitados from "@/components/Mostrarinvitados";
+import MostrarInvitados from "@/components/invitados/Mostrarinvitados";
 import Link from "next/link";
-import SendInvitationsButton from "@/components/SendInvitationsButton";
-import Tabs from "@/components/Tabs";
-import UploadFile from "@/components/UploadFile";
+import SendInvitationsButton from "@/components/invitados/SendInvitationsButton";
+import Tabs from "@/components/invitados/Tabs";
+import UploadFile from "@/components/invitados/UploadFile";
 
 
 function Invitados({ params }) {

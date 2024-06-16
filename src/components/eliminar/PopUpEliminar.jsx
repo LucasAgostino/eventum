@@ -2,14 +2,14 @@ import React from 'react';
 import { IconTrash } from "@tabler/icons-react";
 import { supabase } from "@/utils/supabase";
 
-function PopUpEliminar({ eventoId, onCancel, onDelete }) {
+function PopUpEliminar({ itemId, tableName, onCancel, onDelete }) {
   
   const handleDelete = async () => {
-    const { error } = await supabase.from("evento").delete().eq("id", eventoId);
+    const { error } = await supabase.from(tableName).delete().eq("id", itemId);
     if (error) {
-      console.error("Error deleting evento:", error.message);
+      console.error(`Error deleting from ${tableName}:`, error.message);
     } else {
-      onDelete(eventoId); // Llama a onDelete para actualizar la lista de eventos en el componente padre
+      onDelete(itemId); // Llama a onDelete para actualizar la lista de items en el componente padre
     }
     onCancel(); // Cierra el popup después de eliminar
   };
@@ -34,11 +34,11 @@ function PopUpEliminar({ eventoId, onCancel, onDelete }) {
               </div>
               <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <h3 className="text-lg leading-6 font-medium text-white">
-                  Eliminar evento
+                  Eliminar item
                 </h3>
                 <div className="mt-2">
                   <p className="text-sm text-gray-300">
-                    ¿Estás seguro de que deseas eliminar este evento?
+                    ¿Estás seguro de que deseas eliminar este {tableName}?
                   </p>
                 </div>
               </div>

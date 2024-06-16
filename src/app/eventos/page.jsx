@@ -5,9 +5,8 @@ import Link from "next/link";
 import { supabase } from "@/utils/supabase";
 import withAuth from "@/utils/withAuth";
 import { useUserSession } from "../context/UserSessionContext";
-import EliminarEvento from "@/components/EliminarEvento";
-import VisualizarEvento from "@/components/VisualizarEvento";
-import TablaEventos from "@/components/TablaEventos";
+import TablaEventos from "@/components/eventos/TablaEventos";
+
 function Eventos() {
   const [eventos, setEventos] = useState([]);
   const { user } = useUserSession();
@@ -26,10 +25,6 @@ function Eventos() {
     }
     fetchEventos();
   }, [user]);
-
-  const handleDelete = (eventoId) => {
-    setEventos(eventos.filter((evento) => evento.id !== eventoId));
-  };
 
   return (
     <div>

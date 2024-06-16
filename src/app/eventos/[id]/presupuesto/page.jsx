@@ -1,9 +1,9 @@
 "use client"
 import Head from 'next/head';
 import Sidebar from '@/components/NavbarVertical';
-import SalesOverview from '@/components/SalesOverview';
-import AddExpenseForm from '@/components/AddExpenseForm';
-import ExpenseTable from '@/components/ExpenseTable';
+import SalesOverview from '@/components/gastos/SalesOverview';
+import AddExpenseForm from '@/components/gastos/AddExpenseForm';
+import ExpenseTable from '@/components/gastos/ExpenseTable';
 import { useEffect, useState } from "react";
 
 

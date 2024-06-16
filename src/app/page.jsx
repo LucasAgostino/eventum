@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import withAuth from "@/utils/withAuth";
 import { useUserSession } from "./context/UserSessionContext";
-import TablaEventos from "@/components/TablaEventos";
+import TablaEventos from "@/components/eventos/TablaEventos";
 
 const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
   const chartRef = useRef(null);

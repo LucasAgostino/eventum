@@ -1,5 +1,5 @@
 import { Doughnut } from 'react-chartjs-2';
-import '../components/chartSetup'; // Asegúrate de que la ruta es correcta
+import './chartSetup'; // Asegúrate de que la ruta es correcta
 
 
 export default function SalesOverview() {

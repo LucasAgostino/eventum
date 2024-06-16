@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 import { IconTrash } from "@tabler/icons-react";
-import PopUpEliminar from "@/components/PopUpEliminar";
+import PopUpEliminar from "./PopUpEliminar";
 
-const EliminarEvento = ({ evento, onDelete }) => {
-  const [eventoIdToDelete, setEventoIdToDelete] = useState(null);
+
+
+const BotonEliminar = ({ item, tableName, onDelete }) => {
+  const [itemIdToDelete, setItemIdToDelete] = useState(null);
 
   const confirmarEliminacion = () => {
-    setEventoIdToDelete(evento.id);
+    setItemIdToDelete(item.id);
   };
 
   const cancelarEliminacion = () => {
-    setEventoIdToDelete(null);
+    setItemIdToDelete(null);
   };
 
   const handleDelete = () => {
-    onDelete(evento.id);
-    setEventoIdToDelete(null);
+    onDelete(item.id);
+    setItemIdToDelete(null);
   };
 
   return (
     <div>
-      {eventoIdToDelete && (
+      {itemIdToDelete && (
         <PopUpEliminar
-          eventoId={eventoIdToDelete}
+          itemId={itemIdToDelete}
+          tableName={tableName}
           onCancel={cancelarEliminacion}
           onDelete={handleDelete}
         />
@@ -37,4 +40,4 @@ const EliminarEvento = ({ evento, onDelete }) => {
   );
 };
 
-export default EliminarEvento;
+export default BotonEliminar;
