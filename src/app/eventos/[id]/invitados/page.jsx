@@ -5,6 +5,8 @@ import MostrarInvitados from "@/components/Mostrarinvitados";
 import Link from "next/link";
 import SendInvitationsButton from "@/components/SendInvitationsButton";
 import Tabs from "@/components/Tabs";
+import UploadFile from "@/components/UploadFile";
+
 
 function Invitados({ params }) {
   const [filter, setFilter] = useState("pendiente");
@@ -60,6 +62,9 @@ function Invitados({ params }) {
             <span className="group-active:hidden">Añadir Invitado</span>
           </button>
         </Link>
+
+        <UploadFile eventId={params.id}/>
+        
       </div>
 
       <Tabs activeTab={filter} onTabChange={handleFilterChange} />
