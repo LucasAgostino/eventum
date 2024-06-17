@@ -3,31 +3,8 @@ import { supabase } from '@/utils/supabase';
 import { useEffect, useState } from "react";
 import BotonEliminar from '../eliminar/BotonEliminar';
 
-export default function ExpenseTable({eventoID}) {
-
-    const [expenses, setExpenses] = useState([]);
-  
-    useEffect(() => {
-      async function fetchExpenses() {
-        const { data: expenses, error } = await supabase
-          .from("gasto")
-          .select()
-          .eq("eventoId", eventoID);
-
-        if (error) {
-          console.error("Error fetching gastos:", error.message);
-        } else {
-          setExpenses(expenses);
-        }
-      }
-      fetchExpenses();
-    }, [eventoID]);
-
-    const handleDelete = (expenseId) => {
-      setExpenses(expenses.filter((expense) => expense.id !== expenseId));
-    };
-
-  
+export default function ExpenseTable({expenses, onDelete}) {
+    
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-xl font-semibold">Expenses</h2>
@@ -51,7 +28,7 @@ export default function ExpenseTable({eventoID}) {
                                 <BotonEliminar
                                   item={expense}
                                   tableName="gasto"
-                                  onDelete={handleDelete}
+                                  onDelete={onDelete}
                                 />
                             </td>
                         </tr>

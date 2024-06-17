@@ -1,114 +1,68 @@
-// components/AddExpenseForm.js
-import { supabase } from "@/utils/supabase";
 import { useState } from "react";
 
-export default function AddExpenseForm({eventoId}) {
-  const [formData, setFormData] = useState({
-    descripcion: "",
-    eventoId: eventoId,
-    categoria: "",
-    importe: 0.0, // Usamos el eventoID pasado como prop
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+export default function AddExpenseForm({ addExpense }) {
+  const [descripcion, setDescripcion] = useState("");
+  const [importe, setImporte] = useState("");
+  const [categoria, setCategoria] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.from("gasto").insert([
-      {
-        descripcion: formData.descripcion,
-        eventoId: eventoId,
-        importe: formData.importe,
-        categoria: formData.categoria,
-      },
-    ]);
-
-    if (error) {
-      console.error("Error inserting data:", error);
-    } else {
-      console.log("Data inserted successfully:", data);
-      // Opcional: Reiniciar el formulario después de la inserción exitosa
-      setFormData({
-        descripcion: "",
-        eventoId: "",
-        categoria: "",
-        importe: 0.0,
-        eventoId: eventoId,
-      });
-      
-    }
+    const newExpense = {
+      descripcion,
+      importe: parseFloat(importe),
+      categoria,
+    };
+    await addExpense(newExpense); // Llama a la función para agregar el nuevo gasto
+    // Limpiar los campos del formulario
+    setDescripcion("");
+    setImporte("");
+    setCategoria("");
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-xl font-semibold">Agregar gasto</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="descripcion"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Descripcion del gasto:
-          </label>
-          <input
-            type="text"
-            id="descripcion"
-            name="descripcion"
-            value={formData.descripcion}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="importe"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Importe:
-          </label>
-          <input
-            type="number"
-            id="importe"
-            name="importe"
-            value={formData.importe}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
-            Categoria:
-          </label>
-          <select
-            id="categoria"
-            name="categoria"
-            className="w-full p-2 border rounded"
-            value={formData.categoria}
-            onChange={handleChange}
-          >
-            <option value="">Seleccione una categoría</option>
-            <option value="Venue">Venue</option>
-            <option value="Food">Food</option>
-            <option value="Decor">Decor</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Photography">Photography</option>
-          </select>
-        </div>
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none"
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
+      <h2 className="text-xl font-semibold">Agregar Gasto</h2>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-2">
+          Descripción del gasto
+        </label>
+        <input
+          type="text"
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block mb-2">Importe</label>
+        <input
+          type="number"
+          value={importe}
+          onChange={(e) => setImporte(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-2">Categoría</label>
+        <select
+          value={categoria}
+          onChange={(e) => setCategoria(e.target.value)}
+          className="w-full p-2 border rounded"
         >
-          Agregar
-        </button>
-      </form>
-    </div>
+          <option value="">Seleccione una categoría</option>
+          <option value="Venue">Alquiler del local</option>
+          <option value="Food">Catering</option>
+          <option value="Decor">Decoración</option>
+          <option value="Entertainment">Música</option>
+          <option value="Photography">Fotografía</option>
+        </select>
+      </div>
+      <button
+        type="submit"
+        className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none"
+      >
+        Agregar
+      </button>
+    </form>
   );
 }
