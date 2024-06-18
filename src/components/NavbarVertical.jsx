@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { supabase } from "@/utils/supabase";
@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 const menuItems = (eventId) =>
   [
-    { path: "/home", icon: "/hogar.png", text: "Home" },
+    { path: "/", icon: "/hogar.png", text: "Dashboard" },
     { path: "/eventos", icon: "/Calendario.png", text: "Eventos" },
     eventId && {
       path: `/eventos/${eventId}/presupuesto`,
@@ -112,16 +112,25 @@ export default function Sidebar() {
               <div className="flex items-center">
                 <button
                   onClick={handleLogout}
-                  className="flex items-center"
+                  className="flex items-center w-full"
                 >
                   <img
                     src="/logout.png"
                     className="h-5 w-5"
                     alt="Cerrar Sesión Icon"
                   />
-                  {isMenuOpen && (
-                    <span className="ml-2 text-sm">Cerrar sesión</span>
-                  )}
+                  <span
+                    className={`ml-2 text-sm transition-opacity duration-300 ${
+                      isMenuOpen ? "opacity-100" : "opacity-0"
+                    }`}
+                    style={{
+                      width: isMenuOpen ? "auto" : "0px",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Cerrar sesión
+                  </span>
                 </button>
               </div>
             </div>

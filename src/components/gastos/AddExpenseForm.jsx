@@ -20,7 +20,7 @@ export default function AddExpenseForm({ addExpense }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-6 space-y-6 border">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Agregar Gasto</h2>
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">

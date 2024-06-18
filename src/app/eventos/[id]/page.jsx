@@ -30,7 +30,7 @@ function EventoDetalles({ params }) {
     };
 
     fetchEvent();
-  }, [params.id,event]);
+  }, [params.id, event]);
 
   const handleEditar = () => {
     setEditing(true);
@@ -39,6 +39,10 @@ function EventoDetalles({ params }) {
     setcantInvitados(event.cantInvitados);
     setFecha(event.fecha);
     setPresupuestoEstimado(event.presupuestoEstimado);
+  };
+
+  const handleCancelar = () => {
+    setEditing(false);
   };
 
   const handleSubmit = async (event) => {
@@ -161,12 +165,21 @@ function EventoDetalles({ params }) {
                 required
               />
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-end mt-8">
               <button
-                className="mt-8 text-left flex gap-2 text-gray-600 hover:scale-110 duration-200 hover:cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="text-left flex items-center gap-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 ease-in-out transform hover:scale-105"
                 type="submit"
               >
-                Actualizar Evento
+                <span className="hidden md:inline">Actualizar Evento</span>{" "}
+                {/* Texto visible en pantallas medianas y grandes */}
+                <span className="md:hidden">Actualizar</span>{" "}
+                {/* Texto visible en pantallas pequeñas */}
+              </button>
+              <button
+                className="ml-3 text-gray-600 hover:text-gray-800 font-semibold focus:outline-none"
+                onClick={handleCancelar}
+              >
+                Cancelar
               </button>
             </div>
           </form>

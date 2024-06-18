@@ -77,14 +77,14 @@ function ExpensesPage({ params }) {
           </h1>
         </header>
         <main className="flex-grow p-4 flex">
-          <div className="flex-grow p-4 mr-4"> {/* Ajuste de margen derecho */}
+          <div className="flex-grow p-4"> {/* Ajuste de margen derecho */}
             <SalesOverview expenses={expenses}/>
           </div>
-          <div className="w-1/3 p-4 ml-4"> {/* Ajuste de margen izquierdo */}
+          <div className="w-1/3 p-4"> {/* Ajuste de margen izquierdo */}
             <AddExpenseForm addExpense={addExpense} />
           </div>
         </main>
-        <div className="p-4 mr-20 ml-8">
+        <div className="p-4 mr-4 ml-4">
           <ExpenseTable expenses={expenses} onDelete={handleDelete} />
         </div>
       </div>

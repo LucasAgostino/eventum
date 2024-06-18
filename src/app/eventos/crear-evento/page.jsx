@@ -1,6 +1,6 @@
 "use client"
 import withAuth from "@/utils/withAuth";
-import FormularioEvento from "@/components/FormularioEvento";
+import FormularioEvento from "@/components/eventos/FormularioEvento";
 
 function CrearEvento() {
 
