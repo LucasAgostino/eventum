@@ -13,8 +13,7 @@ function Navbar() {
   const hideNavbarOnDynamicRoutes = pathname.startsWith("/confirm/");
   const [eventId, setEventId] = useState(null);
 
-  const showNavbar =
-    !noNavbarRoutes.includes(pathname) && !hideNavbarOnDynamicRoutes;
+  const showNavbar = !noNavbarRoutes.includes(pathname) && !hideNavbarOnDynamicRoutes;
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -33,7 +32,6 @@ function Navbar() {
     } else {
       setEventId(null);
     }
-
 
     const isEventoPage =
       pathname.startsWith("/eventos/") && pathname.split("/").length === 3;

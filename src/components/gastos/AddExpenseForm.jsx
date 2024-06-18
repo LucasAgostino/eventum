@@ -20,8 +20,8 @@ export default function AddExpenseForm({ addExpense }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-xl font-semibold">Agregar Gasto</h2>
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Agregar Gasto</h2>
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">
           Descripción del gasto
@@ -30,16 +30,18 @@ export default function AddExpenseForm({ addExpense }) {
           type="text"
           value={descripcion}
           onChange={(e) => setDescripcion(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div className="mb-4">
-        <label className="block mb-2">Importe</label>
+        <label className="block text-gray-700 font-bold mb-2">Importe</label>
         <input
           type="number"
           value={importe}
           onChange={(e) => setImporte(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -47,7 +49,8 @@ export default function AddExpenseForm({ addExpense }) {
         <select
           value={categoria}
           onChange={(e) => setCategoria(e.target.value)}
-          className="w-full p-2 border rounded"
+          required
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         >
           <option value="">Seleccione una categoría</option>
           <option value="Venue">Alquiler del local</option>
@@ -59,7 +62,7 @@ export default function AddExpenseForm({ addExpense }) {
       </div>
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none"
+        className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
         Agregar
       </button>

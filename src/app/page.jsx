@@ -119,7 +119,7 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
         {/* Tarjeta de evento */}
         <div
           className="bg-white border border-gray-300 shadow-lg p-4 rounded-lg ml-4"
-          style={{ height: "400px", width: "800px" }}
+          style={{ height: "400px", width: "600px" }}
         >
           <h1 className="text-xl font-bold mb-2">Próximo evento</h1>
           <div className="flex items-center mb-">
@@ -180,7 +180,7 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
         {/* Chart a la derecha */}
         <div
           className="bg-white border border-gray-300 shadow-lg p-4 rounded-lg ml-4"
-          style={{ height: "400px", width: "800px" }}
+          style={{ height: "400px", width: "600px" }}
         >
           <div className="px-10 py-6 flex justify-between items-center">
             <h3 className="text-zinc-900 dark:text-black text-2xl">

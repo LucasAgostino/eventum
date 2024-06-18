@@ -59,7 +59,7 @@ const TablaEventos = ({ userId}) => {
           Fecha
         </th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          Cantidad de invitados
+          Invitados
         </th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
           Ubicación

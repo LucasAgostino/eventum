@@ -47,7 +47,7 @@ export default function Auth() {
     <div className="min-h-screen flex flex-col items-center justify-center relative bg-gradient-to-r from-blue-400 to-blue-600 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-75"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-75 animate-particles"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-75"></div>
       </div>
       <div className="relative z-10 max-w-md w-full space-y-8 p-8 rounded-lg shadow-md bg-white">
         <div className="text-center">

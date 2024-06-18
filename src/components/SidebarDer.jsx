@@ -25,7 +25,7 @@ export default function SidebarDer() {
     <div style={{
       position: 'fixed',
       right: 0,
-      top: '115px', // Ajusta este valor para mover el sidebar hacia abajo
+      top: '10px', // Ajusta este valor para mover el sidebar hacia abajo
       height: isOpen ? 'calc(100vh - 60px)' : '60px', // Ajusta la altura según el desplazamiento
       width: isOpen ? '300px' : '60px',
       transition: 'all 0.3s ease-in-out',

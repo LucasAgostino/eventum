@@ -27,6 +27,7 @@ function Eventos() {
   }, [user]);
 
   return (
+
     <div>
       <div className="flex items-center justify-between m-4">
         <h1 className="text-3xl font-bold text-gray-900">Mis eventos</h1>
