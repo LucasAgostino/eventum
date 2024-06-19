@@ -48,7 +48,7 @@ export default function Sidebar() {
   };
 
   function isActive(path) {
-    return router.asPath === path;
+    return pathname === path;
   }
 
   function handleMouseEnter() {
@@ -81,27 +81,37 @@ export default function Sidebar() {
           <div className="bg-blue-800 backdrop-blur-sm border border-blue-700 shadow-lg p-4 rounded-lg min-h-screen flex flex-col justify-between">
             <nav>
               <ul>
-                <li className="p-3 flex items-center cursor-pointer">
+                <li className="p-3 flex items-center cursor-pointer mb-10">
                   <img src="/menu.png" className="h-5 w-5" alt="Menu Icon" />
-                  {isMenuOpen && <span className="ml-2 text-sm">Menú</span>}
+                  <span
+                    className={`ml-2 text-sm transition-opacity duration-300 ${
+                      isMenuOpen ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    Menú
+                  </span>
                 </li>
                 {menuItems(eventId).map(({ path, icon, text }) => (
                   <li
                     key={path}
                     className={`p-3 flex items-center ${
-                      isActive(path) ? "bg-blue-700 shadow-lg" : ""
+                      isActive(path) ? "bg-blue-700 shadow-lg rounded-lg" : ""
                     }`}
                   >
                     <Link href={path} legacyBehavior>
-                      <a className="flex items-center w-full">
+                      <a className="flex items-center w-full mb-2 mt-2">
                         <img
                           src={icon}
                           className="h-5 w-5"
                           alt={`${text} Icon`}
                         />
-                        {isMenuOpen && (
-                          <span className="ml-2 text-sm">{text}</span>
-                        )}
+                        <span
+                          className={`ml-2 text-sm transition-opacity duration-300 ${
+                            isMenuOpen ? "opacity-100" : "opacity-0"
+                          }`}
+                        >
+                          {text}
+                        </span>
                       </a>
                     </Link>
                   </li>

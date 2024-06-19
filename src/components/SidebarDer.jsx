@@ -1,25 +1,27 @@
-"use client"
+"use client";
 import { useState } from 'react';
 
-const checklistItems = [
-  { id: 1, label: 'Enviar Invitaciones' },
-  { id: 2, label: 'Ordenar Mesas' },
-  { id: 3, label: 'Establecer Precio' },
-  // Añade más ítems según necesites
+const initialChecklistItems = [
 ];
 
-const eventDetails = {
-  fecha: '15 de junio, 2024',
-  ubicacion: 'Palacio Alsina, CABA, Buenos Aires',
-  horario: '9:00 PM - 6:00 AM'
-};
 
-export default function SidebarDer() {
+export default function SidebarDer({ eventDetails = { fecha: '12-10-2024', ubicacion: 'Victoria Ocampo 100, CABA', horario: '23:00' } }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [checklistItems, setChecklistItems] = useState(initialChecklistItems);
+  const [newTask, setNewTask] = useState('');
 
-  function toggleSidebar() {
+  const toggleSidebar = () => {
     setIsOpen(!isOpen);
-  }
+  };
+
+  const handleAddTask = () => {
+    if (newTask.trim() === '') return; // No añadir tareas vacías
+
+    const newTaskItem = { id: checklistItems.length + 1, label: newTask };
+    setChecklistItems([...checklistItems, newTaskItem]);
+    setNewTask(''); // Limpiar el campo de entrada
+  };
+    
 
   return (
     <div style={{
@@ -67,28 +69,38 @@ export default function SidebarDer() {
               </label>
             </div>
           ))}
+          <input
+            type="text"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            placeholder="Nueva tarea"
+            className="w-full px-3 py-2 mb-4 text-black rounded"
+          />
+          <button
+            onClick={handleAddTask}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full"
+          >
+            Añadir Tarea
+          </button>
           <h2 className="text-lg font-semibold mt-10 mb-4">Detalles del Evento</h2>
-          <div className="mb-4 flex items-center">
+          <div className="mb-10 flex items-center">
             <img src="/Calendario.png" alt="Fecha" className="h-6 w-6 mr-4"/>
             <div>
               <strong>Fecha:</strong> {eventDetails.fecha}
             </div>
           </div>
-          <div className="mb-4 flex items-center">
-            <img src="/marcador.png" alt="Ubicación" className="h-6 w-6 mr-4"/>
+          <div className="mb-10 flex items-center">
+            <img src="/ubicacion.png" alt="Ubicación" className="h-6 w-6 mr-4"/>
             <div>
               <strong>Ubicación:</strong> {eventDetails.ubicacion}
             </div>
           </div>
-          <div className="mb-4 flex items-center">
+          <div className="mb-10 flex items-center">
             <img src="/reloj.png" alt="Horario" className="h-6 w-6 mr-4"/>
             <div>
               <strong>Horario:</strong> {eventDetails.horario}
             </div>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full">
-            Añadir Tarea
-          </button>
         </div>
       )}
     </div>

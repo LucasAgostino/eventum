@@ -2,9 +2,11 @@ import { Doughnut } from "react-chartjs-2";
 import { useEffect, useRef } from "react";
 import "./chartSetup"; // Asegúrate de que la ruta es correcta
 
-export default function SalesOverview({ expenses }) {
+export default function SalesOverview({ expenses, presupuestoMax}) {
   // Crear una referencia para la imagen
   const imageRef = useRef(null);
+  console.log("presu")
+  console.log(presupuestoMax)
 
   useEffect(() => {
     // Cargar la imagen solo una vez
@@ -115,7 +117,7 @@ export default function SalesOverview({ expenses }) {
         </div>
         <div className="w-1/2 flex flex-col justify-center ml-6">
           <p className="text-4xl font-semibold text-black mb-4">
-            ${totalAmount}
+          ${totalAmount} / ${presupuestoMax}
           </p>
           <ul className="mt-2 space-y-2">
             {expenses.slice(0, 5).map((expense, index) => (

@@ -66,12 +66,12 @@ export default function RegisterPage() {
             />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            <span className="tex-blue-400">Sign up</span> for an account
+            <span className="tex-blue-400">Registrate</span>
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Already have an account?{" "}
+            Ya tenes una cuenta?{" "}
             <span className="font-medium text-blue-600 hover:text-blue-500">
-              <Link href="/login">Log in here</Link>
+              <Link href="/login">Iniciar sesión</Link>
             </span>
           </p>
         </div>
@@ -81,7 +81,7 @@ export default function RegisterPage() {
             <div className="input flex flex-col relative">
               <label
                 htmlFor="name"
-                className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] bg-[#e8e8e8] w-full"
+                className="text-blue-500 text-xs font-semibold top-2 px-[3px]"
               >
                 Nombre:
               </label>
@@ -93,12 +93,13 @@ export default function RegisterPage() {
                 autoComplete="name"
                 required
                 className="border-blue-500 input px-[10px] py-[11px] text-xs bg-[#e8e8e8] border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                placeholder="Nombre"
               />
             </div>
             <div className="input flex flex-col relative">
               <label
                 htmlFor="lastName"
-                className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] bg-[#e8e8e8] w-full"
+                className="text-blue-500 text-xs font-semibold top-2 px-[3px] "
               >
                 Apellido:
               </label>
@@ -110,14 +111,15 @@ export default function RegisterPage() {
                 autoComplete="lastName"
                 required
                 className="border-blue-500 input px-[10px] py-[11px] text-xs bg-[#e8e8e8] border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                placeholder="Apellido"
               />
             </div>
             <div className="input flex flex-col relative">
               <label
                 htmlFor="email"
-                className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] bg-[#e8e8e8] w-full"
+                className="text-blue-500 text-xs font-semibold top-2 px-[3px]"
               >
-                Email address:
+                Email:
               </label>
               <input
                 id="email"
@@ -127,14 +129,16 @@ export default function RegisterPage() {
                 autoComplete="email"
                 required
                 className="border-blue-500 input px-[10px] py-[11px] text-xs bg-[#e8e8e8] border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                placeholder="Email"
+
               />
             </div>
             <div className="input flex flex-col relative">
               <label
                 htmlFor="password"
-                className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] bg-[#e8e8e8] w-full"
+                className="text-blue-500 text-xs font-semibold top-2 px-[3px]"
               >
-                Password:
+                Contraseña:
               </label>
               <input
                 id="password"
@@ -144,14 +148,16 @@ export default function RegisterPage() {
                 autoComplete="new-password"
                 required
                 className="border-blue-500 input px-[10px] py-[11px] text-xs bg-[#e8e8e8] border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                placeholder="Contraseña"
+
               />
             </div>
             <div className="input flex flex-col relative">
               <label
                 htmlFor="passwordConfirmation"
-                className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] bg-[#e8e8e8] w-full"
+                className="text-blue-500 text-xs font-semibold top-2 px-[3px]"
               >
-                Confirmar Password:
+                Confirmar Contraseña:
               </label>
               <input
                 id="passwordConfirmation"
@@ -161,6 +167,8 @@ export default function RegisterPage() {
                 autoComplete="new-password"
                 required
                 className="border-blue-500 input px-[10px] py-[11px] text-xs bg-[#e8e8e8] border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                placeholder="Confirmar contraseña"
+
               />
             </div>
           </div>
@@ -174,7 +182,7 @@ export default function RegisterPage() {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Sign up
+              Registrate
             </button>
           </div>
         </form>

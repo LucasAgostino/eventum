@@ -58,13 +58,13 @@ export default function Auth() {
             style={{ width: "80px", height: "80px" }}
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 tracking-wider">
-            <span className="text-blue-400">Sign in</span> to your account
+            <span className="text-blue-400">Iniciar sesión</span> en tu cuenta
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
+            O{" "}
             <Link href="register">
               <span className="font-medium text-blue-400 hover:text-blue-500 cursor-pointer">
-                Sign Up
+                Registrarse
               </span>
             </Link>
           </p>
@@ -75,7 +75,7 @@ export default function Auth() {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
-                Email address
+                Email
               </label>
               <input
                 id="email-address"
@@ -85,12 +85,12 @@ export default function Auth() {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder="Email"
               />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                Password
+                Contraseña
               </label>
               <input
                 id="password"
@@ -100,7 +100,7 @@ export default function Auth() {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
+                placeholder="Contraseña"
               />
             </div>
           </div>
@@ -117,13 +117,13 @@ export default function Auth() {
                 htmlFor="remember-me"
                 className="ml-2 block text-sm text-gray-900"
               >
-                Remember me
+                Recordarme
               </label>
             </div>
 
             <div className="text-sm">
               <span className="font-medium text-blue-400 hover:text-blue-500 cursor-pointer">
-                Forgot your password?
+                Olvidaste tu contraseña?
               </span>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function Auth() {
                   aria-hidden="true"
                 />
               </span>
-              Sign in
+              Iniciar sesión
             </button>
           </div>
         </form>
