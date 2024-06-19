@@ -24,13 +24,13 @@ function Invitados({ params }) {
   return (
     <div className="p-6 min-h-screen ml-10">
       <div className="mb-12">
-        <h1 className="text-4xl font-extrabold mb-4 text-gray-900 m-10 mb-15">
+        <h1 className="text-4xl font-extrabold mb-4 text-gray-900  mb-15">
           Lista de Invitados
         </h1>
-        <span className="Justify-center text-blue-400 text-4xl m-10 mt-10 ">
+        <span className="Justify-center text-blue-800 text-4xl mt-10 ">
           Invitados para el Evento
         </span>
-        <p className="text-lg text-gray-700 ml-10">
+        <p className="text-lg text-gray-700 ">
           Aquí puedes gestionar todos los invitados para el evento. Crea, edita
           y envía invitaciones fácilmente.
         </p>
@@ -38,7 +38,7 @@ function Invitados({ params }) {
 
       <div className="mb-4 flex space-x-4">
         
-        <SendInvitationsButton eventId={params.id} />
+        <SendInvitationsButton eventId={params.id} className='h-12 w-44' />
 
         <Link href={`/eventos/${params.id}/invitados/crear_invitados`} passHref>
           <button className="cursor-pointer w-44 h-12 bg-green-500 text-white rounded-lg hover:bg-green-600 hover:shadow-lg group active:w-11 active:h-11 active:rounded-full active:duration-300 ease-in-out">
@@ -63,7 +63,7 @@ function Invitados({ params }) {
           </button>
         </Link>
 
-        <UploadFile eventId={params.id}/>
+        <UploadFile eventId={params.id} className=''/>
         
       </div>
 
@@ -75,7 +75,7 @@ function Invitados({ params }) {
           placeholder="Buscar invitados..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full py-2 px-4 rounded bg-gray-50 text-gray-900"
+          className="w-full py-2 px-4 rounded bg-gray-300/40 text-gray-900"
         />
       </div>
 

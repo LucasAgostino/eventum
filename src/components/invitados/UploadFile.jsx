@@ -63,7 +63,7 @@ const UploadFile = (eventoId) => {
 
     return (
         <div>
-            <label className="py-2 px-4 bg-blue-200 text-blue-800 font-semibold rounded-lg cursor-pointer mb-6 hover:bg-blue-300 transition duration-300">
+            <label className="flex items-center py-3 px-4 bg-blue-800 text-white font-semibold rounded-lg cursor-pointer mb-6 hover:bg-blue-300 transition duration-300">
                 <input
                     type="file"
                     onChange={handleFileUpload}
