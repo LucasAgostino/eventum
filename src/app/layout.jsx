@@ -3,7 +3,6 @@ import NavbarVertical from "@/components/NavbarVertical";
 import { UserSessionProvider } from "./context/UserSessionContext";
 import "tailwindcss/tailwind.css";
 import Header from "@/components/header";
-import { LoadScript } from "@react-google-maps/api";
 
 const inter = Inter({ subsets: ["latin"] });
 

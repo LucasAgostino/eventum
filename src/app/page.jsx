@@ -160,24 +160,6 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
           </div>
         </div>
 
-        {/*} <div className="bg-white border border-gray-300 shadow-lg p-4 rounded-lg" style={{ height: '300', width: '800px' }}>
-          <div className='flex'>
-            <h2 className="text-xl font-bold mb-2">Próximo evento</h2>
-            <div className="flex items-center mb-4">
-              <img src='/favicon.ico' alt="Icono del evento" className="w-20 h-20" />
-            <div>
-                <h3 className="text-lg font-semibold">{nombreEvento}Casamiento de Jazmín</h3>
-                <p className="text-gray-600 text-sm">Fecha: {FechaEvento}</p>
-                <p className="text-gray-600 text-sm">Victoria Ocampo 100, CAutónoma de Buenos Aires</p>
-              </div>
-            </div>
-            <div className="bg-gray-200 p-2 rounded-lg">
-              <p className="text-sm text-gray-600">Estado de invitaciones: Enviadas 120/480</p>
-            </div>
-          </div>
-          
-    </div> */}
-        {/* Chart a la derecha */}
         <div
           className="bg-white border border-gray-300 shadow-lg p-4 rounded-lg ml-4"
           style={{ height: "400px", width: "600px" }}
