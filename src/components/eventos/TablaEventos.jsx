@@ -80,7 +80,7 @@ const TablaEventos = ({ userId}) => {
           <td className="px-6 py-4 whitespace-nowrap">{evento.fecha}</td>
           <td className="px-6 py-4 whitespace-nowrap">{evento.cantInvitados}</td>
           <td className="px-6 py-4 whitespace-nowrap">{evento.ubicacion}</td>
-          <td className="px-6 py-4 whitespace-nowrap">$ {evento.presupuestoEstimado}</td>
+          <td className="px-6 py-4 whitespace-nowrap">$ {evento.presupuestoEstimado.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
           <td className="px-6 py-4 whitespace-nowrap">
             <div className="flex space-x-2">
               <BotonEliminar

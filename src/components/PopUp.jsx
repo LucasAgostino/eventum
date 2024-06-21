@@ -22,9 +22,9 @@ export default function Popup({ message, onClose }) {
           </svg>
         </div>
         <div className="flex items-center mb-4">
-          <div className="bg-red-500 p-2 rounded-full">
+          <div className="bg-yellow-500 p-2 rounded-full">
             <svg
-              className="w-6 h-6 text-white"
+              className="w-6 h-6 text-black"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -38,13 +38,13 @@ export default function Popup({ message, onClose }) {
               ></path>
             </svg>
           </div>
-          <h2 className="text-2xl font-bold ml-3 text-red-600">Error</h2>
+          <h2 className="text-2xl font-bold ml-3 text-yellow-500">Alerta</h2>
         </div>
         <p className="text-gray-700">{message}</p>
         <div className="flex justify-end mt-6">
           <button
             onClick={onClose}
-            className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out"
+            className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition duration-300 ease-in-out"
           >
             Cerrar
           </button>

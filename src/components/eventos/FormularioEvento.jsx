@@ -29,12 +29,23 @@ function FormularioEvento() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (parseInt(value) < 0) {
-      return;
+    if (name === 'presupuestoEstimado') {
+      handlePresupuestoChange(value);
+    } else {
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
     }
+  };
+
+  const handlePresupuestoChange = (value) => {
+    value = value.replace(/\D/g, ''); // Eliminar cualquier carácter no numérico
+    const options = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    const formattedValue = new Intl.NumberFormat('es-ES', options).format(value / 100);
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      presupuestoEstimado: formattedValue
     }));
   };
 
@@ -49,12 +60,14 @@ function FormularioEvento() {
     e.preventDefault();
 
     try {
+      const formattedPresupuesto = parseFloat(formData.presupuestoEstimado.replace(/\./g, '').replace(/,/g, '.'));
+      
       const { error } = await supabase.from('evento').insert({
         nombreEvento: formData.nombreEvento,
         cantInvitados: formData.cantInvitados,
         fecha: formData.fecha,
         ubicacion: formData.ubicacion,
-        presupuestoEstimado: formData.presupuestoEstimado,
+        presupuestoEstimado: formattedPresupuesto,
         userID: user.id
       });
 
@@ -141,12 +154,13 @@ function FormularioEvento() {
         <div className="mb-4">
           <label htmlFor="presupuestoEstimado" className="block text-blue-900 font-bold mb-2">Presupuesto Estimado:</label>
           <input
-            type="number"
+            type="text"
             id="presupuestoEstimado"
             name="presupuestoEstimado"
             value={formData.presupuestoEstimado}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="$"
           />
         </div>
         <button

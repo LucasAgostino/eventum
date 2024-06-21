@@ -2,11 +2,9 @@ import { Doughnut } from "react-chartjs-2";
 import { useEffect, useRef } from "react";
 import "./chartSetup"; // Asegúrate de que la ruta es correcta
 
-export default function SalesOverview({ expenses, presupuestoMax}) {
+export default function SalesOverview({ expenses, presupuestoMax }) {
   // Crear una referencia para la imagen
   const imageRef = useRef(null);
-  console.log("presu")
-  console.log(presupuestoMax)
 
   useEffect(() => {
     // Cargar la imagen solo una vez
@@ -20,9 +18,23 @@ export default function SalesOverview({ expenses, presupuestoMax}) {
   // Extraer nombres y cantidades para el gráfico
   const labels = expenses.map((expense) => expense.descripcion);
   const dataValues = expenses.map((expense) => expense.importe);
-  const totalAmount = expenses
-    .reduce((sum, expense) => sum + expense.importe, 0)
-    .toFixed(2); // Total amount spent
+  const totalAmount = expenses.reduce((sum, expense) => sum + expense.importe, 0);
+
+  const percentage = (totalAmount / presupuestoMax) * 100;
+  let amountColor;
+
+  if (percentage < 75) {
+    amountColor = "text-green-500"; // Menos del 75% del presupuesto
+  } else if (percentage >= 75 && percentage < 90) {
+    amountColor = "text-yellow-500"; // Entre el 75% y el 90% del presupuesto
+  } else if (percentage >= 90 && percentage <= 100) {
+    amountColor = "text-orange-500"; // Entre el 90% y el 100% del presupuesto
+  } else {
+    amountColor = "text-red-500"; // Más del 100% del presupuesto
+  }
+
+  const formattedTotalAmount = totalAmount.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const formattedPresupuestoMax = presupuestoMax.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const data = {
     labels,
@@ -116,8 +128,9 @@ export default function SalesOverview({ expenses, presupuestoMax}) {
           />
         </div>
         <div className="w-1/2 flex flex-col justify-center ml-6">
-          <p className="text-4xl font-semibold text-black mb-4">
-          ${totalAmount} / ${presupuestoMax}
+          <p className="text-4xl font-semibold mb-4">
+            <span className={amountColor}>${formattedTotalAmount}</span> /{" "}
+            <span className="text-black">${formattedPresupuestoMax}</span>
           </p>
           <ul className="mt-2 space-y-2">
             {expenses.slice(0, 5).map((expense, index) => (
@@ -144,7 +157,7 @@ export default function SalesOverview({ expenses, presupuestoMax}) {
                   {expense.descripcion}
                 </span>
                 <span className="ml-auto text-md text-black">
-                  ${expense.importe.toFixed(2)}
+                  ${expense.importe.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </li>
             ))}

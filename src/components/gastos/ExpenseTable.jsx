@@ -4,7 +4,7 @@ import BotonEliminar from "../eliminar/BotonEliminar";
 export default function ExpenseTable({ expenses, onDelete }) {
   return (
     <div className="overflow-x-auto p-4">
-      <h2 className="text-xl font-semibold p-4">Expenses</h2>
+      <h2 className="text-xl font-semibold p-4">Gastos</h2>
       <table className="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden shadow-lg">
         <thead className="bg-gray-50">
           <tr>
@@ -29,7 +29,7 @@ export default function ExpenseTable({ expenses, onDelete }) {
                 {expense.descripcion}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                ${expense.importe.toFixed(2)}
+                ${expense.importe.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 {expense.categoria}

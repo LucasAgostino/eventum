@@ -80,7 +80,7 @@ function ExpensesPage({ params }) {
   return (
     <div className="flex h-screen overflow-hidden min-h-screen">
       <Head>
-        <title>Event Expenses</title>
+        <title>Gastos evento</title>
       </Head>
       <SidebarDer onToggle={(isOpen) => setSidebarOpen(isOpen)} />
       <div

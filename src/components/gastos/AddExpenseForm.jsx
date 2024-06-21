@@ -1,35 +1,42 @@
-// components/gastos/AddExpenseForm.js
 import { useState } from "react";
 
 export default function AddExpenseForm({ addExpense, expenses = [], presupuestoMax, setShowPopup, setPopupMessage }) {
   const [descripcion, setDescripcion] = useState("");
   const [importe, setImporte] = useState("");
   const [categoria, setCategoria] = useState("");
-  
-  const totalAmount = expenses
-    .reduce((sum, expense) => sum + expense.importe, 0)
-    .toFixed(2);
+
+  const totalAmount = expenses.reduce((sum, expense) => sum + expense.importe, 0).toFixed(2);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const totalTotal = parseFloat(totalAmount) + importe;
-    
-    if (totalTotal <= presupuestoMax) {
-      const newExpense = {
-        descripcion,
-        importe: parseFloat(importe),
-        categoria,
-      };
-      await addExpense(newExpense);
-    } else {
+    const rawImporte = parseFloat(importe.replace(/\./g, '').replace(/,/g, '.'));
+    const totalTotal = parseFloat(totalAmount) + rawImporte;
+
+    if (totalTotal > presupuestoMax) {
       // Lógica para pop-up de error, supera presupuesto definido
       setPopupMessage("El gasto supera el presupuesto definido.");
       setShowPopup(true);
     }
+
+    const newExpense = {
+      descripcion,
+      importe: rawImporte,
+      categoria,
+    };
+    await addExpense(newExpense);
+
     // Limpiar los campos del formulario
     setDescripcion("");
-    setImporte("");
+    setImporte(""); 
     setCategoria("");
+  };
+
+  const handleImporteChange = (e) => {
+    let value = e.target.value;
+    value = value.replace(/\D/g, ''); // Eliminar cualquier carácter no numérico
+    const options = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    const formattedValue = new Intl.NumberFormat('es-ES', options).format(value / 100);
+    setImporte(formattedValue);
   };
 
   return (
@@ -51,9 +58,9 @@ export default function AddExpenseForm({ addExpense, expenses = [], presupuestoM
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">Importe</label>
         <input
-          type="number"
+          type="text"
           value={importe}
-          onChange={(e) => setImporte(parseFloat(e.target.value))}
+          onChange={handleImporteChange}
           required
           className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           placeholder="$"

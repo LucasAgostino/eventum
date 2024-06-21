@@ -18,7 +18,7 @@ function EventoDetalles({ params }) {
   const [ubicacion, setUbicacion] = useState("");
   const [cantInvitados, setcantInvitados] = useState(0);
   const [fecha, setFecha] = useState("");
-  const [presupuestoEstimado, setPresupuestoEstimado] = useState(0);
+  const [presupuestoEstimado, setPresupuestoEstimado] = useState("");
   const [checklistItems, setChecklistItems] = useState(initialChecklistItems);
   const [newTask, setNewTask] = useState("");
 
@@ -42,29 +42,38 @@ function EventoDetalles({ params }) {
         setError(error.message);
       } else {
         setEvent(data);
+        setNombreEvento(data.nombreEvento);
+        setUbicacion(data.ubicacion);
+        setcantInvitados(data.cantInvitados);
+        setFecha(data.fecha);
+        setPresupuestoEstimado(data.presupuestoEstimado.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
       }
     };
 
     fetchEvent();
-  }, [params.id, event]);
+  }, [params.id]);
 
   const handleEditar = () => {
     setEditing(true);
-    setNombreEvento(event.nombreEvento);
-    setUbicacion(event.ubicacion);
-    setcantInvitados(event.cantInvitados);
-    setFecha(event.fecha);
-    setPresupuestoEstimado(event.presupuestoEstimado);
   };
 
   const handleCancelar = () => {
     setEditing(false);
   };
 
+  const handlePresupuestoChange = (e) => {
+    let value = e.target.value;
+    value = value.replace(/\D/g, ''); // Eliminar cualquier carácter no numérico
+    const options = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    const formattedValue = new Intl.NumberFormat('es-ES', options).format(value / 100);
+    setPresupuestoEstimado(formattedValue);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+      const formattedPresupuesto = parseFloat(presupuestoEstimado.replace(/\./g, '').replace(/,/g, '.'));
       const { data, error } = await supabase
         .from("evento")
         .update({
@@ -72,7 +81,7 @@ function EventoDetalles({ params }) {
           ubicacion,
           cantInvitados,
           fecha,
-          presupuestoEstimado,
+          presupuestoEstimado: formattedPresupuesto,
         })
         .eq("id", params.id);
 
@@ -80,12 +89,19 @@ function EventoDetalles({ params }) {
         throw error;
       }
 
+      setEvent({
+        ...event,
+        nombreEvento,
+        ubicacion,
+        cantInvitados,
+        fecha,
+        presupuestoEstimado: formattedPresupuesto,
+      });
       console.log("Evento actualizado:", data);
+      setEditing(false);
     } catch (error) {
       console.error("Error al actualizar el evento:", error.message);
     }
-    setEditing(false);
-    //window.location.reload();
   };
 
   return (
@@ -182,12 +198,10 @@ function EventoDetalles({ params }) {
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="presupuestoEstimado"
-                  type="number"
+                  type="text"
                   placeholder="Presupuesto Estimado"
                   value={presupuestoEstimado}
-                  onChange={(e) =>
-                    setPresupuestoEstimado(e.target.valueAsNumber)
-                  }
+                  onChange={handlePresupuestoChange}
                   required
                 />
               </div>
@@ -254,7 +268,7 @@ function EventoDetalles({ params }) {
                         Presupuesto Estimado
                       </label>
                       <p className="text-gray-900">
-                        $ {event.presupuestoEstimado}
+                        $ {event.presupuestoEstimado.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                     </div>
                   </div>
