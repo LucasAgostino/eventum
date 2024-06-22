@@ -1,4 +1,3 @@
-// src/app/confirm/[eventId]/[userId].jsx
 "use client"
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -7,31 +6,29 @@ import Head from 'next/head';
 
 const Confirm = () => {
   const { eventoId, userId } = useParams();
-  const [message, setMessage] = useState('Confirmando tu asistencia...');
-  useEffect(() => {
+  const [message, setMessage] = useState('Por favor, confirma tu asistencia.');
 
-    const confirmAttendance = async () => {
-      if (eventoId && userId) {
-        const { data, error } = await supabase
-          .from('invitado')
-          .update({ estado: "confirmado" })
-          .eq('eventoID', eventoId)
-          .eq('id', userId);
+  const handleResponse = async (response) => {
+    if (eventoId && userId) {
+      const { data, error } = await supabase
+        .from('invitado')
+        .update({ estado: response })
+        .eq('eventoID', eventoId)
+        .eq('id', userId);
 
-        if (error) {
-          console.error('Error confirming attendance:', error);
-          setMessage('Error al confirmar la asistencia.');
-        } 
+      if (error) {
+        console.error('Error updating attendance:', error);
+        setMessage('Error al actualizar la asistencia.');
+      } else {
+        setMessage(response === 'confirmado' ? '¡Gracias por aceptar la invitación!' : 'Lamentamos que no puedas asistir.');
       }
-    };
-
-    confirmAttendance();
-  }, [eventoId, userId]);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0c0f29] text-white overflow-hidden relative">
       <Head>
-        <title>Eventum - Gracias</title>
+        <title>Eventum - Confirmación</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>{`
           @keyframes fadeIn {
@@ -75,9 +72,23 @@ const Confirm = () => {
       <div className="container mx-auto text-center py-20 mt-24 animate-fadeIn">
         <div className="content animate-zoomIn">
           <img src="/Logo_Eventum_Title.png" alt="Event Image" className="w-full max-w-lg mx-auto rounded-md" />
-          <h1 className="text-4xl my-5">¡Gracias por aceptar la invitación!</h1>
-          <p className="text-xl my-2">Estamos emocionados de que te unas a nosotros para este evento especial. Tu presencia hará que la ocasión sea aún más memorable.</p>
-          <a href="path/to/your/file.pdf" className="inline-block bg-green-600 text-white py-3 px-6 rounded-md my-5 hover:bg-green-700 transition-colors">Descargar detalles del evento</a>
+          <h1 className="text-4xl my-5">{message}</h1>
+          {message === 'Por favor, confirma tu asistencia.' && (
+            <div className="flex justify-center space-x-4 my-5">
+              <button
+                onClick={() => handleResponse('confirmado')}
+                className="bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition-colors"
+              >
+                Aceptar
+              </button>
+              <button
+                onClick={() => handleResponse('rechazado')}
+                className="bg-red-600 text-white py-3 px-6 rounded-md hover:bg-red-700 transition-colors"
+              >
+                Rechazar
+              </button>
+            </div>
+          )}
         </div>
         <footer className="mt-12 py-5 bg-[#1b1f40] text-center animate-fadeIn">
           <p className="text-gray-400">Conéctate con nosotros en las redes sociales</p>
