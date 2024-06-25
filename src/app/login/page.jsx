@@ -3,7 +3,7 @@ import React from 'react'
 import { useState, useEffect} from 'react';
 import { supabase } from '@/utils/supabase';
 import Link from 'next/link';
-import { LockClosedIcon, MailIcon } from '@heroicons/react/solid';
+import { LockClosedIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/navigation';
 
 export default function Auth() {
@@ -17,9 +17,8 @@ export default function Auth() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Verifica si el valor ingresado es un número y no es negativo antes de actualizar el estado
     if (parseInt(value) < 0) {
-      return; // No actualices el estado si el valor no es un número o es negativo
+      return;
     }
     setFormData((prevState) => ({
       ...prevState,
@@ -28,8 +27,8 @@ export default function Auth() {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Evita que la página se refresque al enviar el formulario
-    const {error } = await supabase.auth.signInWithPassword({
+    e.preventDefault();
+    const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
     });
@@ -37,11 +36,9 @@ export default function Auth() {
     if (error) {
       console.error(error);
       return;
+    } else {
+      router.push('/');
     }
-    else{
-      router.push('/'); // Redirige a la página de inicio
-    }
-
   };
 
   const images = [
@@ -49,7 +46,6 @@ export default function Auth() {
     { src: "/Login.png", text: "¡Sorprende a tus invitados!", subtext: "Optimiza el envio de invitaciones y marca la diferencia con un toque de elegancia y eficiencia."},
     { src: "/Login2.png", text: "Mantente al dia y no te pierdas ninguna fecha", subtext: "Organiza tus compromisos con precision y asegura que cada evento sea especial" }
   ];
-  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -59,23 +55,21 @@ export default function Auth() {
     return () => clearInterval(interval);
   }, []);
 
-  
-
   const handleImageChange = (index) => {
     setCurrentImageIndex(index);
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-3/4 h-3/4 flex bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="w-1/2 flex flex-col items-center justify-center p-8 space-y-8 bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-4xl flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 space-y-8 bg-white">
           <div className="text-center">
             <img
-              className="mx-auto h-20 w-auto "
+              className="mx-auto h-20 w-auto"
               src="/Logo_Eventum_Title.png"
               alt="Eventum Logo"
             />
-            <h2 className="mt-14 text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-4 md:mt-14 text-3xl font-extrabold text-gray-900">
               <span className="text-blue-600">Iniciar sesión</span> con tu cuenta
             </h2>
             <p className="mt-2 text-sm text-gray-600">
@@ -103,9 +97,8 @@ export default function Auth() {
                   autoComplete="email"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Dirección Email"  
+                  placeholder="Dirección Email"
                 />
-                
               </div>
               <div>
                 <label htmlFor="password" className="sr-only">
@@ -164,18 +157,18 @@ export default function Auth() {
           </form>
         </div>
 
-        <div className="w-1/2 flex flex-col items-center justify-center bg-blue-700 text-white p-10 rounded-r-lg">
-          <div className="text-center" >
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-blue-700 text-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-b-none">
+          <div className="text-center">
             <img
               src={images[currentImageIndex].src}
               alt="Illustration"
-              className="mb-6 transition-shadow "
+              className="mb-6 transition-shadow"
             />
             <p className="text-xl font-semibold mb-2">
-            {images[currentImageIndex].text}
+              {images[currentImageIndex].text}
             </p>
             <p>
-            {images[currentImageIndex].subtext}
+              {images[currentImageIndex].subtext}
             </p>
           </div>
           <div className="flex mt-4 space-x-2">

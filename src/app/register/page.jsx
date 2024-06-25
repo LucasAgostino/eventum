@@ -3,13 +3,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
 import { useRouter } from "next/navigation";
-
 import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
 
   const [formData, setFormData] = useState({
     email: "",
@@ -21,9 +19,8 @@ export default function RegisterPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Verifica si el valor ingresado es un número y no es negativo antes de actualizar el estado
     if (parseInt(value) < 0) {
-      return; // No actualices el estado si el valor no es un número o es negativo
+      return;
     }
     setFormData((prevState) => ({
       ...prevState,
@@ -32,7 +29,7 @@ export default function RegisterPage() {
   };
 
   const handleSignUp = async (e) => {
-    e.preventDefault(); // Evita que la página se refresque al enviar el formulario
+    e.preventDefault();
     if (formData.password === formData.confirmarPassword) {
       let { error } = await supabase.auth.signUp({
         email: formData.email,
@@ -50,17 +47,15 @@ export default function RegisterPage() {
         router.push('/login');
       }
     } else {
-      //agregar notificacion de error como el form de eventos
       console.log("Contraseña diferente");
     }
-
   };
+
   const images = [
     { src: "/Register.png", text: "¡Transforma tus eventos en experiencias inolvidables!", subtext: "Organiza mejor tus eventos y asegura el éxito en cada detalle." },
     { src: "/Login.png", text: "¡Sorprende a tus invitados!", subtext: "Optimiza el envio de invitaciones y marca la diferencia con un toque de elegancia y eficiencia."},
     { src: "/Login2.png", text: "Mantente al dia y no te pierdas ninguna fecha", subtext: "Organiza tus compromisos con precision y asegura que cada evento sea especial" }
   ];
-  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,30 +65,28 @@ export default function RegisterPage() {
     return () => clearInterval(interval);
   }, []);
 
-  
-
   const handleImageChange = (index) => {
     setCurrentImageIndex(index);
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-3/4 h-3/4 flex bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="w-1/2 flex flex-col items-center justify-center bg-blue-700 text-white p-10 rounded-r-lg">
-            <div className=" text-center">
-              <img
-                src={images[currentImageIndex].src}
-                alt="Illustration"
-                className="mb-6 ml-10"
-              />
-              <p className="text-xl font-semibold mb-2">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-4xl flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-blue-700 text-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-b-none">
+          <div className="text-center">
+            <img
+              src={images[currentImageIndex].src}
+              alt="Illustration"
+              className="mb-6"
+            />
+            <p className="text-xl font-semibold mb-2">
               {images[currentImageIndex].text}
-              </p>
-              <p>
+            </p>
+            <p>
               {images[currentImageIndex].subtext}
-              </p>
-            </div>
-            <div className="flex mt-4 space-x-2">
+            </p>
+          </div>
+          <div className="flex mt-4 space-x-2">
             {images.map((_, index) => (
               <button
                 key={index}
@@ -102,15 +95,15 @@ export default function RegisterPage() {
               />
             ))}
           </div>
-          </div>
-        <div className="w-1/2 flex flex-col items-center justify-center p-8 space-y-8 bg-white">
+        </div>
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 space-y-8 bg-white">
           <div className="text-center">
             <img
               className="mx-auto h-20 w-auto"
               src="/Logo_Eventum_Title.png"
               alt="Eventum Logo"
             />
-            <h2 className="mt-12 text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-4 md:mt-12 text-3xl font-extrabold text-gray-900">
               <span className="text-blue-600">Registrar</span> una cuenta
             </h2>
             <p className="mt-2 text-sm text-gray-600">
@@ -127,7 +120,7 @@ export default function RegisterPage() {
               <div className="input flex flex-col relative">
                 <label
                   htmlFor="name"
-                  className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 "
+                  className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3"
                 >
                   Nombre
                 </label>
@@ -138,7 +131,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="name"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs  border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Nombre"
                 />
               </div>
@@ -156,7 +149,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="lastName"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs  border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Apellido"
                 />
               </div>
@@ -174,7 +167,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="email"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs  border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Direccion Email"
                 />
               </div>
@@ -192,7 +185,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="new-password"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs  border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Contraseña"
                 />
               </div>
@@ -201,7 +194,7 @@ export default function RegisterPage() {
                   htmlFor="passwordConfirmation"
                   className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 w-full"
                 >
-                  Confirmar contraseña:
+                  Confirmar contraseña
                 </label>
                 <input
                   id="passwordConfirmation"
@@ -210,7 +203,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="new-password"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs  border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Confirmar contraseña"
                 />
               </div>
@@ -230,8 +223,6 @@ export default function RegisterPage() {
             </div>
           </form>
         </div>
-
-        
       </div>
     </div>
   );
