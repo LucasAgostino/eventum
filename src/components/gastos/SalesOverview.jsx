@@ -117,24 +117,24 @@ export default function SalesOverview({ expenses, presupuestoMax }) {
   };
 
   return (
-    <div className="bg-white border shadow-lg p-6 rounded-lg flex flex-col w-full max-w-4xl h-[435px]">
+    <div className="bg-white border shadow-lg p-6 rounded-lg flex flex-col w-full max-w-4xl mx-auto h-full overflow-hidden">
       <h1 className="text-2xl font-semibold text-black mb-4">Gastos</h1>
-      <div className="flex flex-row items-start h-full">
-        <div className="flex-grow h-full relative">
+      <div className="flex flex-col lg:flex-row items-start h-full">
+        <div className="flex-grow h-full relative hidden lg:block">
           <Doughnut
             data={data}
             options={options}
             plugins={[centerTextPlugin]}
           />
         </div>
-        <div className="w-1/2 flex flex-col justify-center ml-6">
-          <p className="text-4xl font-semibold mb-4">
-            <span className={amountColor}>${formattedTotalAmount}</span> /{" "}
-            <span className="text-black">${formattedPresupuestoMax}</span>
+        <div className="w-full lg:w-1/2 flex flex-col justify-center lg:ml-6">
+          <p className="text-lg lg:text-4xl font-semibold mb-4 text-center lg:text-left flex flex-wrap justify-center lg:justify-start">
+            <span className={`${amountColor} text-lg lg:text-4xl`}>${formattedTotalAmount}</span>{" "}
+            <span className="text-black text-lg lg:text-4xl"> / ${formattedPresupuestoMax}</span>
           </p>
-          <ul className="mt-2 space-y-2">
+          <ul className="mt-2 space-y-2 hidden lg:block">
             {expenses.slice(0, 5).map((expense, index) => (
-              <li key={index} className="flex items-center">
+              <li key={index} className="flex items-center justify-between">
                 <span
                   className="inline-block w-4 h-4 mr-2 rounded-full"
                   style={{
@@ -153,10 +153,10 @@ export default function SalesOverview({ expenses, presupuestoMax }) {
                     ][index % 11],
                   }}
                 ></span>
-                <span className="text-md font-medium text-black">
+                <span className="text-sm lg:text-md font-medium text-black">
                   {expense.descripcion}
                 </span>
-                <span className="ml-auto text-md text-black">
+                <span className="ml-auto text-sm lg:text-md text-black">
                   ${expense.importe.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </li>

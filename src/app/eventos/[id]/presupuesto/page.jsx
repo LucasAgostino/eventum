@@ -1,4 +1,3 @@
-// pages/expensesPage.js
 "use client";
 import Head from "next/head";
 import Sidebar from "@/components/NavbarVertical";
@@ -8,7 +7,7 @@ import AddExpenseForm from "@/components/gastos/AddExpenseForm";
 import ExpenseTable from "@/components/gastos/ExpenseTable";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabase";
-import Popup from "@/components/Popup"; // Asegúrate de importar el componente de Popup
+import Popup from "@/components/Popup";
 
 function ExpensesPage({ params }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -78,21 +77,21 @@ function ExpensesPage({ params }) {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden min-h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       <Head>
         <title>Gastos evento</title>
       </Head>
       <SidebarDer onToggle={(isOpen) => setSidebarOpen(isOpen)} />
       <div
         className={`flex flex-col flex-1 overflow-y-auto transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "ml-64" : "ml-25"
+          sidebarOpen ? "ml-64" : "ml-0"
         }`}
       >
         <header className="p-4">
           <h1 className="text-3xl font-bold text-gray-900">Gastos del Evento</h1>
         </header>
-        <main className="flex-grow p-4 flex">
-          <div className="flex-grow p-4">
+        <main className="flex-grow p-4 flex flex-col lg:flex-row">
+          <div className="flex-grow p-4 max-w-full">
             {presupuestoMax !== null && (
               <SalesOverview
                 expenses={expenses}
@@ -100,7 +99,7 @@ function ExpensesPage({ params }) {
               />
             )}
           </div>
-          <div className="w-1/3 p-4">
+          <div className="w-full lg:w-1/3 p-4 max-w-full">
             <AddExpenseForm
               addExpense={addExpense}
               expenses={expenses}
@@ -110,7 +109,7 @@ function ExpensesPage({ params }) {
             />
           </div>
         </main>
-        <div className="p-4 mr-4 ml-4">
+        <div className="p-4 max-w-full">
           <ExpenseTable expenses={expenses} onDelete={handleDelete} />
         </div>
       </div>

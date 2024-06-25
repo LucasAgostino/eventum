@@ -16,7 +16,7 @@ function EventoDetalles({ params }) {
   const [editing, setEditing] = useState(false);
   const [nombreEvento, setNombreEvento] = useState("");
   const [ubicacion, setUbicacion] = useState("");
-  const [cantInvitados, setcantInvitados] = useState(0);
+  const [cantInvitados, setCantInvitados] = useState(0);
   const [fecha, setFecha] = useState("");
   const [presupuestoEstimado, setPresupuestoEstimado] = useState("");
   const [checklistItems, setChecklistItems] = useState(initialChecklistItems);
@@ -44,7 +44,7 @@ function EventoDetalles({ params }) {
         setEvent(data);
         setNombreEvento(data.nombreEvento);
         setUbicacion(data.ubicacion);
-        setcantInvitados(data.cantInvitados);
+        setCantInvitados(data.cantInvitados);
         setFecha(data.fecha);
         setPresupuestoEstimado(data.presupuestoEstimado.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
       }
@@ -105,10 +105,10 @@ function EventoDetalles({ params }) {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row w-full bg-gray-50 p-8">
+    <div className="flex flex-col lg:flex-row w-full bg-gray-50 p-4 lg:p-8">
       {editing ? (
-        <div className="w-full lg:w-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8">
-          <h1 className="text-3xl font-bold mb-6 text-blue-600">
+        <div className="w-full lg:w-1/2 bg-white shadow-md rounded px-4 pt-4 pb-4 lg:px-8 lg:pt-6 lg:pb-8">
+          <h1 className="text-2xl lg:text-3xl font-bold mb-6 text-blue-600">
             Editar Evento
           </h1>
           <form onSubmit={handleSubmit}>
@@ -170,8 +170,8 @@ function EventoDetalles({ params }) {
                 Descripción:
               </label>
             </div>
-            <div className="flex mb-4">
-              <div className="w-1/2 pr-2">
+            <div className="flex flex-col lg:flex-row mb-4">
+              <div className="w-full lg:w-1/2 lg:pr-2 mb-4 lg:mb-0">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="cantidadInvitados"
@@ -184,11 +184,11 @@ function EventoDetalles({ params }) {
                   type="number"
                   placeholder="Cantidad de Invitados"
                   value={cantInvitados}
-                  onChange={(e) => setcantInvitados(e.target.valueAsNumber)}
+                  onChange={(e) => setCantInvitados(e.target.valueAsNumber)}
                   required
                 />
               </div>
-              <div className="w-1/2 pl-2">
+              <div className="w-full lg:w-1/2 lg:pl-2">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="presupuestoEstimado"
@@ -226,8 +226,8 @@ function EventoDetalles({ params }) {
         <div className="flex flex-col w-full">
           <div className="flex flex-col lg:flex-row w-full content-center justify-center">
             {event && (
-              <div className="w-full lg:w-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8">
-                <h1 className="text-3xl font-bold mb-6 text-blue-600">
+              <div className="w-full lg:w-1/2 bg-white shadow-md rounded px-4 pt-4 pb-4 lg:px-8 lg:pt-6 lg:pb-8">
+                <h1 className="text-2xl lg:text-3xl font-bold mb-6 text-blue-600">
                   Detalles del Evento
                 </h1>
                 <div className="space-y-4">
@@ -256,9 +256,9 @@ function EventoDetalles({ params }) {
                     <p>Aca iria una descripcion del evento</p>
                     <p className="text-gray-900">{event.descripcion}</p>
                   </div>
-                  <div className="flex">
-                    <div>
-                      <label className="block text-sm font-bold text-blue-700 mb-1 mr-5">
+                  <div className="flex flex-col lg:flex-row">
+                    <div className="mb-4 lg:mb-0 lg:mr-5">
+                      <label className="block text-sm font-bold text-blue-700 mb-1">
                         Cantidad de Invitados
                       </label>
                       <p className="text-gray-900">{event.cantInvitados}</p>
@@ -300,12 +300,12 @@ function EventoDetalles({ params }) {
                 </div>
               </div>
             )}
-            <div className="w-full lg:w-1/3 p-8 flex items-center justify-center bg-[#24203F] border rounded-md shadow-md">
+            <div className="w-full lg:w-1/3 p-4 lg:p-8 flex items-center justify-center bg-[#24203F] border rounded-md shadow-md">
               <div className="w-full">
-                <h1 className="text-center text-3xl font-bold mb-4 text-white">
+                <h1 className="text-center text-2xl lg:text-3xl font-bold mb-4 text-white">
                   Checklist
                 </h1>
-                <h2 className="text-lg font-semibold mb-6 bt-10 text-white">
+                <h2 className="text-lg font-semibold mb-6 text-white">
                   Tareas
                 </h2>
                 {checklistItems.map((item) => (

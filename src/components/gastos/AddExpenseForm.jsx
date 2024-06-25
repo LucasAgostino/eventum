@@ -51,7 +51,7 @@ export default function AddExpenseForm({ addExpense, expenses = [], presupuestoM
           value={descripcion}
           onChange={(e) => setDescripcion(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs lg:text-base"
           placeholder="Ej: Alquiler de toro mecánico"
         />
       </div>
@@ -62,7 +62,7 @@ export default function AddExpenseForm({ addExpense, expenses = [], presupuestoM
           value={importe}
           onChange={handleImporteChange}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs lg:text-base"
           placeholder="$"
         />
       </div>
@@ -72,7 +72,7 @@ export default function AddExpenseForm({ addExpense, expenses = [], presupuestoM
           value={categoria}
           onChange={(e) => setCategoria(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs lg:text-base"
         >
           <option value="">Seleccione una categoría</option>
           <option value="Alquiler del local">Alquiler del local</option>

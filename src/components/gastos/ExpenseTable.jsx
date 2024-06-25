@@ -9,13 +9,13 @@ export default function ExpenseTable({ expenses, onDelete }) {
         <thead className="bg-gray-50">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Descripcion
+              Descripción
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
               Importe
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Categoria
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+              Categoría
             </th>
             <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
               Acciones
@@ -28,10 +28,10 @@ export default function ExpenseTable({ expenses, onDelete }) {
               <td className="px-6 py-4 whitespace-nowrap">
                 {expense.descripcion}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-4 whitespace-nowrap hidden lg:table-cell">
                 ${expense.importe.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-4 whitespace-nowrap hidden lg:table-cell">
                 {expense.categoria}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-center">
