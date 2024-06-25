@@ -17,12 +17,10 @@ export default function RootLayout({ children }) {
         <UserSessionProvider>
           {/* Contenedor principal que contiene el Navbar y el contenido */}
           <div className="flex w-full h-full overflow-hidden">
-            <NavbarVertical /> {/* NavbarVertical alineado a la izquierda */}
+            <NavbarVertical />
             {/* Contenedor para el contenido principal */}
-            <div className="flex flex-col flex-1 overflow-auto">
-              <main className="flex-1 p-4">
-                {children}
-              </main>
+            <div className="flex flex-col flex-1 overflow-auto transition-all duration-300 ease-in-out">
+              <main className="flex-1 p-4">{children}</main>
             </div>
           </div>
         </UserSessionProvider>
