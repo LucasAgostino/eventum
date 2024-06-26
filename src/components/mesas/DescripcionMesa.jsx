@@ -3,16 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { IconTrash, IconPlus} from "@tabler/icons-react";
 import PopupAgregarInvitado from '@/components/mesas/PopupAgregarInvitado';
 
-const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], onAddInvitado }) => {
+const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados,  onAddInvitado }) => {
   const [editMode, setEditMode] = useState(false);
-  const [invitados, setInvitados] = useState(mesa ? mesa.invitados : []);
+  const [invitados, setInvitados] = useState(mesa ? asignados : []);
   const [showPopup, setShowPopup] = useState(false);
-
-  useEffect(() => {
-    if (mesa) {
-      setInvitados(mesa.invitados);
-    }
-  }, [mesa]);
 
   const handleAddInvitado = (invitado) => {
     setInvitados([...invitados, invitado]);
