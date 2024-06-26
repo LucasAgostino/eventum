@@ -26,7 +26,7 @@ const menuItems = (eventId) =>
     },
     eventId && {
       path: `/eventos/${eventId}/mesas`,
-      icon: "/user.png",
+      icon: "/mesa.png",
       text: "Mesas",
     },
     // Añade más elementos aquí

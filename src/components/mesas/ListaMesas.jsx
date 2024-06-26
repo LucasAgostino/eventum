@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Mesa from '@/components/mesas/Mesa';
 import DescripcionMesa from '@/components/mesas/DescripcionMesa';
 
-const ListaMesas = ({ mesas, invitadosSinUbicar, onAddInvitado }) => {
+const ListaMesas = ({ mesas, invitados, onAddInvitado }) => {
   const [selectedMesa, setSelectedMesa] = useState(null);
+  const [invitadosSinUbicar, setInvitadosSinUbicar] = useState(invitados.filter((invitado) => invitado.mesaId === null));
+
 
   return (
     <div className="flex">
@@ -12,9 +14,9 @@ const ListaMesas = ({ mesas, invitadosSinUbicar, onAddInvitado }) => {
           {mesas.map((mesa, index) => (
             <Mesa
               key={index}
-              nombre={mesa.nombre}
+              nombre={mesa.nroMesa}
               capacidad={mesa.capacidad}
-              invitados={mesa.invitados.length}
+              asignados = {invitados.filter((invitado) => invitado.mesaId === mesa.id).length}
               onClick={() => setSelectedMesa(mesa)}
             />
           ))}
@@ -25,6 +27,7 @@ const ListaMesas = ({ mesas, invitadosSinUbicar, onAddInvitado }) => {
           <DescripcionMesa
             mesa={selectedMesa}
             invitadosSinUbicar={invitadosSinUbicar}
+            asignados = {invitados.filter((invitado) => invitado.mesaId === selectedMesa.id)}
             onAddInvitado={onAddInvitado}
           />
         )}

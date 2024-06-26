@@ -11,7 +11,7 @@ const FiltroMesas = ({ filtros, filtroActual, setFiltro }) => {
           
         >
           <div className='flex'>
-            Mesas {filtro}p 
+            Mesas {filtro} 
             <img src='/juventud.png' className='ml-3' style={{height:'20px', width:'20px'}}></img>
           </div>
         

@@ -1,62 +1,153 @@
-"use client"
-import React, { useState } from 'react';
-import ListaMesas from '@/components/mesas/ListaMesas';
-import InvitadosMesa from '@/components/mesas/InvitadosMesa';
-import FiltroMesas from '@/components/mesas/FiltroMesas';
-
-
-const initialMesas = [
-  { id: 1, nombre: 'Mesa 1', capacidad: 6, invitados: [{ nombre: 'Ivan Daza' }, { nombre: 'Lucas Agostino' }] },
-  { id: 2, nombre: 'Mesa 2', capacidad: 6, invitados: [{ nombre: 'Carlos Pérez' }] },
-  { id: 3, nombre: 'Mesa 3', capacidad: 6, invitados: [{ nombre: 'Ana Gómez' }, { nombre: 'Marta López' }, { nombre: 'Juan Díaz' }, { nombre: 'Sofia Martínez' }, { nombre: 'Pedro Ramírez' }, { nombre: 'Laura Jiménez' }] },
-  // Agrega más mesas según sea necesario
-];
+"use client";
+import React, { useEffect, useState } from "react";
+import ListaMesas from "@/components/mesas/ListaMesas";
+import InvitadosMesa from "@/components/mesas/InvitadosMesa";
+import FiltroMesas from "@/components/mesas/FiltroMesas";
+import { supabase } from "@/utils/supabase";
 
 const filtrosDisponibles = [4, 6, 8];
 
-const initialInvitadosSinUbicar = [
-    { nombre: 'Eventum' },
-    { nombre: 'Software' }
-  ];
-
-const HomePage = () => {
+const MesasPage = ({ params }) => {
+  const [invitados, setInvitados] = useState([]);
   const [filtro, setFiltro] = useState(6);
-  const [mesas, setMesas] = useState(initialMesas);
-  const [invitadosSinUbicar, setInvitadosSinUbicar] = useState(initialInvitadosSinUbicar);
+  const [mesas, setMesas] = useState([]);
   const [selectedMesa, setSelectedMesa] = useState(null);
+  const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [newMesa, setNewMesa] = useState({ nroMesa: "", capacidad: null });
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Fetch invitados
+        const { data: invitadosData, error: invitadosError } = await supabase
+          .from("invitado")
+          .select("id, nombre, apellido, mesaId")
+          .eq("eventoID", params.id);
+
+        if (invitadosError) {
+          throw invitadosError;
+        } else {
+          setInvitados(invitadosData);
+        }
+        // Fetch mesas
+        const { data: mesasData, error: mesasError } = await supabase
+          .from("mesa")
+          .select("id, nroMesa, capacidad")
+          .eq("eventoId", params.id);
+
+        if (mesasError) {
+          throw mesasError;
+        } else {
+          setMesas(mesasData);
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+    }
+
+    if (params.id) {
+      fetchData();
+    }
+  }, [params.id,mesas]);
+
+  const agregarMesa = async (e) => {
+    e.preventDefault();
+    const { nroMesa, capacidad } = newMesa;
+    const { data, error } = await supabase.from("mesa").insert([{ eventoId: params.id, nroMesa, capacidad }]);
+    if (error) {
+      setError(error.message);
+    } else {
+      setMesas([...mesas]);
+      setShowModal(false);
+      setNewMesa({ nroMesa: "", capacidad: 4 });
+    }
+  };
 
   const mesasFiltradas = mesas.filter((mesa) => mesa.capacidad === filtro);
 
   const handleAddInvitado = (invitado) => {
-    setInvitadosSinUbicar(invitadosSinUbicar.filter(i => i.nombre !== invitado.nombre));
-    setMesas(mesas.map(mesa => {
-      if (mesa.id === selectedMesa.id) {
-        return {
-          ...mesa,
-          invitados: [...mesa.invitados, invitado]
-        };
-      }
-      return mesa;
-    }));
+    setInvitadosSinUbicar(
+      invitadosSinUbicar.filter((i) => i.nombre !== invitado.nombre)
+    );
+    setMesas(
+      mesas.map((mesa) => {
+        if (mesa.id === selectedMesa.id) {
+          return {
+            ...mesa,
+            invitados: [...mesa.invitados, invitado],
+          };
+        }
+        return mesa;
+      })
+    );
   };
+
   return (
     <div className="container mx-auto p-4">
+      {error && <div>Error: {error}</div>}
       <div className="flex justify-between items-center mb-4">
-        <FiltroMesas filtros={filtrosDisponibles} filtroActual={filtro} setFiltro={setFiltro} />
-        <button className="bg-[#274690] text-white px-4 py-3 rounded">Agregar mesa</button>
+        <FiltroMesas
+          filtros={filtrosDisponibles}
+          filtroActual={filtro}
+          setFiltro={setFiltro}
+        />
+        <button onClick={() => setShowModal(true)} className="bg-[#274690] text-white px-4 py-3 rounded">
+          Agregar mesa
+        </button>
       </div>
+      
       <ListaMesas
         mesas={mesasFiltradas}
-        invitadosSinUbicar={invitadosSinUbicar}
+        invitados={invitados}
         onAddInvitado={handleAddInvitado}
       />
 
-      
       <div className="mt-4">
-        <InvitadosMesa filter="todos" searchQuery="" />
+        <InvitadosMesa filter="todos" searchQuery="" invitados={invitados}/>
       </div>
+      {showModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-4 rounded shadow-lg">
+            <h2 className="text-xl mb-4">Agregar Nueva Mesa</h2>
+            <form onSubmit={agregarMesa}>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Número de Mesa</label>
+                <input
+                  type="text"
+                  value={newMesa.nroMesa}
+                  onChange={(e) => setNewMesa({ ...newMesa, nroMesa: e.target.value })}
+                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  required
+                  placeholder="N°"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Capacidad</label>
+                <input
+                  type="number"
+                  value={newMesa.capacidad}
+                  onChange={(e) => setNewMesa({ ...newMesa, capacidad: parseInt(e.target.value) })}
+                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                  min="1"
+                  required
+                  placeholder="4"
+                />
+              </div>
+              <div className="flex justify-end">
+                <button type="button" onClick={() => setShowModal(false)} className="mr-4 px-4 py-2 border border-gray-300 rounded">
+                  Cancelar
+                </button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default HomePage;
+export default MesasPage;
