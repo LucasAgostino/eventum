@@ -24,6 +24,11 @@ const menuItems = (eventId) =>
       icon: "/user.png",
       text: "Invitados",
     },
+    eventId && {
+      path: `/eventos/${eventId}/mesas`,
+      icon: "/user.png",
+      text: "Mesas",
+    },
     // Añade más elementos aquí
   ].filter((item) => item); // Filtra elementos falsy (null, undefined, false)
 
