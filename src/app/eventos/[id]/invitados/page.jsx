@@ -7,7 +7,6 @@ import SendInvitationsButton from "@/components/invitados/SendInvitationsButton"
 import Tabs from "@/components/invitados/Tabs";
 import UploadFile from "@/components/invitados/UploadFile";
 
-
 function Invitados({ params }) {
   const [filter, setFilter] = useState("pendiente");
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,26 +21,25 @@ function Invitados({ params }) {
   };
 
   return (
-    <div className="p-6 min-h-screen ml-10">
-      <div className="mb-12">
-        <h1 className="text-4xl font-extrabold mb-4 text-gray-900  mb-15">
+    <div className="p-6 min-h-screen sm:p-4">
+      <div className="mb-12 text-left">
+        <h1 className="text-4xl font-extrabold mb-4 text-gray-900">
           Lista de Invitados
         </h1>
-        <span className="Justify-center text-blue-800 text-4xl mt-10 ">
+        <span className="text-blue-800 text-2xl sm:text-4xl mt-2 sm:mt-10 block">
           Invitados para el Evento
         </span>
-        <p className="text-lg text-gray-700 ">
+        <p className="text-lg text-gray-700 mt-2 sm:mt-4">
           Aquí puedes gestionar todos los invitados para el evento. Crea, edita
           y envía invitaciones fácilmente.
         </p>
       </div>
 
-      <div className="mb-4 flex space-x-4">
-        
-        <SendInvitationsButton eventId={params.id} className='h-12 w-44' />
+      <div className="mb-4 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-start">
+        <SendInvitationsButton eventId={params.id} className='h-12 w-full sm:w-44' />
 
         <Link href={`/eventos/${params.id}/invitados/crear_invitados`} passHref>
-          <button className="cursor-pointer w-44 h-12 bg-green-500 text-white rounded-lg hover:bg-green-600 hover:shadow-lg group active:w-11 active:h-11 active:rounded-full active:duration-300 ease-in-out">
+          <button className="cursor-pointer w-full sm:w-44 h-12 bg-green-500 text-white rounded-lg hover:bg-green-600 hover:shadow-lg group active:w-11 active:h-11 active:rounded-full active:duration-300 ease-in-out">
             <svg
               className="animate-spin hidden group-active:block mx-auto"
               width="33"
@@ -63,13 +61,12 @@ function Invitados({ params }) {
           </button>
         </Link>
 
-        <UploadFile eventId={params.id} className=''/>
-        
+        <UploadFile eventId={params.id} className='h-12 w-full sm:w-44' />
       </div>
 
       <Tabs activeTab={filter} onTabChange={handleFilterChange} />
 
-      <div className="mb-4 w-80">
+      <div className="mb-4 w-full sm:w-80">
         <input
           type="text"
           placeholder="Buscar invitados..."
