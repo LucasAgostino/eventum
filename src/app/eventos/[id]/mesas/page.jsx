@@ -9,6 +9,7 @@ const filtrosDisponibles = [4, 6, 8];
 
 const MesasPage = ({ params }) => {
   const [invitados, setInvitados] = useState([]);
+  const [invitadosSinUbicar, setInvitadosSinUbicar] = useState([]);
   const [filtro, setFiltro] = useState(6);
   const [mesas, setMesas] = useState([]);
   const [selectedMesa, setSelectedMesa] = useState(null);
@@ -29,6 +30,7 @@ const MesasPage = ({ params }) => {
           throw invitadosError;
         } else {
           setInvitados(invitadosData);
+          setInvitadosSinUbicar(invitadosData.filter(inv => !inv.mesaId));
         }
         // Fetch mesas
         const { data: mesasData, error: mesasError } = await supabase
@@ -49,7 +51,7 @@ const MesasPage = ({ params }) => {
     if (params.id) {
       fetchData();
     }
-  }, [params.id,mesas]);
+  }, [params.id]);
 
   const agregarMesa = async (e) => {
     e.preventDefault();
@@ -58,7 +60,7 @@ const MesasPage = ({ params }) => {
     if (error) {
       setError(error.message);
     } else {
-      setMesas([...mesas]);
+      setMesas([...mesas, data[0]]);
       setShowModal(false);
       setNewMesa({ nroMesa: "", capacidad: 4 });
     }
@@ -75,7 +77,7 @@ const MesasPage = ({ params }) => {
         if (mesa.id === selectedMesa.id) {
           return {
             ...mesa,
-            invitados: [...mesa.invitados, invitado],
+            invitados: [...mesa.invitados || [], invitado],
           };
         }
         return mesa;
@@ -101,10 +103,11 @@ const MesasPage = ({ params }) => {
         mesas={mesasFiltradas}
         invitados={invitados}
         onAddInvitado={handleAddInvitado}
+        setSelectedMesa={setSelectedMesa}
       />
 
       <div className="mt-4">
-        <InvitadosMesa filter="todos" searchQuery="" invitados={invitados}/>
+        <InvitadosMesa filter="todos" searchQuery="" invitados={invitados} mesa/>
       </div>
       {showModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">

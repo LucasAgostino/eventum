@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Mesa from '@/components/mesas/Mesa';
 import DescripcionMesa from '@/components/mesas/DescripcionMesa';
 
-const ListaMesas = ({ mesas, invitados, onAddInvitado }) => {
-  const [selectedMesa, setSelectedMesa] = useState(null);
-  const [invitadosSinUbicar, setInvitadosSinUbicar] = useState(invitados.filter((invitado) => invitado.mesaId === null));
+const ListaMesas = ({ mesas, invitados, onAddInvitado, setSelectedMesa }) => {
+  const [localSelectedMesa, setLocalSelectedMesa] = useState(null);
 
+  const handleMesaClick = (mesa) => {
+    setLocalSelectedMesa(mesa);
+    setSelectedMesa(mesa);  // Llamar a la función pasada como prop
+  };
 
   return (
     <div className="flex">
@@ -16,18 +19,18 @@ const ListaMesas = ({ mesas, invitados, onAddInvitado }) => {
               key={index}
               nombre={mesa.nroMesa}
               capacidad={mesa.capacidad}
-              asignados = {invitados.filter((invitado) => invitado.mesaId === mesa.id).length}
-              onClick={() => setSelectedMesa(mesa)}
+              asignados={invitados.filter((invitado) => invitado.mesaId === mesa.id).length}
+              onClick={() => handleMesaClick(mesa)}
             />
           ))}
         </div>
       </div>
       <div className="w-1/3 ml-4">
-        {selectedMesa && (
+        {localSelectedMesa && (
           <DescripcionMesa
-            mesa={selectedMesa}
-            invitadosSinUbicar={invitadosSinUbicar}
-            asignados = {invitados.filter((invitado) => invitado.mesaId === selectedMesa.id)}
+            mesa={localSelectedMesa}
+            invitadosSinUbicar={invitados.filter((invitado) => invitado.mesaId === null)}
+            asignados={invitados.filter((invitado) => invitado.mesaId === localSelectedMesa.id)}
             onAddInvitado={onAddInvitado}
           />
         )}

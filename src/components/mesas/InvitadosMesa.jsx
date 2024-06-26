@@ -1,18 +1,35 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import TabsMesas from '@/components/mesas/TabsMesas'; 
-
+import TabsMesas from '@/components/mesas/TabsMesas';
+import { supabase } from "@/utils/supabase"; // Ajusta la ruta según tu estructura
 
 const InvitadosMesa = ({ filter, searchQuery, invitados }) => {
-
   const [filteredInvitados, setFilteredInvitados] = useState(invitados);
   const [activeTab, setActiveTab] = useState('todos');
+  const [mesas, setMesas] = useState([]);
+
+  useEffect(() => {
+    const fetchMesas = async () => {
+      const { data, error } = await supabase
+        .from('mesa')
+        .select('id, nroMesa');
+
+      if (error) {
+        console.error('Error fetching mesas:', error);
+      } else {
+        setMesas(data);
+      }
+    };
+
+    fetchMesas();
+  }, []);
 
   useEffect(() => {
     let result = invitados;
 
     if (filter !== 'todos') {
-      result = result.filter(invitado => invitado.estado.toLowerCase() === activeTab);}
+      result = result.filter(invitado => invitado.estado.toLowerCase() === activeTab);
+    }
 
     if (searchQuery) {
       result = result.filter(invitado =>
@@ -22,11 +39,18 @@ const InvitadosMesa = ({ filter, searchQuery, invitados }) => {
     }
 
     setFilteredInvitados(result);
-  }, [activeTab, searchQuery, invitados]);
+  }, [activeTab, searchQuery, invitados, filter]);
+
+  const getNroMesa = (mesaId) => {
+    console.log('mesas:', mesas); // Verificar datos de mesas en la función
+    console.log('mesaId:', mesaId); // Verificar mesaId de cada invitado
+    const mesa = mesas.find(m => m.id === mesaId);
+    return mesa ? mesa.nroMesa : '';
+  };
 
   return (
     <div className="overflow-x-auto p-1">
-      <TabsMesas activeTab ={activeTab} onTabChange= {setActiveTab}/>
+      <TabsMesas activeTab={activeTab} onTabChange={setActiveTab} />
       <table className="min-w-full divide-y border divide-gray-200 rounded-lg overflow-hidden shadow-lg">
         <thead className="bg-gray-50">
           <tr>
@@ -43,7 +67,7 @@ const InvitadosMesa = ({ filter, searchQuery, invitados }) => {
               <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
               <td className="px-6 py-4 whitespace-nowrap">{invitado.nombre}</td>
               <td className="px-6 py-4 whitespace-nowrap">{invitado.apellido}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{invitado.mesaId}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{getNroMesa(invitado.mesaId)}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 {invitado.mesaId === null ? (
                   <span>No ubicado</span>
