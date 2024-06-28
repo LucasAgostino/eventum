@@ -5,7 +5,6 @@ import PopupAgregarInvitado from '@/components/mesas/PopupAgregarInvitado';
 import { supabase } from "@/utils/supabase";
 
 const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvitado }) => {
-  const [editMode, setEditMode] = useState(false);
   const [invitados, setInvitados] = useState(mesa ? asignados : []);
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState(null);
@@ -42,58 +41,25 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
     setInvitados(newInvitados);
   };
 
-  const saveChanges = async () => {
-    try {
-      // Actualiza la columna mesaId para cada invitado en Supabase
-      for (let invitado of invitados) {
-        const { error } = await supabase
-          .from('invitado')
-          .update({ mesaId: mesa.id })
-          .eq('id', invitado.id);
-
-        if (error) {
-          throw error;
-        }
-      }
-      setEditMode(false);
-      alert('Cambios guardados exitosamente');
-    } catch (error) {
-      setError(error.message);
-      console.error('Error al actualizar invitados: ', error);
-    }
-  };
-
   const casilleros = Array.from({ length: mesa.capacidad }, (_, index) => (
     invitados[index] ? (
       <li key={index} className="flex items-center p-2 bg-[#576CA8] text-white mb-2 rounded">
-        {editMode ? (
-          <>
-            <input
-              type="text"
-              value={invitados[index].nombre}
-              onChange={(e) => handleInputChange(index, e.target.value)}
-              className="bg-transparent border-none text-white w-full"
-            />
-            <button onClick={() => handleRemoveInvitado(index)} className="ml-2">
-              <IconTrash />
-            </button>
-          </>
-        ) : (
-          <span>{invitados[index].nombre}</span>
-        )}
+        <input
+          type="text"
+          value={invitados[index].nombre}
+          onChange={(e) => handleInputChange(index, e.target.value)}
+          className="bg-transparent border-none text-white w-full"
+        />
+        <button onClick={() => handleRemoveInvitado(index)} className="ml-2">
+          <IconTrash />
+        </button>
       </li>
     ) : (
       <li key={index} className="p-2 bg-gray-200 text-gray-600 mb-2 rounded border-2 flex items-center">
-        {editMode ? (
-          <>
-            <button onClick={() => setShowPopup(true)} className="flex items-center">
-              <IconPlus className="mr-2" />
-              <span>Agrega un nuevo invitado</span>
-            </button>
-          </>
-        ) : (
-          <span>Vacío</span>
-        )}
+        <button onClick={() => setShowPopup(true)} className="flex items-center">
+          <IconPlus className="mr-2" />
+          <span>Agrega un nuevo invitado</span>
+        </button>
       </li>
     )
   ));
@@ -108,15 +74,6 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
       <ul className='mt-4'>
         {casilleros}
       </ul>
-      {editMode ? (
-        <button onClick={saveChanges} className="bg-[#1B264F] text-white rounded mt-4 justify-center content-center h-8 w-40">
-          Guardar cambios
-        </button>
-      ) : (
-        <button onClick={() => setEditMode(true)} className="bg-[#1B264F] text-white rounded mt-4 justify-center content-center h-8 w-40">
-          Editar Mesa
-        </button>
-      )}
       {showPopup && (
         <PopupAgregarInvitado
           invitadosSinUbicar={invitadosSinUbicar}
