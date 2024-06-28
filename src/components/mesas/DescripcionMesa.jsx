@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { IconTrash, IconPlus } from "@tabler/icons-react";
 import PopupAgregarInvitado from '@/components/mesas/PopupAgregarInvitado';
 import { supabase } from "@/utils/supabase";
+import BotonEliminar from '../eliminar/BotonEliminar';
 
-const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvitado }) => {
+const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvitado, handledelete }) => {
   const [invitados, setInvitados] = useState(asignados);
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState(null);
@@ -81,12 +82,19 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
     )
   ));
 
+  const handleDelete = () => {
+    handledelete()
+  };
+
   return (
     <div className="bg-white p-4 rounded shadow-md w-80">
       <div className='h-20 bg-[#1B264F] content-center text-center'>
         <p className='text-white text-xl'>Nombre de los invitados</p>
       </div>
-      <h2 className="text-xl mt-4">Mesa: {mesa.nroMesa}</h2>
+      <div className="flex justify-between items-center mt-4">
+        <h2 className="text-xl">Mesa: {mesa.nroMesa}</h2>
+        <BotonEliminar item={mesa} tableName="mesa" onDelete={handleDelete}/>
+      </div>
       <p className='text-sm'>{invitados.length}/{mesa.capacidad}</p>
       <ul className='mt-4'>
         {casilleros}

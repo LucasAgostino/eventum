@@ -51,7 +51,7 @@ const MesasPage = ({ params }) => {
     if (params.id) {
       fetchData();
     }
-  }, [params.id,invitados]);
+  }, [params.id,invitados,mesas]);
 
   const agregarMesa = async (e) => {
     e.preventDefault();
@@ -60,7 +60,7 @@ const MesasPage = ({ params }) => {
     if (error) {
       setError(error.message);
     } else {
-      setMesas([...mesas, data[0]]);
+      setMesas([...mesas]);
       setShowModal(false);
       setNewMesa({ nroMesa: "", capacidad: 4 });
     }
@@ -104,6 +104,7 @@ const MesasPage = ({ params }) => {
         invitados={invitados}
         onAddInvitado={handleAddInvitado}
         setSelectedMesa={setSelectedMesa}
+        SetMesas={setMesas}
       />
 
       <div className="mt-4">

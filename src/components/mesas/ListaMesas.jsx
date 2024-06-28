@@ -9,6 +9,10 @@ const ListaMesas = ({ mesas, invitados, onAddInvitado, setSelectedMesa }) => {
     setLocalSelectedMesa(mesa);
     setSelectedMesa(mesa); // Llamar a la función pasada como prop
   };
+  const handledelete = () => {
+    setLocalSelectedMesa(null);
+    setSelectedMesa(null); // Llamar a la función pasada como prop
+  };
 
   return (
     <div className="flex">
@@ -33,6 +37,7 @@ const ListaMesas = ({ mesas, invitados, onAddInvitado, setSelectedMesa }) => {
             invitadosSinUbicar={invitados.filter((invitado) => invitado.mesaId === null)}
             asignados={invitados.filter((invitado) => invitado.mesaId === localSelectedMesa.id)}
             onAddInvitado={onAddInvitado}
+            handledelete = {handledelete}
           />
         )}
       </div>
