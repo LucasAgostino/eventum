@@ -15,7 +15,7 @@ const MesasPage = ({ params }) => {
   const [selectedMesa, setSelectedMesa] = useState(null);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [newMesa, setNewMesa] = useState({ nroMesa: "", capacidad: null });
+  const [newMesa, setNewMesa] = useState({ nroMesa: "", capacidad: "" });
 
   useEffect(() => {
     async function fetchData() {
@@ -56,13 +56,13 @@ const MesasPage = ({ params }) => {
   const agregarMesa = async (e) => {
     e.preventDefault();
     const { nroMesa, capacidad } = newMesa;
-    const { data, error } = await supabase.from("mesa").insert([{ eventoId: params.id, nroMesa, capacidad }]);
+    const { data, error } = await supabase.from("mesa").insert([{ eventoId: params.id, nroMesa, capacidad }]).select();
     if (error) {
       setError(error.message);
     } else {
-      setMesas([...mesas]);
+      setMesas([...mesas, data[0]]);
       setShowModal(false);
-      setNewMesa({ nroMesa: "", capacidad: 4 });
+      setNewMesa({ nroMesa: "", capacidad: "" });
     }
   };
 
