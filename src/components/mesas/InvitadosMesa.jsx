@@ -1,29 +1,10 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import TabsMesas from '@/components/mesas/TabsMesas';
-import { supabase } from "@/utils/supabase"; // Ajusta la ruta según tu estructura
-import { data } from 'autoprefixer';
 
-const InvitadosMesa = ({ filter, searchQuery, invitados}) => {
+const InvitadosMesa = ({ filter, searchQuery, invitados, mesas}) => {
   const [filteredInvitados, setFilteredInvitados] = useState(invitados);
   const [activeTab, setActiveTab] = useState('todos');
-  const [mesas, setMesas] = useState([]);
-
-  useEffect(() => {
-    const fetchMesas = async () => {
-      const { data, error } = await supabase
-        .from('mesa')
-        .select('id, nroMesa');
-
-      if (error) {
-        console.error('Error fetching mesas:', error);
-      } else {
-        setMesas(data);
-      }
-    };
-
-    fetchMesas();
-  }, [mesas]);
 
   useEffect(() => {
     let result = invitados;

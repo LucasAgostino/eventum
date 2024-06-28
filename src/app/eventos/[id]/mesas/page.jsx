@@ -50,8 +50,32 @@ const MesasPage = ({ params }) => {
 
     if (params.id) {
       fetchData();
+
+      // Suscripción a cambios en la tabla 'invitado'
+      const invitadosChannel = supabase
+        .channel('invitados-changes')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'invitado' }, payload => {
+          console.log('Cambio en la tabla invitado:', payload);
+          fetchData(); // Vuelve a llamar a fetchData cuando hay un cambio
+        })
+        .subscribe();
+
+      // Suscripción a cambios en la tabla 'mesa'
+      const mesasChannel = supabase
+        .channel('mesas-changes')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'mesa' }, payload => {
+          console.log('Cambio en la tabla mesa:', payload);
+          fetchData(); // Vuelve a llamar a fetchData cuando hay un cambio
+        })
+        .subscribe();
+
+      // Cleanup las suscripciones cuando el componente se desmonte
+      return () => {
+        supabase.removeChannel(invitadosChannel);
+        supabase.removeChannel(mesasChannel);
+      };
     }
-  }, [params.id,invitados,mesas]);
+  }, [params.id]);
 
   const agregarMesa = async (e) => {
     e.preventDefault();
@@ -104,11 +128,11 @@ const MesasPage = ({ params }) => {
         invitados={invitados}
         onAddInvitado={handleAddInvitado}
         setSelectedMesa={setSelectedMesa}
-        SetMesas={setMesas}
+        setMesas={setMesas}
       />
 
       <div className="mt-4">
-        <InvitadosMesa filter="todos" searchQuery="" invitados={invitados} mesa/>
+        <InvitadosMesa filter="todos" searchQuery="" invitados={invitados} mesas={mesas} />
       </div>
       {showModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
