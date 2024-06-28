@@ -7,7 +7,7 @@ const ListaMesas = ({ mesas, invitados, onAddInvitado, setSelectedMesa }) => {
 
   const handleMesaClick = (mesa) => {
     setLocalSelectedMesa(mesa);
-    setSelectedMesa(mesa);  // Llamar a la función pasada como prop
+    setSelectedMesa(mesa); // Llamar a la función pasada como prop
   };
 
   return (
@@ -28,6 +28,7 @@ const ListaMesas = ({ mesas, invitados, onAddInvitado, setSelectedMesa }) => {
       <div className="w-1/3 ml-4">
         {localSelectedMesa && (
           <DescripcionMesa
+            key={localSelectedMesa.id}
             mesa={localSelectedMesa}
             invitadosSinUbicar={invitados.filter((invitado) => invitado.mesaId === null)}
             asignados={invitados.filter((invitado) => invitado.mesaId === localSelectedMesa.id)}

@@ -42,8 +42,6 @@ const InvitadosMesa = ({ filter, searchQuery, invitados }) => {
   }, [activeTab, searchQuery, invitados, filter]);
 
   const getNroMesa = (mesaId) => {
-    console.log('mesas:', mesas); // Verificar datos de mesas en la función
-    console.log('mesaId:', mesaId); // Verificar mesaId de cada invitado
     const mesa = mesas.find(m => m.id === mesaId);
     return mesa ? mesa.nroMesa : '';
   };

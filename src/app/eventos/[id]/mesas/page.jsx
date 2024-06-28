@@ -51,7 +51,7 @@ const MesasPage = ({ params }) => {
     if (params.id) {
       fetchData();
     }
-  }, [params.id]);
+  }, [params.id,invitados]);
 
   const agregarMesa = async (e) => {
     e.preventDefault();

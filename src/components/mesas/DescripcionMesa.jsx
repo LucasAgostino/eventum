@@ -1,17 +1,34 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconTrash, IconPlus } from "@tabler/icons-react";
 import PopupAgregarInvitado from '@/components/mesas/PopupAgregarInvitado';
 import { supabase } from "@/utils/supabase";
 
 const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvitado }) => {
-  const [invitados, setInvitados] = useState(mesa ? asignados : []);
+  const [invitados, setInvitados] = useState(asignados);
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleAddInvitado = (invitado) => {
-    setInvitados([...asignados, invitado]);
+  useEffect(() => {
+    setInvitados(asignados);
+  }, [asignados]);
+
+  const handleAddInvitado = async (invitado) => {
+    setInvitados([...invitados, invitado]);
     onAddInvitado(invitado);
+    try {
+      const { error } = await supabase
+        .from('invitado')
+        .update({ mesaId: mesa.id })
+        .eq('id', invitado.id);
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      setError(error.message);
+      console.error('Error al agregar invitado: ', error);
+    }
     setShowPopup(false);
   };
 
@@ -69,13 +86,14 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
       <div className='h-20 bg-[#1B264F] content-center text-center'>
         <p className='text-white text-xl'>Nombre de los invitados</p>
       </div>
-      <h2 className="text-xl mt-4">Mesa: {mesa.nombre}</h2>
+      <h2 className="text-xl mt-4">Mesa: {mesa.nroMesa}</h2>
       <p className='text-sm'>{invitados.length}/{mesa.capacidad}</p>
       <ul className='mt-4'>
         {casilleros}
       </ul>
       {showPopup && (
         <PopupAgregarInvitado
+          key={invitadosSinUbicar.length} // Usar la longitud de la lista como key para forzar el remount
           invitadosSinUbicar={invitadosSinUbicar}
           onAddInvitado={handleAddInvitado}
           onClose={() => setShowPopup(false)}
