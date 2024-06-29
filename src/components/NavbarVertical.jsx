@@ -35,7 +35,7 @@ const menuItems = (eventId) =>
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const noNavbarRoutes = ["/login", "/register", "/home"];
+  const noNavbarRoutes = ["/login", "/register", "/home","/reset-password", "/update-password"];
   const hideNavbarOnDynamicRoutes = pathname.startsWith("/confirm/");
   const [eventId, setEventId] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -135,7 +135,7 @@ export default function Auth() {
 
               <div className="text-sm">
                 <span className="font-medium text-blue-600 hover:text-blue-500 cursor-pointer">
-                  ¿Olvidaste tu contraseña?
+                  <a href="/reset-password">¿Olvidaste tu contraseña?</a>
                 </span>
               </div>
             </div>
