@@ -10,9 +10,14 @@ const Confirm = () => {
 
   const handleResponse = async (response) => {
     if (eventoId && userId) {
+      let updates = { estado: response };
+      if (response === 'rechazado') {
+        updates.mesaId = null;
+      }
+
       const { data, error } = await supabase
         .from('invitado')
-        .update({ estado: response })
+        .update(updates)
         .eq('eventoID', eventoId)
         .eq('id', userId);
 

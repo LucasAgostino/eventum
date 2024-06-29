@@ -2,15 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import TabsMesas from '@/components/mesas/TabsMesas';
 
-const InvitadosMesa = ({ filter, searchQuery, invitados, mesas}) => {
+const InvitadosMesa = ({ filter, searchQuery, invitados, mesas }) => {
   const [filteredInvitados, setFilteredInvitados] = useState(invitados);
   const [activeTab, setActiveTab] = useState('todos');
 
   useEffect(() => {
     let result = invitados;
 
-    if (filter !== 'todos') {
-      result = result.filter(invitado => invitado.estado.toLowerCase() === activeTab);
+    if (activeTab !== 'todos') {
+      if (activeTab === 'ubicados') {
+        result = result.filter(invitado => invitado.mesaId !== null);
+      } else if (activeTab === 'no_ubicados') {
+        result = result.filter(invitado => invitado.mesaId === null);
+      }
     }
 
     if (searchQuery) {
@@ -21,7 +25,7 @@ const InvitadosMesa = ({ filter, searchQuery, invitados, mesas}) => {
     }
 
     setFilteredInvitados(result);
-  }, [activeTab, searchQuery, invitados, filter]);
+  }, [activeTab, searchQuery, invitados]);
 
   const getNroMesa = (mesaId) => {
     const mesa = mesas.find(m => m.id === mesaId);
