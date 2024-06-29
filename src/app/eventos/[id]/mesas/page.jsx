@@ -113,13 +113,13 @@ const MesasPage = ({ params }) => {
   return (
     <div className="container mx-auto p-4">
       {error && <div>Error: {error}</div>}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
         <FiltroMesas
           filtros={filtrosDisponibles}
           filtroActual={filtro}
           setFiltro={setFiltro}
         />
-        <button onClick={() => setShowModal(true)} className="bg-[#274690] text-white px-4 py-3 rounded">
+        <button onClick={() => setShowModal(true)} className="bg-[#274690] text-white px-4 py-3 rounded mt-4 md:mt-0">
           Agregar mesa
         </button>
       </div>
@@ -137,7 +137,7 @@ const MesasPage = ({ params }) => {
       </div>
       {showModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-4 rounded shadow-lg">
+          <div className="bg-white p-4 rounded shadow-lg max-w-md w-full mx-4">
             <h2 className="text-xl mb-4">Agregar Nueva Mesa</h2>
             <form onSubmit={agregarMesa}>
               <div className="mb-4">
