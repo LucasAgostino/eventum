@@ -23,8 +23,9 @@ const MesasPage = ({ params }) => {
         // Fetch invitados
         const { data: invitadosData, error: invitadosError } = await supabase
           .from("invitado")
-          .select("id, nombre, apellido, mesaId")
-          .eq("eventoID", params.id);
+          .select("id, nombre, apellido, mesaId, estado")
+          .eq("eventoID", params.id)
+          .neq("estado", "rechazado");
 
         if (invitadosError) {
           throw invitadosError;
