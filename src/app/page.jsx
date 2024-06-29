@@ -29,7 +29,7 @@ const Home = ({ id, nombreevento, cantinvi, onDelete, FechaEvento }) => {
     <div className="p-4">
       <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
         <h1 className="text-3xl font-bold text-gray-900 mb-4 sm:mb-0">Dashboard</h1>
-        <Link href="/eventos/crear-evento" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <Link href="/crear-evento" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Crear evento
         </Link>
       </div>

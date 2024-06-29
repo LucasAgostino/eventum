@@ -10,6 +10,11 @@ const menuItems = (eventId) =>
     { path: "/", icon: "/hogar.png", text: "Dashboard" },
     { path: "/eventos", icon: "/Calendario.png", text: "Eventos" },
     eventId && {
+      path: `/eventos/${eventId}`,
+      icon: "/dolar.png",
+      text: "Detalles",
+    },
+    eventId && {
       path: `/eventos/${eventId}/presupuesto`,
       icon: "/dolar.png",
       text: "Presupuestos",
