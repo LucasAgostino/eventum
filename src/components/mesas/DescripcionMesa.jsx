@@ -83,7 +83,7 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
   ));
 
   const handleDelete = () => {
-    handledelete()
+    handledelete();
   };
 
   return (
@@ -96,7 +96,7 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
         <BotonEliminar item={mesa} tableName="mesa" onDelete={handleDelete}/>
       </div>
       <p className='text-sm'>{invitados.length}/{mesa.capacidad}</p>
-      <ul className='mt-4'>
+      <ul className={`mt-4 ${casilleros.length > 9 ? 'max-h-96 overflow-y-auto' : ''}`}>
         {casilleros}
       </ul>
       {showPopup && (

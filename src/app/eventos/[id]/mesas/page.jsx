@@ -10,7 +10,7 @@ const filtrosDisponibles = [4, 6, 8];
 const MesasPage = ({ params }) => {
   const [invitados, setInvitados] = useState([]);
   const [invitadosSinUbicar, setInvitadosSinUbicar] = useState([]);
-  const [filtro, setFiltro] = useState(6);
+  const [filtro, setFiltro] = useState('Todas');
   const [mesas, setMesas] = useState([]);
   const [selectedMesa, setSelectedMesa] = useState(null);
   const [error, setError] = useState(null);
@@ -90,7 +90,7 @@ const MesasPage = ({ params }) => {
     }
   };
 
-  const mesasFiltradas = mesas.filter((mesa) => mesa.capacidad === filtro);
+  const mesasFiltradas = filtro === 'Todas' ? mesas : mesas.filter((mesa) => mesa.capacidad === filtro);
 
   const handleAddInvitado = (invitado) => {
     setInvitadosSinUbicar(
