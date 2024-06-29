@@ -31,7 +31,7 @@ function Eventos() {
       <div className="flex items-center justify-between m-4">
         <h1 className="text-3xl font-bold text-gray-900">Mis eventos</h1>
         <div className="relative inline-flex items-center justify-center p-2 px-4 rounded-lg transition duration-200 font-bold text-gray-700 shadow-lg bg-blue-300 hover:bg-blue-400 hover:text-indigo-900 transform hover:scale-95">
-          <Link href="/eventos/crear-evento">Crear evento</Link>
+          <Link href="/crear-evento">Crear evento</Link>
         </div>
       </div>
       <TablaEventos userId={user.id} />

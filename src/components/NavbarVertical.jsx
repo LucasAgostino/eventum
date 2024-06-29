@@ -10,6 +10,11 @@ const menuItems = (eventId) =>
     { path: "/", icon: "/hogar.png", text: "Dashboard" },
     { path: "/eventos", icon: "/Calendario.png", text: "Eventos" },
     eventId && {
+      path: `/eventos/${eventId}`,
+      icon: "/dolar.png",
+      text: "Detalles",
+    },
+    eventId && {
       path: `/eventos/${eventId}/presupuesto`,
       icon: "/dolar.png",
       text: "Presupuestos",
@@ -30,7 +35,7 @@ const menuItems = (eventId) =>
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const noNavbarRoutes = ["/login", "/register", "/home"];
+  const noNavbarRoutes = ["/login", "/register", "/home","/reset-password", "/update-password"];
   const hideNavbarOnDynamicRoutes = pathname.startsWith("/confirm/");
   const [eventId, setEventId] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
