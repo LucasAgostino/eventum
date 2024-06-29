@@ -84,9 +84,10 @@ export default function SalesOverview({ expenses, presupuestoMax }) {
       // Dibuja la imagen cuando esté cargada
       if (imageRef.current) {
         const image = imageRef.current;
-        const imageX = width / 2 - image.width / 8; // Ajusta el tamaño según sea necesario
-        const imageY = height / 2 - image.height / 8; // Ajusta el tamaño según sea necesario
-        ctx.drawImage(image, imageX, imageY, image.width / 4, image.height / 4); // Dibuja la imagen a un tamaño menor
+        const size = Math.min(width, height)/2; // Ajustar el tamaño de la imagen en función del tamaño del gráfico
+        const imageX = width / 2 - size / 2;
+        const imageY = height / 2 - size / 2;
+        ctx.drawImage(image, imageX, imageY, size, size); // Dibuja la imagen ajustada
       }
 
       ctx.save();
