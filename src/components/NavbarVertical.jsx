@@ -15,11 +15,6 @@ const menuItems = (eventId) =>
       text: "Presupuestos",
     },
     eventId && {
-      path: `/eventos/${eventId}/reportes`,
-      icon: "/grafico-histograma.png",
-      text: "Reportes",
-    },
-    eventId && {
       path: `/eventos/${eventId}/invitados`,
       icon: "/user.png",
       text: "Invitados",
@@ -81,13 +76,13 @@ export default function Sidebar() {
     <div>
       {showNavbar && (
         <div
-          className={`bg-blue-900 min-h-screen text-white transition-all duration-300 ease-in-out ${
+          className={`bg-violeta min-h-screen text-white transition-all duration-300 ease-in-out ${
             isMenuOpen ? "w-48" : "w-20"
           }`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="bg-blue-800 backdrop-blur-sm border border-blue-700 shadow-lg p-4 rounded-lg min-h-screen flex flex-col justify-between">
+          <div className="bg-violeta backdrop-blur-sm shadow-lg p-4 rounded-lg min-h-screen flex flex-col justify-between">
             <nav>
               <ul>
                 <li className="p-3 flex items-center cursor-pointer mb-10">
@@ -104,7 +99,7 @@ export default function Sidebar() {
                   <li
                     key={path}
                     className={`p-3 flex items-center ${
-                      isActive(path) ? "bg-blue-700 shadow-lg rounded-lg" : ""
+                      isActive(path) ? "bg-black/25 shadow-lg rounded-lg" : ""
                     }`}
                   >
                     <Link href={path} legacyBehavior>
