@@ -89,7 +89,7 @@ const InsertarInvitados = ({ eventoID }) => {
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
                     />
                 </div>
-                <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none">
+                <button type="submit" className="w-full py-2 px-4 bg-violeta text-white rounded-lg shadow-md hover:bg-violoscuro focus:outline-none">
                     Enviar
                 </button>
             </form>

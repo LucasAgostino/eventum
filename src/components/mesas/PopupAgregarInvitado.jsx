@@ -11,7 +11,7 @@ const PopupAgregarInvitado = ({ invitadosSinUbicar = [], onAddInvitado, onClose 
               <span>{invitado.nombre}</span>
               <button
                 onClick={() => onAddInvitado(invitado)}
-                className="bg-blue-500 text-white px-2 py-1 rounded"
+                className="bg-violeta text-white px-2 py-1 rounded"
               >
                 Agregar
               </button>

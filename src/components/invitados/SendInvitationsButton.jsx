@@ -29,7 +29,7 @@ const SendInvitationsButton = ({ eventId }) => {
       <button
         onClick={sendInvitations}
         disabled={loading}
-        className="flex items-center justify-center w-full sm:w-auto bg-blue-800 text-white gap-1 px-4 py-3 cursor-pointer text-gray-300 font-semibold tracking-widest rounded-md hover:bg-blue-400 duration-300 hover:gap-2"
+        className="flex items-center justify-center bg-violeta w-full gap-1 px-4 py-3 cursor-pointer text-white font-semibold tracking-widest rounded-md sm:w-auto hover:bg-violoscuro duration-300 hover:gap-2"
       >
         <svg
           className="w-5 h-5"

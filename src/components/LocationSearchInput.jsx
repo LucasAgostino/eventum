@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
-
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
-
+import React, { useState, useEffect, useRef } from 'react';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { useJsApiLoader } from '@react-google-maps/api';
 
 const libraries = ['places'];
 
 const LocationSearchInput = ({ onSelect }) => {
   const [address, setAddress] = useState('');
-  
+  const inputRef = useRef(null);
+
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -32,6 +28,23 @@ const LocationSearchInput = ({ onSelect }) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Tab' && address) {
+      handleSelect(address);
+    }
+  };
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      if (inputRef.current) {
+        inputRef.current.removeEventListener('keydown', handleKeyDown);
+      }
+    };
+  }, [address]);
+
   if (loadError) {
     return <div>Error loading Google Maps</div>;
   }
@@ -45,27 +58,31 @@ const LocationSearchInput = ({ onSelect }) => {
       value={address}
       onChange={handleChange}
       onSelect={handleSelect}
+      searchOptions={{ componentRestrictions: { country: 'AR' } }}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div>
+        <div className="relative">
           <input
             {...getInputProps({
-              placeholder: 'Ingrese ubicacion',
+              placeholder: 'Ingrese ubicación',
               className: 'location-search-input w-full px-3 py-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600',
+              ref: inputRef,
             })}
+            className="w-full px-3 py-2 border border-violet-500 rounded focus:outline-none focus:ring-2 focus:ring-violet-900"
+
           />
-          <div className="autocomplete-dropdown-container">
-            {loading && <div>Loading...</div>}
+          <div className="autocomplete-dropdown-container absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow-lg">
+            {loading && <div className="loading p-2 text-gray-500">Loading...</div>}
             {suggestions.map(suggestion => {
               const className = suggestion.active
-                ? 'suggestion-item--active'
-                : 'suggestion-item';
+                ? 'suggestion-item--active bg-blue-500 text-white'
+                : 'suggestion-item bg-white text-black';
               const key = suggestion.placeId || suggestion.description;
               return (
                 <div
                   key={key}
                   {...getSuggestionItemProps(suggestion, {
-                    className,
+                    className: `cursor-pointer p-2 ${className}`,
                   })}
                 >
                   <span>{suggestion.description}</span>

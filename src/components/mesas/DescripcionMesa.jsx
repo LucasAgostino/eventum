@@ -61,7 +61,7 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
 
   const casilleros = Array.from({ length: mesa.capacidad }, (_, index) => (
     invitados[index] ? (
-      <li key={index} className="flex items-center p-2 bg-[#576CA8] text-white mb-2 rounded">
+      <li key={index} className="flex items-center p-2 bg-[#1B264F] text-white mb-2 rounded">
         <input
           type="text"
           value={invitados[index].nombre}

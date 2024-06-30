@@ -42,30 +42,30 @@ export default function SalesOverview({ expenses, presupuestoMax }) {
       {
         data: dataValues,
         backgroundColor: [
-          "#1e3a8a",
-          "#3b82f6",
-          "#60a5fa",
-          "#93c5fd",
-          "#bfdbfe",
-          "#1d4ed8",
-          "#2563eb",
-          "#3b82f6",
-          "#60a5fa",
-          "#93c5fd",
-          "#dbeafe",
-        ], // Más colores azulados
+          "#473ED7", // violeta
+          "#322C99", // violoscuro
+          "#7F6EFF", // un tono más claro de violeta
+          "#4A41FF", // un tono más brillante de violeta
+          "#B5A8FF", // un tono pastel de violeta
+          "#6E5AFF", // un tono medio de violeta
+          "#5543CC", // un tono más oscuro y profundo de violeta
+          "#A89EFF", // un tono suave de violeta
+          "#3D34B2", // un tono oscuro y vibrante
+          "#8672FF", // un tono brillante y claro de violeta
+          "#31299D"  // un tono muy oscuro de violeta
+        ],
         hoverBackgroundColor: [
-          "#1e3a8acc",
-          "#3b82f6cc",
-          "#60a5facc",
-          "#93c5fdcc",
-          "#bfdbfecc",
-          "#1d4ed8cc",
-          "#2563ebcc",
-          "#3b82f6cc",
-          "#60a5facc",
-          "#93c5fdcc",
-          "#dbeafecc",
+          "#473ED7CC",
+          "#322C99CC",
+          "#7F6EFFCC",
+          "#4A41FFCC",
+          "#B5A8FFCC",
+          "#6E5AFFCC",
+          "#5543CCCC",
+          "#A89EFFCC",
+          "#3D34B2CC",
+          "#8672FFCC",
+          "#31299DCC"
         ], // Más colores azulados con opacidad
         borderWidth: 1,
       },
@@ -140,17 +140,17 @@ export default function SalesOverview({ expenses, presupuestoMax }) {
                   className="inline-block w-4 h-4 mr-2 rounded-full"
                   style={{
                     backgroundColor: [
-                      "#1e3a8a",
-                      "#3b82f6",
-                      "#60a5fa",
-                      "#93c5fd",
-                      "#bfdbfe",
-                      "#1d4ed8",
-                      "#2563eb",
-                      "#3b82f6",
-                      "#60a5fa",
-                      "#93c5fd",
-                      "#dbeafe",
+                      "#473ED7", // violeta
+                      "#322C99", // violoscuro
+                      "#7F6EFF", // un tono más claro de violeta
+                      "#4A41FF", // un tono más brillante de violeta
+                      "#B5A8FF", // un tono pastel de violeta
+                      "#6E5AFF", // un tono medio de violeta
+                      "#5543CC", // un tono más oscuro y profundo de violeta
+                      "#A89EFF", // un tono suave de violeta
+                      "#3D34B2", // un tono oscuro y vibrante
+                      "#8672FF", // un tono brillante y claro de violeta
+                      "#31299D"  // un tono muy oscuro de violeta
                     ][index % 11],
                   }}
                 ></span>

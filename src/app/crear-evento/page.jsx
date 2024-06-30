@@ -5,6 +5,7 @@ import FormularioEvento from "@/components/eventos/FormularioEvento";
 function CrearEvento() {
 
   return (
+
     <FormularioEvento/>
   );
 }

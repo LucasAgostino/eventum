@@ -8,6 +8,7 @@ import TablaEventos from "@/components/eventos/TablaEventos";
 import TarjetaEventoProximo from "@/components/eventos/TarjetaEventoProximo";
 import GraficoDashboard from "@/components/GraficoDashboard";
 
+
 const Home = () => {
   const { user } = useUserSession();
   const [proximoEvento, setProximoEvento] = useState(null);
@@ -55,9 +56,9 @@ const Home = () => {
 
   return (
     <div className="p-4">
-      <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between mb-4 ">
         <h1 className="text-3xl font-bold text-gray-900 mb-4 sm:mb-0">Dashboard</h1>
-        <Link href="/crear-evento" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-violeta hover:bg-violet-950 focus:outline-none focus:ring-2 focus:ring-offset-2">
+        <Link href="/crear-evento" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-violeta hover:bg-violoscuro focus:outline-none focus:ring-2 focus:ring-offset-2">
             Crear evento
         </Link>
       </div>
@@ -66,7 +67,7 @@ const Home = () => {
         <GraficoDashboard expenses = {expenses} presupuestoMax = {presupuestoMax} />
       </div>
       <br />
-      <TablaEventos userId={user.id} />
+      <TablaEventos userId={user.id} flag = {true} />
     </div>
   );
 };

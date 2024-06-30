@@ -1,17 +1,29 @@
 // components/Header.jsx
 
+"use client";
 import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
+  const noHeaderRoutes = ["/login", "/register", "/home", "/reset-password", "/update-password"];
+  const hideHeaderOnDynamicRoutes = pathname.startsWith("/confirm/");
+
+  const showHeader = !noHeaderRoutes.includes(pathname) && !hideHeaderOnDynamicRoutes;
+
   return (
-    <header className="bg-blue-900 text-white p-4 flex items-center justify-between w-full fixed top-0 left-0 z-50">
-      <div className="flex items-center mx-auto max-w-7xl w-full px-4">
-        <div className="flex items-center">
-          <img src="/tu_logo.png" alt="Logo de tu aplicación" className="h-8 mr-2" />
-          <span className="text-xl font-bold">Eventum</span> {/* Nombre de tu aplicación */}
-        </div>
-      </div>
-    </header>
+    <>
+      {showHeader && (
+        <header className="bg-[#1B264F] p-4" style={{height:70}}>
+          <div className="container mx-auto flex justify-center items-center w-full">
+            <Link href="/">
+              <img src="/Logo_Eventum_Title.png" alt="Logo" style={{height:46}}/>
+            </Link>
+          </div>
+        </header>
+      )}
+    </>
   );
 };
 

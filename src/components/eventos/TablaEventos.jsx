@@ -4,30 +4,47 @@ import { supabase } from "@/utils/supabase";
 import VisualizarEvento from "./VisualizarEvento";
 import BotonEliminar from "../eliminar/BotonEliminar";
 
-const TablaEventos = ({ userId }) => {
+const TablaEventos = ({ userId , flag = false}) => {
   const [eventos, setEventos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchEventos = async () => {
-      if (!userId) {
-        setError("Usuario ID no válido");
-        setLoading(false);
-        return;
-      }
-      setLoading(true);
-      const { data: eventos, error } = await supabase
+      const abortController = new AbortController();
+      try {
+        if (!userId) {
+          setError("Usuario ID no válido");
+          setLoading(false);
+          return;
+        }
+        setLoading(true);
+
+        const { data: eventos, error } = await supabase
         .from("evento")
         .select()
-        .eq("userID", userId);
-
-      if (error) {
-        setError(error.message);
-      } else {
-        setEventos(eventos);
+        .eq("userID", userId)
+        .order("fecha",{ascending:true})
+        .abortSignal(abortController.signal);
+        
+        if (error) {
+          setError(error.message);
+        } else {
+          if (flag) {
+            setEventos(eventos.slice(0,3));
+          }
+          else{ 
+            setEventos(eventos);
+          }
+        }
+      } catch (fetchError) {
+        if (fetchError.name !== "AbortError") {
+          setError("Error al cargar los eventos.");
+        }
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
+      return () => abortController.abort();
     };
 
     fetchEventos();

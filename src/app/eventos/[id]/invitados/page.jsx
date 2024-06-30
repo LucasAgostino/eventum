@@ -26,7 +26,7 @@ function Invitados({ params }) {
         <h1 className="text-4xl font-extrabold mb-4 text-gray-900">
           Lista de Invitados
         </h1>
-        <span className="text-blue-800 text-2xl sm:text-4xl mt-2 sm:mt-10 block">
+        <span className="text-violeta text-2xl sm:text-4xl mt-2 sm:mt-10 block">
           Invitados para el Evento
         </span>
         <p className="text-lg text-gray-700 mt-2 sm:mt-4">

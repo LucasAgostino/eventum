@@ -120,7 +120,7 @@ const MesasPage = ({ params }) => {
           filtroActual={filtro}
           setFiltro={setFiltro}
         />
-        <button onClick={() => setShowModal(true)} className="bg-[#274690] text-white px-4 py-3 rounded mt-4 md:mt-0">
+        <button onClick={() => setShowModal(true)} className="bg-violeta text-white px-4 py-3 rounded mt-4 md:mt-0">
           Agregar mesa
         </button>
       </div>
@@ -168,7 +168,7 @@ const MesasPage = ({ params }) => {
                 <button type="button" onClick={() => setShowModal(false)} className="mr-4 px-4 py-2 border border-gray-300 rounded">
                   Cancelar
                 </button>
-                <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+                <button type="submit" className="px-4 py-2 bg-violeta text-white rounded">
                   Guardar
                 </button>
               </div>

@@ -30,7 +30,7 @@ function Eventos() {
     <div>
       <div className="flex items-center justify-between m-4">
         <h1 className="text-3xl font-bold text-gray-900">Mis eventos</h1>
-        <div className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-violeta hover:bg-violet-950 focus:outline-none focus:ring-2 focus:ring-offset-2">
+        <div className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-violeta hover:bg-violoscuro focus:outline-none focus:ring-2 focus:ring-offset-2">
           <Link href="/crear-evento">Crear evento</Link>
         </div>
       </div>

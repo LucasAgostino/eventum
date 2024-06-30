@@ -5,7 +5,7 @@ import React from "react";
 const LinkButton = ({ eventoId }) => {
   return (
     <Link href={`/eventos/${eventoId}`} passHref>
-      <button className="ml-2 text-blue-600 hover:text-blue-900">
+      <button className="ml-2 text-violeta hover:text-violoscuro">
         <svg
           className="w-6"
           viewBox="0 0 24 24"
