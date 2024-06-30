@@ -51,15 +51,10 @@ const TarjetaEventoProximo = () => {
     }, [user]);
 
     return (
-      <div className="bg-white border border-gray-300 shadow-lg p-4 rounded-lg mb-4 sm:mb-0 sm:ml-4 w-full max-w-lg">
+      <div className="bg-white border border-gray-300 shadow-lg p-4 max-h-full rounded-lg mr-4 mb-4 sm:ml-4 w-full max-w-lg">
         <h1 className="text-xl font-bold mb-2">Próximo evento</h1>
         {proximoEvento ? (
           <div className="flex items-center mb-4">
-            <img
-              src="Favicon.ico"
-              className="h-5 w-5 mr-2"
-              alt="Icono de la aplicación"
-            ></img>
             <div>
               <h2 className="text-3xl font-semibold mb-2">
                 <strong>{proximoEvento.nombreEvento}</strong>

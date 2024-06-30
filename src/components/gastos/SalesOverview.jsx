@@ -118,7 +118,7 @@ export default function SalesOverview({ expenses, presupuestoMax }) {
   };
 
   return (
-    <div className="bg-white border shadow-lg p-6 rounded-lg flex flex-col w-full max-w-4xl mx-auto h-full overflow-hidden">
+    <div className="bg-white border shadow-lg p-6 rounded-lg flex flex-col w-full max-w-4xl mx-auto min-h-400 overflow-hidden">
       <h1 className="text-2xl font-semibold text-black mb-4">Gastos</h1>
       <div className="flex flex-col lg:flex-row items-start h-full">
         <div className="flex-grow h-full relative hidden lg:block">

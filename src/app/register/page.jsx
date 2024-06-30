@@ -72,7 +72,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-4xl flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-blue-700 text-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-b-none">
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-violeta text-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-b-none">
           <div className="text-center">
             <img
               src={images[currentImageIndex].src}
@@ -104,11 +104,11 @@ export default function RegisterPage() {
               alt="Eventum Logo"
             />
             <h2 className="mt-4 md:mt-12 text-3xl font-extrabold text-gray-900">
-              <span className="text-blue-600">Registrar</span> una cuenta
+              <span className="text-violeta">Registrar</span> una cuenta
             </h2>
             <p className="mt-2 text-sm text-gray-600">
               Ya tienes una cuenta?{" "}
-              <span className="font-medium text-blue-600 hover:text-blue-500">
+              <span className="font-medium text-violeta hover:text-violoscuro">
                 <Link href="/login">Iniciar sesion</Link>
               </span>
             </p>
@@ -120,7 +120,7 @@ export default function RegisterPage() {
               <div className="input flex flex-col relative">
                 <label
                   htmlFor="name"
-                  className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3"
+                  className="text-violeta text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3"
                 >
                   Nombre
                 </label>
@@ -131,14 +131,14 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="name"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-violeta opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Nombre"
                 />
               </div>
               <div className="input flex flex-col relative">
                 <label
                   htmlFor="lastName"
-                  className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 w-full"
+                  className="text-violeta text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 w-full"
                 >
                   Apellido
                 </label>
@@ -149,14 +149,14 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="lastName"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-violeta opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Apellido"
                 />
               </div>
               <div className="input flex flex-col relative">
                 <label
                   htmlFor="email"
-                  className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] w-full mb-3"
+                  className="text-violeta text-xs font-semibold relative top-2 ml-[7px] px-[3px] w-full mb-3"
                 >
                   Email
                 </label>
@@ -167,14 +167,14 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="email"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-violeta opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Direccion Email"
                 />
               </div>
               <div className="input flex flex-col relative">
                 <label
                   htmlFor="password"
-                  className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 w-full"
+                  className="text-violeta text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 w-full"
                 >
                   Contraseña
                 </label>
@@ -185,14 +185,14 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="new-password"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-violeta opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Contraseña"
                 />
               </div>
               <div className="input flex flex-col relative">
                 <label
                   htmlFor="passwordConfirmation"
-                  className="text-blue-500 text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 w-full"
+                  className="text-violeta text-xs font-semibold relative top-2 ml-[7px] px-[3px] mb-3 w-full"
                 >
                   Confirmar contraseña
                 </label>
@@ -203,7 +203,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   autoComplete="new-password"
                   required
-                  className="border-blue-500 opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
+                  className="border-violeta opacity-70 input px-[10px] py-[11px] text-xs border-2 rounded-[5px] w-full focus:outline-none placeholder-text-black/25"
                   placeholder="Confirmar contraseña"
                 />
               </div>
@@ -218,7 +218,7 @@ export default function RegisterPage() {
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Sign up
+                Registrarse
               </button>
             </div>
           </form>

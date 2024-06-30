@@ -15,6 +15,7 @@ function EventoDetalles({ params }) {
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
   const [nombreEvento, setNombreEvento] = useState("");
+  const [Detalle, setDetalle] = useState("");
   const [ubicacion, setUbicacion] = useState("");
   const [cantInvitados, setCantInvitados] = useState(0);
   const [fecha, setFecha] = useState("");
@@ -46,6 +47,7 @@ function EventoDetalles({ params }) {
         setUbicacion(data.ubicacion);
         setCantInvitados(data.cantInvitados);
         setFecha(data.fecha);
+        setDetalle(data.Detalle);
         setPresupuestoEstimado(data.presupuestoEstimado.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
       }
     };
@@ -81,6 +83,7 @@ function EventoDetalles({ params }) {
           ubicacion,
           cantInvitados,
           fecha,
+          Detalle,
           presupuestoEstimado: formattedPresupuesto,
         })
         .eq("id", params.id);
@@ -95,6 +98,7 @@ function EventoDetalles({ params }) {
         ubicacion,
         cantInvitados,
         fecha,
+        Detalle,
         presupuestoEstimado: formattedPresupuesto,
       });
       console.log("Evento actualizado:", data);
@@ -108,7 +112,7 @@ function EventoDetalles({ params }) {
     <div className="flex flex-col lg:flex-row w-full bg-gray-50 p-4 lg:p-8">
       {editing ? (
         <div className="w-full lg:w-1/2 bg-white shadow-md rounded px-4 pt-4 pb-4 lg:px-8 lg:pt-6 lg:pb-8">
-          <h1 className="text-2xl lg:text-3xl font-bold mb-6 text-blue-600">
+          <h1 className="text-2xl lg:text-3xl font-bold mb-6 text-violeta">
             Editar Evento
           </h1>
           <form onSubmit={handleSubmit}>
@@ -169,6 +173,14 @@ function EventoDetalles({ params }) {
               >
                 Descripción:
               </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="Detalle"
+                type="text"
+                placeholder="Detalle"
+                value={Detalle}
+                onChange={(e) => setDetalle(e.target.value)}
+              />
             </div>
             <div className="flex flex-col lg:flex-row mb-4">
               <div className="w-full lg:w-1/2 lg:pr-2 mb-4 lg:mb-0">
@@ -208,13 +220,13 @@ function EventoDetalles({ params }) {
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 ease-in-out transform hover:scale-105"
+                className="bg-violeta hover:bg-violoscuro text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 ease-in-out transform hover:scale-105"
                 type="submit"
               >
                 Actualizar Evento
               </button>
               <button
-                className="text-gray-600 hover:text-gray-800 font-semibold focus:outline-none"
+                className="text-red-600 hover:text-gray-800 font-semibold focus:outline-none"
                 onClick={handleCancelar}
               >
                 Cancelar
@@ -227,44 +239,43 @@ function EventoDetalles({ params }) {
           <div className="flex flex-col lg:flex-row w-full content-center justify-center">
             {event && (
               <div className="w-full lg:w-1/2 bg-white shadow-md rounded px-4 pt-4 pb-4 lg:px-8 lg:pt-6 lg:pb-8">
-                <h1 className="text-2xl lg:text-3xl font-bold mb-6 text-blue-600">
+                <h1 className="text-2xl lg:text-3xl font-bold mb-6 text-bg-[#24203F]">
                   Detalles del Evento
                 </h1>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-bold text-blue-700 mb-1">
+                    <label className="block text-sm font-bold text-bg-[#24203F] mb-1">
                       Nombre del Evento
                     </label>
                     <p className="text-gray-900">{event.nombreEvento}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-blue-700 mb-1">
+                    <label className="block text-sm font-bold text-bg-[#24203F] mb-1">
                       Fecha
                     </label>
                     <p className="text-gray-900">{event.fecha}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-blue-700 mb-1">
+                    <label className="block text-sm font-bold text-bg-[#24203F] mb-1">
                       Ubicación
                     </label>
                     <p className="text-gray-900">{event.ubicacion}</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-blue-700 mb-1">
+                    <label className="block text-sm font-bold text-bg-[#24203F] mb-1">
                       Descripción
                     </label>
-                    <p>Aca iria una descripcion del evento</p>
-                    <p className="text-gray-900">{event.descripcion}</p>
+                    <p className="text-gray-900">{event.Detalle}</p>
                   </div>
                   <div className="flex flex-col lg:flex-row">
                     <div className="mb-4 lg:mb-0 lg:mr-5">
-                      <label className="block text-sm font-bold text-blue-700 mb-1">
+                      <label className="block text-sm font-bold text-bg-[#24203F] mb-1">
                         Cantidad de Invitados
                       </label>
                       <p className="text-gray-900">{event.cantInvitados}</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-blue-700 mb-1">
+                      <label className="block text-sm font-bold text-bg-[#24203F] mb-1">
                         Presupuesto Estimado
                       </label>
                       <p className="text-gray-900">
@@ -274,7 +285,7 @@ function EventoDetalles({ params }) {
                   </div>
                 </div>
                 <div className="flex items-center justify-between mt-8">
-                  <button className="px-4 py-2 bg-blue-700 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-blue-500 hover:shadow-lg transform hover:scale-105 transition duration-200 ease-in-out">
+                  <button className="px-4 py-2 bg-violeta text-white font-semibold text-sm rounded-lg shadow-md hover:bg-violoscuro hover:shadow-lg transform hover:scale-105 transition duration-200 ease-in-out">
                     <Link href="/eventos">
                       <span>Volver a eventos</span>
                     </Link>
@@ -329,7 +340,7 @@ function EventoDetalles({ params }) {
                 />
                 <button
                   onClick={handleAddTask}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full"
+                  className="bg-violeta hover:bg-violoscuro text-white font-bold py-2 px-4 rounded-lg w-full"
                 >
                   Añadir Tarea
                 </button>
@@ -339,7 +350,7 @@ function EventoDetalles({ params }) {
           {/* Renderizar el componente EventMap solo si la ubicación está definida */}
           {event && event.ubicacion && (
             <div className="w-full mt-8">
-              <h2 className="text-2xl font-bold mb-4 text-blue-600">Mapa del Evento</h2>
+              <h2 className="text-2xl font-bold mb-4 text-violeta">Mapa del Evento</h2>
               <EventMap address={event.ubicacion} />
             </div>
           )}

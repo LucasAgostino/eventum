@@ -11,7 +11,7 @@ const menuItems = (eventId) =>
     { path: "/eventos", icon: "/Calendario.png", text: "Eventos" },
     eventId && {
       path: `/eventos/${eventId}`,
-      icon: "/dolar.png",
+      icon: "/archivo.png",
       text: "Detalles",
     },
     eventId && {

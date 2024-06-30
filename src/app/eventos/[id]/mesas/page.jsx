@@ -4,6 +4,7 @@ import ListaMesas from "@/components/mesas/ListaMesas";
 import InvitadosMesa from "@/components/mesas/InvitadosMesa";
 import FiltroMesas from "@/components/mesas/FiltroMesas";
 import { supabase } from "@/utils/supabase";
+import withAuth from "@/utils/withAuth";
 
 const filtrosDisponibles = [4, 6, 8];
 
@@ -179,4 +180,4 @@ const MesasPage = ({ params }) => {
   );
 };
 
-export default MesasPage;
+export default withAuth(MesasPage);

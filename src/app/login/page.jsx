@@ -70,12 +70,12 @@ export default function Auth() {
               alt="Eventum Logo"
             />
             <h2 className="mt-4 md:mt-14 text-3xl font-extrabold text-gray-900">
-              <span className="text-blue-600">Iniciar sesión</span> con tu cuenta
+              <span className="text-violeta">Iniciar sesión</span> con tu cuenta
             </h2>
             <p className="mt-2 text-sm text-gray-600">
               O{" "}
               <Link href="/register">
-                <span className="font-medium text-blue-600 hover:text-blue-500 cursor-pointer">
+                <span className="font-medium text-violeta hover:text-violet-950 cursor-pointer">
                   Registrarse
                 </span>
               </Link>
@@ -118,23 +118,8 @@ export default function Auth() {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Recordarme
-                </label>
-              </div>
-
               <div className="text-sm">
-                <span className="font-medium text-blue-600 hover:text-blue-500 cursor-pointer">
+                <span className="font-medium text-violeta hover:text-violet-950 cursor-pointer">
                   <a href="/reset-password">¿Olvidaste tu contraseña?</a>
                 </span>
               </div>
@@ -143,11 +128,11 @@ export default function Auth() {
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violeta hover:bg-violoscuro focus:outline-none focus:ring-2 focus:ring-offset-2"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon
-                    className="h-5 w-5 text-blue-500 group-hover:text-blue-400"
+                    className="h-5 w-5 text-violet-500 group-hover:text-violet-900"
                     aria-hidden="true"
                   />
                 </span>
@@ -157,7 +142,7 @@ export default function Auth() {
           </form>
         </div>
 
-        <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-blue-700 text-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-b-none">
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center bg-violeta text-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-b-none">
           <div className="text-center">
             <img
               src={images[currentImageIndex].src}

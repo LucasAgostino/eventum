@@ -6,7 +6,7 @@ import withAuth from "@/utils/withAuth";
 import { useUserSession } from "./context/UserSessionContext";
 import TablaEventos from "@/components/eventos/TablaEventos";
 import TarjetaEventoProximo from "@/components/eventos/TarjetaEventoProximo";
-import SalesOverview from "@/components/gastos/SalesOverview";
+import GraficoDashboard from "@/components/GraficoDashboard";
 
 const Home = () => {
   const { user } = useUserSession();
@@ -57,13 +57,13 @@ const Home = () => {
     <div className="p-4">
       <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
         <h1 className="text-3xl font-bold text-gray-900 mb-4 sm:mb-0">Dashboard</h1>
-        <Link href="/crear-evento" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <Link href="/crear-evento" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-violeta hover:bg-violet-950 focus:outline-none focus:ring-2 focus:ring-offset-2">
             Crear evento
         </Link>
       </div>
       <div className="flex flex-col items-center sm:flex-row sm:items-start justify-center">
-        <TarjetaEventoProximo />
-        <SalesOverview expenses = {expenses} presupuestoMax = {presupuestoMax} />
+        <TarjetaEventoProximo/>
+        <GraficoDashboard expenses = {expenses} presupuestoMax = {presupuestoMax} />
       </div>
       <br />
       <TablaEventos userId={user.id} />

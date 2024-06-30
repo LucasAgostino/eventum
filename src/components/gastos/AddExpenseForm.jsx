@@ -85,7 +85,7 @@ export default function AddExpenseForm({ addExpense, expenses = [], presupuestoM
       </div>
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className="w-full py-2 px-4 bg-violeta text-white rounded-lg shadow-md hover:bg-violoscuro focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
         Agregar
       </button>

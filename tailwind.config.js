@@ -8,7 +8,8 @@ module.exports = {
     extend: {
       colors: {
         'custom-blue': '#020059',
-        'violeta':'#473ED7'
+        'violeta':'#473ED7',
+        'violoscuro':'#24203F'
       },
     },
   },

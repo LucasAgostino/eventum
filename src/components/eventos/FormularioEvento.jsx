@@ -19,7 +19,8 @@ function FormularioEvento() {
     cantInvitados: '',
     fecha: '',
     ubicacion: '',
-    presupuestoEstimado: ''
+    presupuestoEstimado: '',
+    descripcion: ''
   });
 
   useEffect(() => {
@@ -68,6 +69,7 @@ function FormularioEvento() {
         fecha: formData.fecha,
         ubicacion: formData.ubicacion,
         presupuestoEstimado: formattedPresupuesto,
+        Detalle : formData.descripcion, // Nuevo campo
         userID: user.id
       });
 
@@ -161,6 +163,17 @@ function FormularioEvento() {
             onChange={handleChange}
             className="w-full px-3 py-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
             placeholder="$"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="descripcion" className="block text-blue-900 font-bold mb-2">Descripción:</label>
+          <input
+            type="text"
+            id="descripcion"
+            name="descripcion"
+            value={formData.descripcion}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
         <button
