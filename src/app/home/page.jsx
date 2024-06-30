@@ -19,14 +19,8 @@ export default function Landing() {
                   <div className="flex flex-col gap-2 min-[400px]:flex-row ml-16">
                     <a href="/login">
                       <button
-                        className="overflow-hidden w-50 p-2 h-12 opacity-50 text-white rounded-md text-xl font-bold cursor-pointer relative z-10 group border"
-                      >
-                        Inicia sesion
-                        <span className="absolute w-36 h-32 -top-8 -left-2 bg-blue-200 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-bottom"></span>
-                        <span className="absolute w-36 h-32 -top-8 -left-2 bg-blue-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-bottom"></span>
-                        <span className="absolute w-36 h-32 -top-8 -left-2 bg-blue-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-bottom"></span>
-                        <span className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10 text-white">Inicia sesion</span>
-                      </button>
+                        className="overflow-hidden w-50 p-2 h-12  text-white rounded-md text-xl font-bold cursor-pointer relative z-10 group border bg-[#576CA8] hover:bg-violet-950"
+                      > Inicia sesion</button>
                     </a>
                   </div>
                 </div>
@@ -37,8 +31,8 @@ export default function Landing() {
           <section className="w-full py-12 md:py-10 lg:py-20 xl:py-30 bg-gray-100 items-center justify-center pl-10">
             <div className="container px-4 md:px-6 flex flex-col items-center justify-center">
               <div className="space-y-4 text-center">
-                <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm">Key Features</div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Plan and manage your events with ease</h2>
+                <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm">Características Principales</div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Planifica y gestiona tus eventos con facilidad.</h2>
                 <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Eventum ofrece un conjunto completo de herramientas para ayudarte a planificar, organizar y gestionar tus eventos de manera fluida.                </p>
               </div>
@@ -89,57 +83,52 @@ export default function Landing() {
                 </p>
               </div>
               <div className="grid gap-6">
-                <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-                  <div className="flex items-start space-x-4">
-                    <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                      <span className="flex h-full w-full items-center justify-center rounded-full bg-muted">
-                        <img src="/circulo-de-usuario.png" alt=""></img>
+                <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+                  <div class="flex items-start space-x-4">
+                    <span class="relative flex h-20 w-20 shrink-0 overflow-hidden rounded-full">
+                      <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">
+                        <img src="/Jane.png" alt="Jane Doe"></img>
                       </span>
                     </span>
                     <div>
-                      <p className="text-lg font-medium">Eventum has been a game-changer for my event planning business.</p>
-                      <p className="mt-2 text-gray-500">- Jane Doe, Event Planner</p>
+                      <p class="text-lg font-medium">Eventum ha sido un cambio radical para mi negocio de planificación de eventos.</p>
+                      <p class="mt-2 text-gray-500">- Jane Doe, Planificadora de Eventos</p>
                     </div>
                   </div>
                 </div>
                 <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-2xl">
                   <div className="flex items-start space-x-4">
-                    <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                      <span className="flex h-full w-full items-center justify-center rounded-full bg-muted">
-                        <img src="/circulo-de-usuario.png" alt=""></img>
+                    <span className="relative flex  h-20 w-20 shrink-0 overflow-hidden rounded-full">
+                      <span className="flex h-full w-full items-center justify-center rounded-full ">
+                        <img src="/John.png" alt="John "></img>
                       </span>
                     </span>
                     <div>
                       <p className="text-lg font-medium">
-                        Eventum s features have saved me so much time and effort in organizing my events.
+                        Las funciones de Eventum me han ahorrado mucho tiempo y esfuerzo en la organización de mis eventos.
                       </p>
-                      <p className="mt-2 text-gray-500">- John Brock, Conference Organizer</p>
+                      <p className="mt-2 text-gray-500">- John Brock, Organizador de Conferencias</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-          <section className="relative pl-10">
-            <div className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b to-black opacity-50 z-0">
-              <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 relative z-10">
+          <section className="relative pl-10 opacity-50">
+            <div className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b to-black  z-0">
+              <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 relative z-10 ">
                 <div className="space-y-3">
-                  <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-white opacity">Ready to plan your next event?</h2>
-                  <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Sign up for Eventum and start planning your events today.
+                  <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-white opacity">¿Listo para planificar tu próximo evento?</h2>
+                  <p className="mx-auto max-w-[600px] text-white md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                    Regístrate en Eventum y comienza a planificar tus eventos hoy mismo.
                   </p>
                 </div>
                 <div className="mx-auto w-full max-w-sm space-y-2">
                   <a href="/register">
                     <button
-                      className="overflow-hidden relative w-32 p-2 h-12 bg-black text-white rounded-md text-l font-bold cursor-pointer z-10 group border"
+                      className="overflow-hidden relative w-32 p-2 h-12 bg-[#576CA8] hover:bg-violet-950 text-white rounded-md text-l font-bold cursor-pointer z-10 group border"
                     >
-                      Sign Up
-                      <span className="absolute w-36 h-32 -top-8 -left-2 bg-blue-200 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-bottom"></span>
-                      <span className="absolute w-36 h-32 -top-8 -left-2 bg-blue-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-bottom"></span>
-                      <span className="absolute w-36 h-32 -top-8 -left-2 bg-blue-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-bottom"></span>
-                      <span className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-3 left-8 z-10 text-white">Sign Up</span>
-                    </button>
+                      Registrate</button>
                   </a>
                 </div>
               </div>
