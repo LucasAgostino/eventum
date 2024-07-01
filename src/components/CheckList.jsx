@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '@/utils/supabase';
-import BotonEliminar from './eliminar/BotonEliminar';
+import { useState, useEffect } from "react";
+import { supabase } from "@/utils/supabase";
+import BotonEliminar from "./eliminar/BotonEliminar";
 
 function Checklist({ params }) {
   const [checklistItems, setChecklistItems] = useState([]);
@@ -10,17 +10,17 @@ function Checklist({ params }) {
     const fetchChecklistItems = async () => {
       try {
         const { data, error } = await supabase
-          .from('checklist')
-          .select('*')
-          .eq('id_evento', params.id);
+          .from("checklist")
+          .select("*")
+          .eq("id_evento", params.id);
 
         if (error) {
-          console.error('Error fetching checklist items:', error);
+          console.error("Error fetching checklist items:", error);
         } else {
           setChecklistItems(data);
         }
       } catch (error) {
-        console.error('Error fetching checklist items:', error);
+        console.error("Error fetching checklist items:", error);
       }
     };
 
@@ -31,49 +31,54 @@ function Checklist({ params }) {
     if (newTask.trim() !== "") {
       try {
         const { data, error } = await supabase
-          .from('checklist')
-          .insert([{ 
-            id_evento: params.id, 
-            descripcion: newTask, 
-            estado: false 
-          }])
-          .select('*');  // Asegúrate de seleccionar todos los campos después de la inserción
+          .from("checklist")
+          .insert([
+            {
+              id_evento: params.id,
+              descripcion: newTask,
+            },
+          ])
+          .select("*"); // Asegúrate de seleccionar todos los campos después de la inserción
 
         if (error) {
-          console.error('Error adding task:', error);
+          console.error("Error adding task:", error);
           return;
         }
 
-        const newItem = data[0];  // Usa los datos devueltos por la inserción
+        const newItem = data[0]; // Usa los datos devueltos por la inserción
         setChecklistItems([...checklistItems, newItem]);
         setNewTask("");
       } catch (error) {
-        console.error('Error adding task:', error);
+        console.error("Error adding task:", error);
       }
     }
   };
   const handleDelete = (itemid) => {
-    setChecklistItems(checklistItems.filter((checklistItem) => checklistItem.id !== itemid));
+    setChecklistItems(
+      checklistItems.filter((checklistItem) => checklistItem.id !== itemid)
+    );
   };
 
   const handleCheckboxChange = async (id, currentStatus) => {
     try {
       const { data, error } = await supabase
-        .from('checklist')
+        .from("checklist")
         .update({ estado: !currentStatus })
-        .eq('id', id)
-        .select('*');
+        .eq("id", id)
+        .select("*");
 
       if (error) {
-        console.error('Error updating task status:', error);
+        console.error("Error updating task status:", error);
         return;
       }
 
-      setChecklistItems(checklistItems.map(item => 
-        item.id === id ? { ...item, estado: !currentStatus } : item
-      ));
+      setChecklistItems(
+        checklistItems.map((item) =>
+          item.id === id ? { ...item, estado: !currentStatus } : item
+        )
+      );
     } catch (error) {
-      console.error('Error updating task status:', error);
+      console.error("Error updating task status:", error);
     }
   };
 
@@ -83,28 +88,42 @@ function Checklist({ params }) {
         <h1 className="text-center text-2xl lg:text-3xl font-bold mb-4 text-white">
           Checklist
         </h1>
-        <h2 className="text-lg font-semibold mb-6 text-white">
-          Tareas
-        </h2>
-        <div className="overflow-y-auto max-h-60"> {/* Contenedor scrollable */}
-        {checklistItems.map((item) => (
-    <div key={item.id} className="mb-6 flex justify-between items-center">
-      <label className="flex items-center">
-        <input
-          type="checkbox"
-          className="scale-100 transition-all duration-500 ease-in-out hover:scale-110 checked:scale-100 w-6 h-6"
-          id={`check-item-${item.id}`}
-          checked={item.estado}
-          onChange={() => handleCheckboxChange(item.id, item.estado)}
-        />
-        <span className="ml-2 text-white">{item.descripcion}</span>
-      </label>
-      <div className="mr-6">
-        <BotonEliminar item={item} tableName={'checklist'} onDelete={handleDelete}  />
-      </div>
-    </div>
-  ))}
+        <h2 className="text-lg font-semibold mb-6 text-white">Tareas</h2>
+        <div className="overflow-y-auto max-h-60">
+          {" "}
+          {/* Contenedor scrollable */}
+          {checklistItems.map((item) => (
+            <div
+              key={item.id}
+              className="mb-6 flex justify-between items-center"
+            >
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="scale-100 transition-all duration-500 ease-in-out hover:scale-110 checked:scale-100 w-6 h-6"
+                  id={`check-item-${item.id}`}
+                  checked={item.estado}
+                  onChange={() => handleCheckboxChange(item.id, item.estado)}
+                />
+                <span
+                  className={`ml-2 ${
+                    item.estado ? "line-through text-gray-400" : "text-white"
+                  }`}
+                >
+                  {item.descripcion}
+                </span>
+              </label>
+              <div className="mr-6">
+                <BotonEliminar
+                  item={item}
+                  tableName={"checklist"}
+                  onDelete={handleDelete}
+                />
+              </div>
+            </div>
+          ))}
         </div>
+
         <input
           type="text"
           value={newTask}

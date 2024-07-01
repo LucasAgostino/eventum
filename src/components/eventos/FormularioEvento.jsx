@@ -25,7 +25,6 @@ function FormularioEvento() {
 
   useEffect(() => {
     const { query } = router;
-    console.log(query);
   }, [router]);
 
   const handleChange = (e) => {
@@ -62,8 +61,15 @@ function FormularioEvento() {
 
     try {
       const formattedPresupuesto = parseFloat(formData.presupuestoEstimado.replace(/\./g, '').replace(/,/g, '.'));
+      const defaultTasks = [
+        { descripcion: 'Completar información faltante'},
+        { descripcion: 'Cargar gastos'},
+        { descripcion: 'Cargar lista invitados'},
+        { descripcion: 'Enviar invitaciones'},
+        { descripcion: 'Asignar invitados a las mesas'}
+      ];
       
-      const { error } = await supabase.from('evento').insert({
+      const {data,error } = await supabase.from('evento').insert({
         nombreEvento: formData.nombreEvento,
         cantInvitados: formData.cantInvitados,
         fecha: formData.fecha,
@@ -71,13 +77,24 @@ function FormularioEvento() {
         presupuestoEstimado: formattedPresupuesto,
         Detalle : formData.descripcion, // Nuevo campo
         userID: user.id
-      });
+      }).select('*');
 
       if (error) {
         console.log(user)
         throw error;
       }
+      
+      const checklistTasks = defaultTasks.map(task => ({
+        ...task,
+        id_evento: data[0].id // Asumimos que el campo de relación en la tabla 'checklist' es 'event_id'
+      }));
 
+      const { error: checklistError } = await supabase.from('checklist').insert(checklistTasks);
+      
+      if (checklistError) {
+        throw checklistError;
+      }
+      
       setNotificationContent('El evento se ha creado correctamente');
       setNotificationClass('bg-green-500');
       setNotificationIcon(
@@ -88,7 +105,7 @@ function FormularioEvento() {
       setShowNotification(true);
       setTimeout(() => {
         setShowNotification(false);
-        router.push('/eventos');
+        router.push(`/eventos/${data[0].id}`);
       }, 2000);
 
     } catch (error) {
