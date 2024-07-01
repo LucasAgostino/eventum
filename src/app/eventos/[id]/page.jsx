@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import withAuth from "@/utils/withAuth";
 import dynamic from "next/dynamic";
+import Checklist from "@/components/CheckList";
 
 // Importar dinámicamente EventMap para evitar problemas de SSR
 const EventMap = dynamic(() => import("@/components/EventMap"), { ssr: false });
-
-const initialChecklistItems = [];
 
 function EventoDetalles({ params }) {
   const [event, setEvent] = useState(null);
@@ -20,16 +19,6 @@ function EventoDetalles({ params }) {
   const [cantInvitados, setCantInvitados] = useState(0);
   const [fecha, setFecha] = useState("");
   const [presupuestoEstimado, setPresupuestoEstimado] = useState("");
-  const [checklistItems, setChecklistItems] = useState(initialChecklistItems);
-  const [newTask, setNewTask] = useState("");
-
-  const handleAddTask = () => {
-    if (newTask.trim() === "") return; // No añadir tareas vacías
-
-    const newTaskItem = { id: checklistItems.length + 1, label: newTask };
-    setChecklistItems([...checklistItems, newTaskItem]);
-    setNewTask(""); // Limpiar el campo de entrada
-  };
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -311,41 +300,7 @@ function EventoDetalles({ params }) {
                 </div>
               </div>
             )}
-            <div className="w-full lg:w-1/3 p-4 lg:p-8 flex items-center justify-center bg-[#24203F] border rounded-md shadow-md">
-              <div className="w-full">
-                <h1 className="text-center text-2xl lg:text-3xl font-bold mb-4 text-white">
-                  Checklist
-                </h1>
-                <h2 className="text-lg font-semibold mb-6 text-white">
-                  Tareas
-                </h2>
-                {checklistItems.map((item) => (
-                  <div key={item.id} className="mb-6">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        className="scale-100 transition-all duration-500 ease-in-out hover:scale-110 checked:scale-100 w-6 h-6"
-                        id={`check-item-${item.id}`}
-                      />
-                      <span className="ml-2 text-white">{item.label}</span>
-                    </label>
-                  </div>
-                ))}
-                <input
-                  type="text"
-                  value={newTask}
-                  onChange={(e) => setNewTask(e.target.value)}
-                  placeholder="Nueva tarea"
-                  className="w-full px-3 py-2 mb-4 text-black rounded"
-                />
-                <button
-                  onClick={handleAddTask}
-                  className="bg-violeta hover:bg-violoscuro text-white font-bold py-2 px-4 rounded-lg w-full"
-                >
-                  Añadir Tarea
-                </button>
-              </div>
-            </div>
+            <Checklist params={params} />
           </div>
           {/* Renderizar el componente EventMap solo si la ubicación está definida */}
           {event && event.ubicacion && (
