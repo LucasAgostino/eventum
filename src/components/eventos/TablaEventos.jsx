@@ -31,7 +31,9 @@ const TablaEventos = ({ userId , flag = false}) => {
           setError(error.message);
         } else {
           if (flag) {
-            setEventos(eventos.slice(0,3));
+            const ahora = new Date();
+            const eventosProximo = eventos.filter((evento) => new Date(evento.fecha) > ahora);
+            setEventos(eventosProximo.slice(0,3));
           }
           else{ 
             setEventos(eventos);

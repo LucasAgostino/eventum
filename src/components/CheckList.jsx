@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/utils/supabase';
+import BotonEliminar from './eliminar/BotonEliminar';
 
 function Checklist({ params }) {
   const [checklistItems, setChecklistItems] = useState([]);
@@ -51,6 +52,9 @@ function Checklist({ params }) {
       }
     }
   };
+  const handleDelete = (itemid) => {
+    setChecklistItems(checklistItems.filter((checklistItem) => checklistItem.id !== itemid));
+  };
 
   const handleCheckboxChange = async (id, currentStatus) => {
     try {
@@ -83,20 +87,23 @@ function Checklist({ params }) {
           Tareas
         </h2>
         <div className="overflow-y-auto max-h-60"> {/* Contenedor scrollable */}
-          {checklistItems.map((item) => (
-            <div key={item.id} className="mb-6">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="scale-100 transition-all duration-500 ease-in-out hover:scale-110 checked:scale-100 w-6 h-6"
-                  id={`check-item-${item.id}`}
-                  checked={item.estado}
-                  onChange={() => handleCheckboxChange(item.id, item.estado)}
-                />
-                <span className="ml-2 text-white">{item.descripcion}</span>
-              </label>
-            </div>
-          ))}
+        {checklistItems.map((item) => (
+    <div key={item.id} className="mb-6 flex justify-between items-center">
+      <label className="flex items-center">
+        <input
+          type="checkbox"
+          className="scale-100 transition-all duration-500 ease-in-out hover:scale-110 checked:scale-100 w-6 h-6"
+          id={`check-item-${item.id}`}
+          checked={item.estado}
+          onChange={() => handleCheckboxChange(item.id, item.estado)}
+        />
+        <span className="ml-2 text-white">{item.descripcion}</span>
+      </label>
+      <div className="mr-6">
+        <BotonEliminar item={item} tableName={'checklist'} onDelete={handleDelete}  />
+      </div>
+    </div>
+  ))}
         </div>
         <input
           type="text"
