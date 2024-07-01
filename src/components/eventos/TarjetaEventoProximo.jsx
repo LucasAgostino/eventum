@@ -50,6 +50,11 @@ const TarjetaEventoProximo = () => {
       }
     }, [user]);
 
+    const formatDate = (dateString) => {
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
     return (
       <div className="bg-white border border-gray-300 shadow-lg p-4 max-h-full rounded-lg mr-4 mb-4 sm:ml-4 w-full max-w-lg">
         <h1 className="text-xl font-bold mb-2">Próximo evento</h1>
@@ -61,7 +66,7 @@ const TarjetaEventoProximo = () => {
               </h2>
               <p className="text-gray-600 text-sm mb-2">
                 <strong> Fecha: </strong>
-                {new Date(proximoEvento.fecha).toLocaleDateString()}
+                {formatDate(proximoEvento.fecha)}
               </p>
               <p className="text-gray-600 text-sm">
                 📍{proximoEvento.ubicacion || "Ubicación no especificada"}

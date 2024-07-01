@@ -27,7 +27,7 @@ export default function SalesOverview({ expenses, presupuestoMax }) {
     amountColor = "text-green-500"; // Menos del 75% del presupuesto
   } else if (percentage >= 75 && percentage < 90) {
     amountColor = "text-yellow-500"; // Entre el 75% y el 90% del presupuesto
-  } else if (percentage >= 90 && percentage <= 100) {
+  } else if (percentage >= 90 && percentage < 100) {
     amountColor = "text-orange-500"; // Entre el 90% y el 100% del presupuesto
   } else {
     amountColor = "text-red-500"; // Más del 100% del presupuesto

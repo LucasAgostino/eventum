@@ -1,6 +1,5 @@
 "use client";
 import Head from "next/head";
-import SidebarDer from "@/components/SidebarDer";
 import SalesOverview from "@/components/gastos/SalesOverview";
 import AddExpenseForm from "@/components/gastos/AddExpenseForm";
 import ExpenseTable from "@/components/gastos/ExpenseTable";
@@ -86,7 +85,6 @@ function ExpensesPage({ params }) {
       <Head>
         <title>Gastos evento</title>
       </Head>
-      <SidebarDer onToggle={(isOpen) => setSidebarOpen(isOpen)} eventDetails = {eventData} />
       <div
         className={`flex flex-col flex-1 overflow-y-auto transition-all duration-300 ease-in-out ${
           sidebarOpen ? "ml-64" : "ml-0"
