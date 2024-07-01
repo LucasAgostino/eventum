@@ -1,6 +1,5 @@
 "use client";
 import Head from "next/head";
-import Sidebar from "@/components/NavbarVertical";
 import SidebarDer from "@/components/SidebarDer";
 import SalesOverview from "@/components/gastos/SalesOverview";
 import AddExpenseForm from "@/components/gastos/AddExpenseForm";
@@ -15,6 +14,7 @@ function ExpensesPage({ params }) {
   const [presupuestoMax, setPresupuestoMax] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [eventData, setEventData] = useState({});
 
   const handleDelete = (expenseId) => {
     setExpenses(expenses.filter((expense) => expense.id !== expenseId));
@@ -30,7 +30,7 @@ function ExpensesPage({ params }) {
           supabase.from("gasto").select("*").eq("eventoId", params.id),
           supabase
             .from("evento")
-            .select("presupuestoEstimado")
+            .select("presupuestoEstimado, nombreEvento, ubicacion, fecha")
             .eq("id", params.id)
             .single(),
         ]);
@@ -45,6 +45,11 @@ function ExpensesPage({ params }) {
           console.error("Error fetching event:", eventError);
         } else if (eventData) {
           setPresupuestoMax(eventData.presupuestoEstimado);
+          setEventData({
+            nombreEvento: eventData.nombreEvento,
+            ubicacion: eventData.ubicacion,
+            fecha: eventData.fecha,
+          });
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -81,7 +86,7 @@ function ExpensesPage({ params }) {
       <Head>
         <title>Gastos evento</title>
       </Head>
-      <SidebarDer onToggle={(isOpen) => setSidebarOpen(isOpen)} />
+      <SidebarDer onToggle={(isOpen) => setSidebarOpen(isOpen)} eventDetails = {eventData} />
       <div
         className={`flex flex-col flex-1 overflow-y-auto transition-all duration-300 ease-in-out ${
           sidebarOpen ? "ml-64" : "ml-0"

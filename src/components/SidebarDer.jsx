@@ -5,13 +5,23 @@ const initialChecklistItems = [
 ];
 
 
-export default function SidebarDer({ eventDetails = { fecha: '12-10-2024', ubicacion: 'Victoria Ocampo 100, CABA', horario: '23:00' } }) {
+export default function SidebarDer({eventDetails}) {
   const [isOpen, setIsOpen] = useState(false);
   const [checklistItems, setChecklistItems] = useState(initialChecklistItems);
   const [newTask, setNewTask] = useState('');
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+  
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    // Ajustamos la fecha agregando el offset de la zona horaria
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses empiezan desde 0
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   };
 
   const handleAddTask = () => {
@@ -85,20 +95,14 @@ export default function SidebarDer({ eventDetails = { fecha: '12-10-2024', ubica
           <h2 className="text-lg font-semibold mt-10 mb-4">Detalles del Evento</h2>
           <div className="mb-10 flex items-center">
             <img src="/Calendario.png" alt="Fecha" className="h-6 w-6 mr-4"/>
-            <div>
-              <strong>Fecha:</strong> {eventDetails.fecha}
-            </div>
+            <p>
+                <strong>Fecha:</strong> {formatDate(eventDetails.fecha)}
+            </p>
           </div>
           <div className="mb-10 flex items-center">
             <img src="/ubicacion.png" alt="Ubicación" className="h-6 w-6 mr-4"/>
             <div>
               <strong>Ubicación:</strong> {eventDetails.ubicacion}
-            </div>
-          </div>
-          <div className="mb-10 flex items-center">
-            <img src="/reloj.png" alt="Horario" className="h-6 w-6 mr-4"/>
-            <div>
-              <strong>Horario:</strong> {eventDetails.horario}
             </div>
           </div>
         </div>
