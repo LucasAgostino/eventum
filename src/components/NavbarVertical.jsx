@@ -87,8 +87,8 @@ export default function Sidebar() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="bg-violeta backdrop-blur-sm shadow-lg p-4 rounded-lg min-h-screen flex flex-col justify-between">
-            <nav>
+          <div className="bg-violeta backdrop-blur-sm shadow-lg p-4 rounded-lg min-h-screen flex flex-col">
+            <nav className="flex-grow">
               <ul>
                 <li className="p-3 flex items-center cursor-pointer mb-10">
                   <img src="/menu.png" className="h-5 w-5" alt="Menu Icon" />
@@ -127,7 +127,7 @@ export default function Sidebar() {
                 ))}
               </ul>
             </nav>
-            <div className="p-3">
+            <div className="mt-auto mb-20  px-3">
               <div className="flex items-center">
                 <button
                   onClick={handleLogout}
