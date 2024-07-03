@@ -1,10 +1,12 @@
 "use client";
 import { useState } from 'react';
 import { supabase } from '@/utils/supabase';
+import { useRouter } from 'next/navigation';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const router = useRouter();
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
@@ -16,6 +18,10 @@ export default function ForgotPassword() {
     } else {
       setMessage('Mail de recupero enviado correctamente');
     }
+  };
+
+  const handleRedirect = () => {
+    router.push('/login'); // Reemplaza '/login' con la ruta a la que deseas redirigir
   };
 
   return (
@@ -42,6 +48,13 @@ export default function ForgotPassword() {
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Recuperar contraseña
+          </button>
+          <button
+            type="button"
+            className="w-full text-black py-2 px-4"
+            onClick={handleRedirect}
+          >
+            Volver a inicio de sesión
           </button>
         </form>
         {message && (
