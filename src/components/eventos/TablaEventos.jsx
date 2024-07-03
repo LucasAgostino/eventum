@@ -4,7 +4,7 @@ import { supabase } from "@/utils/supabase";
 import VisualizarEvento from "./VisualizarEvento";
 import BotonEliminar from "../eliminar/BotonEliminar";
 
-const TablaEventos = ({ userId , flag = false}) => {
+const TablaEventos = ({ userId, flag = false }) => {
   const [eventos, setEventos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,21 +21,22 @@ const TablaEventos = ({ userId , flag = false}) => {
         setLoading(true);
 
         const { data: eventos, error } = await supabase
-        .from("evento")
-        .select()
-        .eq("userID", userId)
-        .order("fecha",{ascending:true})
-        .abortSignal(abortController.signal);
-        
+          .from("evento")
+          .select()
+          .eq("userID", userId)
+          .order("fecha", { ascending: true })
+          .abortSignal(abortController.signal);
+
         if (error) {
           setError(error.message);
         } else {
           if (flag) {
             const ahora = new Date();
-            const eventosProximo = eventos.filter((evento) => new Date(evento.fecha) > ahora);
-            setEventos(eventosProximo.slice(0,3));
-          }
-          else{ 
+            const eventosProximo = eventos.filter(
+              (evento) => new Date(evento.fecha) > ahora
+            );
+            setEventos(eventosProximo.slice(0, 3));
+          } else {
             setEventos(eventos);
           }
         }
@@ -90,15 +91,38 @@ const TablaEventos = ({ userId , flag = false}) => {
         <tbody className="bg-white divide-y divide-gray-200">
           {eventos.map((evento, index) => (
             <tr key={evento.id} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">{index + 1}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{evento.nombreEvento}</td>
-              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">{evento.fecha}</td>
-              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">{evento.cantInvitados}</td>
-              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">{evento.ubicacion}</td>
-              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">$ {evento.presupuestoEstimado.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                {index + 1}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {evento.nombreEvento}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                {evento.fecha}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                {evento.cantInvitados}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                {evento.ubicacion}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                {" "}
+                ${" "}
+                {evento.presupuestoEstimado === null
+                  ? 0
+                  : evento.presupuestoEstimado.toLocaleString("es-ES", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+              </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex space-x-2">
-                  <BotonEliminar item={evento} tableName="evento" onDelete={handleDelete} />
+                  <BotonEliminar
+                    item={evento}
+                    tableName="evento"
+                    onDelete={handleDelete}
+                  />
                   <VisualizarEvento eventoId={evento.id} />
                 </div>
               </td>

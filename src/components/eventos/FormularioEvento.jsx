@@ -69,7 +69,7 @@ function FormularioEvento() {
         { descripcion: 'Asignar invitados a las mesas'}
       ];
       
-      const {data,error } = await supabase.from('evento').insert({
+      const { data, error } = await supabase.from('evento').insert({
         nombreEvento: formData.nombreEvento,
         cantInvitados: formData.cantInvitados,
         fecha: formData.fecha,
@@ -80,7 +80,7 @@ function FormularioEvento() {
       }).select('*');
 
       if (error) {
-        console.log(user)
+        console.log(user);
         throw error;
       }
       
@@ -142,6 +142,8 @@ function FormularioEvento() {
             value={formData.nombreEvento}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-violet-500 rounded focus:outline-none focus:ring-2 focus:ring-violet-900"
+            placeholder="Ingrese el nombre del evento"
+            required
           />
         </div>
         <div className="mb-4">
@@ -153,6 +155,8 @@ function FormularioEvento() {
             value={formData.cantInvitados}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-violet-500 rounded focus:outline-none focus:ring-2 focus:ring-violet-900"
+            placeholder="Ingrese la cantidad de invitados"
+            required
           />
         </div>
         <div className="mb-4">
@@ -164,6 +168,7 @@ function FormularioEvento() {
             value={formData.fecha}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-violet-500 rounded focus:outline-none focus:ring-2 focus:ring-violet-900"
+            required
           />
         </div>
         <div className="mb-4">
@@ -180,6 +185,7 @@ function FormularioEvento() {
             onChange={handleChange}
             className="w-full px-3 py-2 border border-violet-500 rounded focus:outline-none focus:ring-2 focus:ring-violet-900"
             placeholder="$"
+            required
           />
         </div>
         <div className="mb-4">
@@ -191,7 +197,7 @@ function FormularioEvento() {
             value={formData.descripcion}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-violet-500 rounded focus:outline-none focus:ring-2 focus:ring-violet-900"
-            placeholder='Ingrese descripcion'
+            placeholder='Ingrese una descripción para el evento'
           />
         </div>
         <button
