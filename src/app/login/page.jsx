@@ -1,25 +1,20 @@
 "use client"
-import React from 'react'
-import { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '@/utils/supabase';
 import Link from 'next/link';
-import { LockClosedIcon } from '@heroicons/react/solid';
+import { LockClosedIcon, EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/navigation';
 
 export default function Auth() {
   const router = useRouter();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (parseInt(value) < 0) {
-      return;
-    }
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -34,8 +29,9 @@ export default function Auth() {
     });
 
     if (error) {
-      console.error(error);
-      return;
+      setErrorMessage(error.message);
+      setShowPopup(true);
+      setFormData({ email: "", password: "" });
     } else {
       router.push('/');
     }
@@ -57,6 +53,10 @@ export default function Auth() {
 
   const handleImageChange = (index) => {
     setCurrentImageIndex(index);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -93,6 +93,7 @@ export default function Auth() {
                   id="email-address"
                   name="email"
                   type="email"
+                  value={formData.email}
                   onChange={handleChange}
                   autoComplete="email"
                   required
@@ -100,20 +101,32 @@ export default function Auth() {
                   placeholder="Dirección Email"
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label htmlFor="password" className="sr-only">
                   Contraseña
                 </label>
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
                   onChange={handleChange}
                   autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Contraseña"
                 />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3"
+                >
+                  {showPassword ? (
+                    <EyeOffIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                  )}
+                </button>
               </div>
             </div>
 
@@ -167,6 +180,21 @@ export default function Auth() {
           </div>
         </div>
       </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold mb-4">Error de inicio de sesión</h2>
+            <p className="mb-4">Ingreso de datos invalido</p>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="px-4 py-2 bg-violeta text-white rounded-md"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
