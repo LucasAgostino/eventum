@@ -55,7 +55,9 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
 
   const handleInputChange = (index, value) => {
     const newInvitados = invitados.slice();
-    newInvitados[index].nombre = value;
+    const [nombre, apellido] = value.split(' ');
+    newInvitados[index].nombre = nombre;
+    newInvitados[index].apellido = apellido;
     setInvitados(newInvitados);
   };
 
@@ -64,7 +66,7 @@ const DescripcionMesa = ({ mesa, invitadosSinUbicar = [], asignados, onAddInvita
       <li key={index} className="flex items-center p-2 bg-[#1B264F] text-white mb-2 rounded">
         <input
           type="text"
-          value={invitados[index].nombre}
+          value={`${invitados[index].nombre} ${invitados[index].apellido}`}
           onChange={(e) => handleInputChange(index, e.target.value)}
           className="bg-transparent border-none text-white w-full"
         />
