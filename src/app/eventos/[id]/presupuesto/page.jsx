@@ -93,7 +93,7 @@ function ExpensesPage({ params }) {
         <header className="p-4">
           <h1 className="text-3xl font-bold text-gray-900">Gastos del Evento</h1>
         </header>
-        <main className="flex-grow p-4 flex flex-col lg:flex-row">
+        <main className="flex-grow p-4 flex flex-col lg:flex-row lg:max-h-96 ">
           <div className="flex-grow p-4 max-w-full">
             {presupuestoMax !== null && (
               <SalesOverview
@@ -112,7 +112,7 @@ function ExpensesPage({ params }) {
             />
           </div>
         </main>
-        <div className="p-4 max-w-full">
+        <div className="p-4 max-w-full mt-14">
           <ExpenseTable expenses={expenses} onDelete={handleDelete} />
         </div>
       </div>

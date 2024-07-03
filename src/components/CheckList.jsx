@@ -129,7 +129,7 @@ function Checklist({ params }) {
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Nueva tarea"
-          className="w-full px-3 py-2 mb-4 text-black rounded"
+          className="w-full px-3 py-2 mb-4 mt-3 text-black rounded"
         />
         <button
           onClick={handleAddTask}

@@ -116,7 +116,7 @@ function EventoDetalles({ params }) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="nombreEvento"
                 type="text"
-                placeholder="Nombre del Evento"
+                placeholder="Ingrese el nombre del evento"
                 value={nombreEvento}
                 onChange={(e) => setNombreEvento(e.target.value)}
                 required
@@ -149,7 +149,7 @@ function EventoDetalles({ params }) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="ubicacion"
                 type="text"
-                placeholder="Ubicación"
+                placeholder="Ingrese la ubicación del evento"
                 value={ubicacion}
                 onChange={(e) => setUbicacion(e.target.value)}
                 required
@@ -166,7 +166,7 @@ function EventoDetalles({ params }) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="Detalle"
                 type="text"
-                placeholder="Ingresar descripcion"
+                placeholder="Ingrese una descripción para el evento"
                 value={Detalle}
                 onChange={(e) => setDetalle(e.target.value)}
               />
@@ -183,7 +183,7 @@ function EventoDetalles({ params }) {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="cantidadInvitados"
                   type="number"
-                  placeholder="Cantidad de Invitados"
+                  placeholder="Ingrese la cantidad de invitados"
                   value={cantInvitados}
                   onChange={(e) => setCantInvitados(e.target.valueAsNumber)}
                   required
