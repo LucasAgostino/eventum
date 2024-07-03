@@ -25,90 +25,62 @@ const Confirm = () => {
         console.error('Error updating attendance:', error);
         setMessage('Error al actualizar la asistencia.');
       } else {
-        setMessage(response === 'confirmado' ? '¡Gracias por aceptar la invitación!' : 'Lamentamos que no puedas asistir.');
+        setMessage(response === 'confirmado' ? "¡Gracias por aceptar la invitación! Estamos emocionados de verte allí." : "Lamentamos que no puedas acompañarnos. ¡Esperamos verte en la próxima ocasión! 😔");
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0c0f29] text-white overflow-hidden relative">
-      <Head>
-        <title>Eventum - Confirmación</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-
-          @keyframes slideDown {
-            from { top: -100px; }
-            to { top: 0; }
-          }
-
-          @keyframes zoomIn {
-            from { transform: scale(0.5); }
-            to { transform: scale(1); }
-          }
-
-          @keyframes move {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100vw, 100vh); }
-          }
-
-          .animate-fadeIn {
-            animation: fadeIn 2s ease-in-out;
-          }
-
-          .animate-slideDown {
-            animation: slideDown 1s ease-in-out;
-          }
-
-          .animate-zoomIn {
-            animation: zoomIn 1s ease-in-out;
-          }
-
-          .animate-move {
-            animation: move 10s infinite ease-in-out;
-          }
-        `}</style>
-      </Head>
-      
-      <div className="container mx-auto text-center py-20 mt-24 animate-fadeIn">
-        <div className="content animate-zoomIn">
-          <img src="/Logo_Eventum_Title.png" alt="Event Image" className="w-full max-w-lg mx-auto rounded-md" />
-          <h1 className="text-4xl my-5">{message}</h1>
-          {message === 'Por favor, confirma tu asistencia.' && (
-            <div className="flex justify-center space-x-4 my-5">
-              <button
-                onClick={() => handleResponse('confirmado')}
-                className="bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition-colors"
-              >
-                Aceptar
-              </button>
-              <button
-                onClick={() => handleResponse('rechazado')}
-                className="bg-red-600 text-white py-3 px-6 rounded-md hover:bg-red-700 transition-colors"
-              >
-                Rechazar
-              </button>
+    <div className="min-h-screen bg-gradient-to-b from-[#1D244D] to-[#0F172A] text-white overflow-hidden relative flex items-center justify-center">
+      <div className="container mx-auto text-center justify-center py-20 px-20 lg:px-8">
+        <div className="flex flex-col items-center">
+          <img
+            src="/Logo_Eventum_Title.png"
+            alt="Event Image"
+            className="mb-6"
+          />
+          <div className="bg-[#2A448D] bg-opacity-80 border border-[#596BA5] rounded-xl shadow-lg animate-fadeIn flex items-center justify-center" style={{ height: 400, width: 800 }}>
+            <div className="text-center">
+              <h1 className="text-4xl font-bold mb-8 ">{message}</h1>
+              {message === 'Por favor, confirma tu asistencia.' && (
+                <div className="flex flex-col items-center space-y-4">
+                  <button
+                    onClick={() => handleResponse('confirmado')}
+                    className="bg-green-600 bg-opacity-90 text-white border border-green-800 py-3 px-10 rounded-full shadow-lg hover:bg-green-700 transition-transform transform hover:scale-105"
+                  >
+                    Aceptar
+                  </button>
+                  <button
+                    onClick={() => handleResponse('rechazado')}
+                    className="bg-red-600 bg-opacity-90 border border-red-800 text-white py-3 px-10 rounded-full shadow-lg hover:bg-red-700 transition-transform transform hover:scale-105"
+                  >
+                    Rechazar
+                  </button>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
-        <footer className="mt-12 py-5 bg-[#1b1f40] text-center animate-fadeIn">
-          <p className="text-gray-400">Conéctate con nosotros en las redes sociales</p>
-          <a href="https://www.instagram.com" className="text-green-500 mx-2">Instagram</a>
-          <a href="https://www.facebook.com" className="text-green-500 mx-2">Facebook</a>
-          <a href="https://www.twitter.com" className="text-green-500 mx-2">Twitter</a>
-          <a href="https://www.whatsapp.com" className="text-green-500 mx-2">WhatsApp</a>
-        </footer>
       </div>
-      <div className="particle absolute w-1 h-1 bg-white opacity-50 rounded-full top-[20%] left-[10%] animate-move" style={{ animationDelay: '0.5s' }}></div>
-      <div className="particle absolute w-1 h-1 bg-white opacity-50 rounded-full top-[40%] left-[80%] animate-move" style={{ animationDelay: '1s' }}></div>
-      <div className="particle absolute w-1 h-1 bg-white opacity-50 rounded-full top-[60%] left-[30%] animate-move" style={{ animationDelay: '1.5s' }}></div>
-      <div className="particle absolute w-1 h-1 bg-white opacity-50 rounded-full top-[80%] left-[70%] animate-move" style={{ animationDelay: '2s' }}></div>
+      <div
+        className="particle absolute w-2 h-2 bg-white opacity-50 rounded-full animate-move"
+        style={{ top: '20%', left: '10%', animationDelay: '0.5s' }}
+      ></div>
+      <div
+        className="particle absolute w-2 h-2 bg-white opacity-50 rounded-full animate-move"
+        style={{ top: '40%', left: '80%', animationDelay: '1s' }}
+      ></div>
+      <div
+        className="particle absolute w-2 h-2 bg-white opacity-50 rounded-full animate-move"
+        style={{ top: '60%', left: '30%', animationDelay: '1.5s' }}
+      ></div>
+      <div
+        className="particle absolute w-2 h-2 bg-white opacity-50 rounded-full animate-move"
+        style={{ top: '80%', left: '70%', animationDelay: '2s' }}
+      ></div>
     </div>
   );
+  
 };
 
 export default Confirm;

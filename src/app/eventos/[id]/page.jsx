@@ -166,7 +166,7 @@ function EventoDetalles({ params }) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="Detalle"
                 type="text"
-                placeholder="Detalle"
+                placeholder="Ingresar descripcion"
                 value={Detalle}
                 onChange={(e) => setDetalle(e.target.value)}
               />

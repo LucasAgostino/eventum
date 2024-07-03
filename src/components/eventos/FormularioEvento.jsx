@@ -191,6 +191,7 @@ function FormularioEvento() {
             value={formData.descripcion}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-violet-500 rounded focus:outline-none focus:ring-2 focus:ring-violet-900"
+            placeholder='Ingrese descripcion'
           />
         </div>
         <button

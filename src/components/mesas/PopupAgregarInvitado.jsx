@@ -8,7 +8,7 @@ const PopupAgregarInvitado = ({ invitadosSinUbicar = [], onAddInvitado, onClose 
         <ul className="max-h-60 overflow-y-auto">
           {invitadosSinUbicar.map((invitado, index) => (
             <li key={index} className="flex justify-between p-2 border-b border-gray-200">
-              <span>{invitado.nombre}</span>
+              <span>{invitado.nombre} {invitado.apellido}</span>
               <button
                 onClick={() => onAddInvitado(invitado)}
                 className="bg-violeta text-white px-2 py-1 rounded"
