@@ -118,10 +118,10 @@ export default function GraficoDashboard({ expenses, presupuestoMax }) {
   };
 
   return (
-    <div className="bg-white border border-gray-300 shadow-lg p-6 rounded-lg flex flex-col w-full max-w-4xl mx-auto min-h-400 overflow-hidden" style={{height: 298}}>
-      <h1 className="text-2xl font-semibold text-black mb-4">Gastos</h1>
+    <div className="bg-white border border-gray-300 shadow-lg p-6 rounded-lg flex flex-col w-full max-w-4xl mx-auto min-h-400 overflow-hidden " style={{height: 298 }}>
+      <h1 className="text-2xl font-semibold text-black lg:mb-4 sm:mb-0">Gastos</h1>
       <div className="flex flex-col lg:flex-row items-start h-full">
-        <div className="flex-grow h-full relative hidden lg:block">
+        <div className="flex-grow h-full relative sm:h-max-100 lg:block ">
           <Doughnut
             data={data}
             options={options}
@@ -130,7 +130,7 @@ export default function GraficoDashboard({ expenses, presupuestoMax }) {
         </div>
         <div className="w-full lg:w-1/2 flex flex-col justify-center lg:ml-6">
           <p className="text-lg lg:text-4xl font-semibold mb-4 text-center lg:text-left flex flex-wrap justify-center lg:justify-start">
-            <span className={`${amountColor} text-lg lg:text-4xl`}>${formattedTotalAmount}</span>{" "}
+            <span className={`${amountColor} text-lg lg:text-4xl sm:text-md`}>${formattedTotalAmount}</span>{" "}
             <span className="text-black text-lg lg:text-4xl"> / ${formattedPresupuestoMax}</span>
           </p>
           <ul className="mt-2 space-y-2 hidden lg:block">
